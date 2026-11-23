@@ -1,0 +1,318 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VerdictBadge from '../../components/VerdictBadge.astro';
+import PriceTable from '../../components/PriceTable.astro';
+import SocialPresenceCard from '../../components/SocialPresenceCard.astro';
+import { getAllComparisons } from '../../lib/content';
+import { SITE, formatTRY } from '../../data/site';
+
+export function getStaticPaths() {
+  const comparisons = getAllComparisons();
+  return comparisons.map((comparison) => ({
+    params: { slug: comparison.slug },
+    props: { comparison },
+  }));
+}
+
+const { comparison } = Astro.props;
+const canonicalPath = `/vs/${comparison.slug}`;
+const fullUrl = new URL(canonicalPath, SITE.url).toString();
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${comparison.title} (${comparison.hookBadge}) — HEG VS Karşılaştırma`,
+  description: comparison.tldr,
+  image: new URL(comparison.thumbnail, SITE.url).toString(),
+  datePublished: comparison.datePublished,
+  dateModified: comparison.dateModified,
+  author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.name,
+    logo: { '@type': 'ImageObject', url: new URL('/images/heg-logo.png', SITE.url).toString() },
+  },
+  mainEntityOfPage: fullUrl,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: comparison.faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+
+<BaseLayout
+  title={`${comparison.title} Karşılaştırma | ${comparison.hookBadge}`}
+  description={comparison.tldr}
+  image={comparison.thumbnail}
+  canonicalPath={canonicalPath}
+  ogType="article"
+  activeNav="vs"
+  jsonLd={[articleSchema, faqSchema]}
+>
+  <article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <!-- Top Bar -->
+    <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+      <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-slate-500">
+        <a href="/" class="hover:text-[#03519F]">Ana Sayfa</a>
+        <span>/</span>
+        <a href="/vs" class="hover:text-[#03519F]">HEG VS</a>
+        <span>/</span>
+        <span class="text-slate-900 font-bold">{comparison.title}</span>
+      </nav>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="bg-[#111827] text-[#FAD002] px-2.5 py-1 rounded-md font-bold">📅 {comparison.displayDate}</span>
+        <span class="bg-white border border-slate-300 text-slate-700 px-2.5 py-1 rounded-md font-semibold">
+          🛡️ SPONSORLUK YOK • TARAFSIZ VS
+        </span>
+      </div>
+    </div>
+
+    <!-- Split-Screen Scoreboard Header (Mirroring Video Aesthetic!) -->
+    <header class="heg-dark-card rounded-3xl p-6 sm:p-8 text-white space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <span class="bg-[#FAD002] text-[#0B0B0D] font-mono font-extrabold text-xs px-3 py-1 rounded-lg">
+          {comparison.hookBadge}
+        </span>
+        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-4 py-1.5 rounded-full font-mono text-xs font-extrabold">
+          <span class="text-sky-300">{comparison.productA.shortName}</span>
+          <span class="bg-[#03519F] text-white px-2.5 py-0.5 rounded tabular-nums">{comparison.scoreA}</span>
+          <span class="text-slate-500">VS</span>
+          <span class="bg-[#FAD002] text-[#0B0B0D] px-2.5 py-0.5 rounded tabular-nums">{comparison.scoreB}</span>
+          <span class="text-[#FAD002]">{comparison.productB.shortName}</span>
+        </div>
+      </div>
+
+      <div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+          <span class="text-sky-300">{comparison.productA.name}</span>
+          <span class="text-slate-500 font-light mx-2">vs</span>
+          <span class="text-[#FAD002]">{comparison.productB.name}</span>
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 mt-2 max-w-3xl">{comparison.subtitle}</p>
+      </div>
+
+      <!-- Two Contenders Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+        <!-- Side A (Italian Blue) -->
+        <div class="rounded-2xl bg-white/[0.04] border-2 border-[#03519F] p-5 flex flex-col justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-24 h-24 bg-white rounded-xl p-2 shrink-0 flex items-center justify-center">
+              <img src={comparison.productA.image} alt={comparison.productA.name} class="max-h-full max-w-full object-contain" />
+            </div>
+            <div>
+              <div class="text-[11px] font-mono text-sky-300 font-bold uppercase">SOL KÖŞE • {comparison.productA.brand}</div>
+              <h2 class="text-lg font-extrabold text-white">{comparison.productA.name}</h2>
+              <div class="mt-2">
+                <VerdictBadge verdict={comparison.productA.verdict} score={comparison.productA.hegScore} size="sm" />
+              </div>
+            </div>
+          </div>
+          <div class="flex items-end justify-between pt-3 border-t border-white/10 font-mono">
+            <div>
+              <div class="text-[10px] text-slate-400">EN DİP TÜRKİYE FİYATI</div>
+              <div class="text-2xl font-extrabold text-white tabular-nums">{formatTRY(comparison.productA.lowestPrice)}</div>
+            </div>
+            {comparison.productA.productSlug && (
+              <a href={`/urun/${comparison.productA.productSlug}`} class="text-xs font-bold text-sky-300 hover:underline">
+                Tam İnceleme →
+              </a>
+            )}
+          </div>
+        </div>
+
+        <!-- Side B (Iconic Yellow) -->
+        <div class="rounded-2xl bg-white/[0.04] border-2 border-[#FAD002]/80 p-5 flex flex-col justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-24 h-24 bg-white rounded-xl p-2 shrink-0 flex items-center justify-center">
+              <img src={comparison.productB.image} alt={comparison.productB.name} class="max-h-full max-w-full object-contain" />
+            </div>
+            <div>
+              <div class="text-[11px] font-mono text-[#FAD002] font-bold uppercase">SAĞ KÖŞE • {comparison.productB.brand}</div>
+              <h2 class="text-lg font-extrabold text-white">{comparison.productB.name}</h2>
+              <div class="mt-2">
+                <VerdictBadge verdict={comparison.productB.verdict} score={comparison.productB.hegScore} size="sm" />
+              </div>
+            </div>
+          </div>
+          <div class="flex items-end justify-between pt-3 border-t border-white/10 font-mono">
+            <div>
+              <div class="text-[10px] text-slate-400">EN DİP TÜRKİYE FİYATI</div>
+              <div class="text-2xl font-extrabold text-[#FAD002] tabular-nums">{formatTRY(comparison.productB.lowestPrice)}</div>
+            </div>
+            {comparison.productB.productSlug && (
+              <a href={`/urun/${comparison.productB.productSlug}`} class="text-xs font-bold text-[#FAD002] hover:underline">
+                Tam İnceleme →
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- Answer-First TL;DR for Humans & AI Engines -->
+      <div class="bg-white/[0.06] border-l-4 border-emerald-400 rounded-r-xl p-5">
+        <div class="text-[10px] font-mono font-extrabold uppercase tracking-widest text-emerald-400 mb-1">
+          HEG VS KESİN SONUÇ ({comparison.winnerName} — {comparison.scoreA}-{comparison.scoreB})
+        </div>
+        <p class="text-sm text-slate-100 leading-relaxed">{comparison.tldr}</p>
+      </div>
+    </header>
+
+    <!-- Synthetic Benchmark / Quantitative Bar Chart (Directly inspired by 04_benchmarks.jpg!) -->
+    {comparison.benchmarks.length > 0 && (
+      <section class="heg-dark-card rounded-2xl p-6 sm:p-8 text-white space-y-6">
+        <div>
+          <div class="text-[11px] font-mono uppercase tracking-widest text-slate-400">
+            SAYISAL PERFORMANS & VERİ KIYASLAMASI
+          </div>
+          <h2 class="text-xl font-extrabold text-white mt-0.5">Benchmark & Ölçüm Karşılaştırması</h2>
+        </div>
+
+        <div class="space-y-6">
+          {comparison.benchmarks.map((b) => {
+            const maxVal = Math.max(b.productAValue, b.productBValue) || 1;
+            const pctA = Math.round((b.productAValue / maxVal) * 100);
+            const pctB = Math.round((b.productBValue / maxVal) * 100);
+            return (
+              <div class="space-y-2.5">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <span class="text-sm font-extrabold text-[#FAD002]">{b.metric}</span>
+                  <span class="text-xs font-mono text-slate-400">{b.subtitle}</span>
+                </div>
+
+                <div class="space-y-2">
+                  <div class="grid grid-cols-12 items-center gap-3 text-xs font-mono">
+                    <span class="col-span-3 sm:col-span-2 text-slate-300 truncate">{b.productALabel}</span>
+                    <div class="col-span-6 sm:col-span-8 h-3.5 bg-white/10 rounded-full overflow-hidden">
+                      <div class="h-full bg-[#0B6BCB] rounded-full" style={`width: ${pctA}%`}></div>
+                    </div>
+                    <span class="col-span-3 sm:col-span-2 text-right font-extrabold text-white tabular-nums">{b.productADisplay}</span>
+                  </div>
+
+                  <div class="grid grid-cols-12 items-center gap-3 text-xs font-mono">
+                    <span class="col-span-3 sm:col-span-2 text-slate-300 truncate">{b.productBLabel}</span>
+                    <div class="col-span-6 sm:col-span-8 h-3.5 bg-white/10 rounded-full overflow-hidden">
+                      <div class="h-full bg-[#FAD002] rounded-full" style={`width: ${pctB}%`}></div>
+                    </div>
+                    <span class="col-span-3 sm:col-span-2 text-right font-extrabold text-[#FAD002] tabular-nums">{b.productBDisplay}</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    )}
+
+    <!-- Round-by-Round Semantic HTML Comparison Table (GEO Gold!) -->
+    <section class="bg-white rounded-2xl border border-slate-900/10 shadow-sm overflow-hidden">
+      <div class="px-6 py-4 bg-[#111827] text-white flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <div class="text-[11px] font-mono text-[#FAD002] uppercase tracking-widest">RAUND BAZLI DEĞERLENDİRME</div>
+          <h2 class="text-lg font-extrabold">{comparison.rounds.length} Raundluk Teknik & Kullanıcı Karşılaştırma Tablosu</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-300">{comparison.priceDiffText}</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-mono uppercase tracking-wider text-slate-500">
+              <th class="py-3.5 px-5">Raund / Kriter</th>
+              <th class="py-3.5 px-4 text-[#03519F]">{comparison.productA.shortName}</th>
+              <th class="py-3.5 px-4 text-amber-700">{comparison.productB.shortName}</th>
+              <th class="py-3.5 px-5 text-right">Raund Kazananı</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            {comparison.rounds.map((r) => (
+              <tr class="hover:bg-slate-50/80 transition align-top">
+                <td class="py-4 px-5">
+                  <div class="font-mono text-[10px] font-bold text-slate-400">RAUND 0{r.number}</div>
+                  <div class="font-extrabold text-slate-900 mt-0.5">{r.title}</div>
+                  <p class="text-xs text-slate-500 mt-1 leading-relaxed max-w-xs">{r.summary}</p>
+                </td>
+                <td class={`py-4 px-4 text-xs sm:text-sm leading-relaxed ${r.winner === 'A' ? 'bg-blue-50/60 font-bold text-slate-900' : 'text-slate-600'}`}>
+                  {r.productAValue}
+                </td>
+                <td class={`py-4 px-4 text-xs sm:text-sm leading-relaxed ${r.winner === 'B' ? 'bg-amber-50/70 font-bold text-slate-900' : 'text-slate-600'}`}>
+                  {r.productBValue}
+                </td>
+                <td class="py-4 px-5 text-right whitespace-nowrap">
+                  <span
+                    class={`inline-block text-[11px] font-mono font-extrabold px-2.5 py-1 rounded-lg ${
+                      r.winner === 'A'
+                        ? 'bg-[#03519F] text-white'
+                        : r.winner === 'B'
+                          ? 'bg-[#FAD002] text-[#0B0B0D]'
+                          : 'bg-slate-200 text-slate-800'
+                    }`}
+                  >
+                    {r.winnerLabel}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Who Should Buy Which? -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl border-t-4 border-[#03519F] p-6 shadow-sm space-y-2">
+        <div class="text-[11px] font-mono font-extrabold text-[#03519F] uppercase">KİMLER BUNU ALMALI?</div>
+        <h3 class="text-lg font-extrabold text-slate-950">{comparison.productA.name}</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">{comparison.productA.whoShouldBuy}</p>
+      </div>
+      <div class="bg-white rounded-2xl border-t-4 border-[#FAD002] p-6 shadow-sm space-y-2">
+        <div class="text-[11px] font-mono font-extrabold text-amber-700 uppercase">KİMLER BUNU ALMALI?</div>
+        <h3 class="text-lg font-extrabold text-slate-950">{comparison.productB.name}</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">{comparison.productB.whoShouldBuy}</p>
+      </div>
+    </section>
+
+    <!-- Dual Multi-Store Price Tables (Both products!) -->
+    <div class="grid grid-cols-1 gap-6">
+      <PriceTable
+        productName={comparison.productA.name}
+        displayDate={comparison.displayDate}
+        offers={comparison.productA.offers}
+        hasAffiliateLinks={comparison.hasAffiliateLinks}
+      />
+      <PriceTable
+        productName={comparison.productB.name}
+        displayDate={comparison.displayDate}
+        offers={comparison.productB.offers}
+        hasAffiliateLinks={comparison.hasAffiliateLinks}
+      />
+    </div>
+
+    <!-- YouTube & Social Presence -->
+    <SocialPresenceCard
+      social={comparison.social}
+      thumbnail={comparison.thumbnail}
+      itemTitle={comparison.title}
+    />
+
+    <!-- FAQ -->
+    {comparison.faqs.length > 0 && (
+      <section class="bg-white rounded-2xl border border-slate-900/10 p-6 sm:p-8 shadow-sm space-y-5">
+        <h2 class="text-xl font-extrabold text-slate-950">Sıkça Sorulan Sorular</h2>
+        <div class="space-y-4 divide-y divide-slate-100">
+          {comparison.faqs.map((faq) => (
+            <div class="pt-4 first:pt-0">
+              <h3 class="text-base font-bold text-slate-900">{faq.question}</h3>
+              <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>

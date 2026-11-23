@@ -1,0 +1,120 @@
+{
+  "slug": "apple-airpods-4-standart",
+  "name": "Apple AirPods 4 (ANC'siz Baz Model)",
+  "brand": "Apple",
+  "subtitle": "Aktif Gürültü Engellemesiz Giriş Versiyonu • HEG Fiyat Tuzağı Denetimi",
+  "category": "Kablosuz Kulaklık",
+  "categorySlug": "kablosuz-kulaklik",
+  "datePublished": "2026-11-22",
+  "dateModified": "2026-11-23",
+  "displayDate": "23 Kasım 2026",
+  "image": "/images/products/airpods-4.jpg",
+  "hegScore": 6.1,
+  "verdict": "ALINMAZ",
+  "verdictHeadline": "Şişirilmiş 'İndirim' Tuzağı — Bu Fiyata ANC'siz Modeli Almayın!",
+  "tldr": "Apple AirPods 4 (ANC'siz baz model), bazı mağazalarda 8.499 TL liste fiyatından 6.899 TL'ye inmiş gibi pazarlanıyor. Ancak aktif gürültü engelleme (ANC), kablosuz şarj ve hoparlörlü Bul (Find My) kutusu eksik. Sadece 1.500 TL farkla ANC'li versiyonu veya yarı fiyatına çok güçlü rakipler varken 6.1/10 puanla HEG Alınmaz uyarısı alıyor.",
+  "isFakeDealAlert": true,
+  "fakeDealReason": "Gerçek piyasa ortalaması zaten 6.700–6.900 TL bandında seyreden ürüne 8.499 TL şişirilmiş üstü çizili etiket yazılıyor; üstelik kritik ANC ve kablosuz şarj özellikleri bu versiyonda yok.",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "listPrice": 8499,
+  "currentLowestPrice": 6899,
+  "netSavings": 0,
+  "discountPercent": 0,
+  "priceNote": "HEG Denetimi: 8.499 TL 'eski fiyat' gerçekçi değil; son 90 günlük ortalama piyasa fiyatı 6.850 TL.",
+  "reviewStats": {
+    "source": "Türkiye & Global Alıcı Değerlendirmeleri",
+    "count": 2150,
+    "rating": 4.2,
+    "satisfactionPercent": 71
+  },
+  "criteria": [
+    {
+      "label": "Fiyat / Performans",
+      "score": 4.8,
+      "summary": "6.899 TL ödeyip ne aktif gürültü engelleme ne kablosuz şarj alabiliyorsunuz; segmentinin en zayıf değeri."
+    },
+    {
+      "label": "Gürültü Yalıtımı",
+      "score": 4.2,
+      "summary": "Açık uçlu tasarım + ANC yokluğu nedeniyle otobüs, metro ve sokakta dış ses tamamen içeri giriyor."
+    },
+    {
+      "label": "Apple Ekosistem & Çip",
+      "score": 8.6,
+      "summary": "H2 çipi sayesinde iPhone/Mac geçişi çok hızlı ve ses kalitesi 3. nesle göre iyileştirilmiş."
+    },
+    {
+      "label": "Kutu & Özellik Eksikleri",
+      "score": 5.5,
+      "summary": "Kablosuz şarj yok, MagSafe yok, kaybolunca ses çıkaran Bul (Find My) hoparlörü bu kutuda bulunmuyor."
+    },
+    {
+      "label": "Konfor & Mikrofon",
+      "score": 7.4,
+      "summary": "Silikon sevmeyenler için hafif ve konforlu; çağrı kalitesi kapalı alanda başarılı."
+    }
+  ],
+  "specs": [
+    { "label": "Çip", "value": "Apple H2" },
+    { "label": "Aktif Gürültü Engelleme", "value": "YOK (Yalnızca üst AirPods 4 ANC versiyonunda var)" },
+    { "label": "Şarj Kutusu", "value": "Yalnızca USB-C (Kablosuz şarj ve Find My hoparlörü YOK)" },
+    { "label": "Pil Ömrü", "value": "5 saat kulaklık / 30 saat kutu" },
+    { "label": "Dayanıklılık", "value": "IP54 toz, ter ve suya dayanıklılık" }
+  ],
+  "pros": [
+    "H2 çipiyle iPhone, iPad ve Mac arasında zahmetsiz anlık geçiş.",
+    "Silikon kulak ucu kullanamayanlar için hafif ve ergonomik açık tasarım.",
+    "USB-C bağlantı ve IP54 toz/ter dayanıklılığı."
+  ],
+  "cons": [
+    "6.899 TL fiyat bandında Aktif Gürültü Engelleme (ANC) bulunmaması kabul edilemez bir eksiklik.",
+    "Kablosuz şarj desteği ve kayıp kutuyu bulmayı sağlayan hoparlör bu modelden kırpılmış.",
+    "Birçok kampanya sayfasında 8.499 TL'den düşmüş gibi şişirilmiş 'sahte indirim' etiketiyle sunuluyor.",
+    "Sadece ~1.500 TL daha eklenerek AirPods 4 ANC alındığında bambaşka bir kulaklık deneyimi elde ediliyor."
+  ],
+  "whoShouldBuy": "Yalnızca hediye çeki/kurumsal indirimle 5.000 TL altına denk gelirse ve silikon uçlu kulaklık asla takamayan Apple kullanıcıları.",
+  "whoShouldSkip": "6.899 TL bütçeye çıkan herkes! Apple ekosisteminde kalacaksanız mutlaka AirPods 4 ANC versiyonunu, maksimum fiyat/performans arıyorsanız 2.999 TL'lik Anker Liberty 4 NC'yi tercih edin.",
+  "offers": [
+    {
+      "store": "Amazon TR (Daha Mantıklı: ANC Modeli)",
+      "price": 8399,
+      "seller": "Amazon.com.tr — Önerilen Üst Model",
+      "inStock": true,
+      "isLowest": true,
+      "isAffiliate": true,
+      "redirectSlug": "airpods-4-anc-amz",
+      "note": "HEG Önerisi: ANC + Kablosuz Şarjlı Versiyon"
+    },
+    {
+      "store": "Amazon TR (Baz Model)",
+      "price": 6899,
+      "seller": "Amazon.com.tr",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": true,
+      "redirectSlug": "airpods-4-amz",
+      "note": "ANC Yok — Önerilmez"
+    },
+    {
+      "store": "Hepsiburada (Baz Model)",
+      "price": 6949,
+      "seller": "Hepsiburada",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "airpods-4-hb",
+      "note": "ANC Yok — Önerilmez"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "HEG neden standart Apple AirPods 4 modeline Alınmaz diyor?",
+      "answer": "Çünkü 6.899 TL seviyesinde aktif gürültü engelleme (ANC), kablosuz şarj ve Find My hoparlörü sunmuyor; ayrıca sıkça 8.499 TL'den düşmüş gibi yapay indirim etiketleriyle pazarlanıyor. Küçük bir farkla AirPods 4 ANC veya yarı fiyatına ANC'li rakipler çok daha mantıklı."
+    },
+    {
+      "question": "AirPods 4 ile AirPods 4 ANC arasındaki fark nedir?",
+      "answer": "AirPods 4 ANC modeli aktif gürültü engelleme, şeffaf mod, adaptif ses, konuşma farkındalığı, kablosuz şarj kutusu ve kaybolduğunda ses çıkaran Bul (Find My) hoparlörüne sahiptir. Standart modelde bunların hiçbiri yoktur."
+    }
+  ]
+}

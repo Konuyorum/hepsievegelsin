@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLatestCatalog } from '../lib/content';
+import { formatTRY, CATALOG_STATUS_META, SITE } from '../data/site';
+
+const catalog = getLatestCatalog()!;
+const markets = ['Tümü', 'A101', 'BİM', 'ŞOK', 'Migros'] as const;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'HEG Akıllı Katalog Elemesi nedir?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A101, BİM, ŞOK ve Migros haftalık aktüel broşürlerindeki onlarca ürünü tek tek online piyasa taban fiyatlarıyla ve gıda içerik listeleriyle karşılaştırarak yalnızca gerçek fırsatları ve online alternatifi daha ucuz olanları ayıklayan bağımsız analizdir.',
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${catalog.title} — A101, BİM, ŞOK, Migros Fiyat Denetimi`}
+  description={catalog.summary}
+  canonicalPath="/katalog"
+  activeNav="katalog"
+  jsonLd={faqSchema}
+>
+  <section class="heg-hero-surface text-white border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div class="flex flex-wrap items-center gap-2.5 text-xs font-mono">
+        <span class="bg-[#FAD002] text-[#0B0B0D] font-extrabold px-2.5 py-1 rounded-md">
+          {catalog.weekLabel}
+        </span>
+        <span class="text-slate-300">📅 SON KONTROL: {catalog.displayDate}</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-3 tracking-tight">
+        HEG Akıllı Katalog Elemesi
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base mt-3 max-w-3xl leading-relaxed">
+        {catalog.summary}
+      </p>
+
+      <div class="mt-7 flex flex-wrap gap-2" id="marketFilters">
+        {markets.map((m, idx) => (
+          <button
+            data-market={m}
+            class={`market-btn px-4 py-2 rounded-xl text-xs font-mono font-extrabold cursor-pointer transition ${
+              idx === 0
+                ? 'bg-[#FAD002] text-[#0B0B0D]'
+                : 'bg-white/10 hover:bg-white/20 text-white border border-white/10'
+            }`}
+          >
+            {m}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    <div class="bg-white rounded-3xl border border-slate-900/10 shadow-sm overflow-hidden">
+      <div class="px-6 py-4 bg-[#111827] text-white flex flex-wrap items-center justify-between gap-2">
+        <h2 class="text-base sm:text-lg font-extrabold">
+          Market Fiyatı vs. Online Piyasa Tabanı (<span id="catalogCountLabel">{catalog.items.length} Elenmiş Ürün</span>)
+        </h2>
+        <span class="text-xs font-mono text-slate-400">Bağlantılarda #reklam (affiliate) bulunabilir</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-mono uppercase tracking-wider text-slate-500">
+              <th class="py-3.5 px-5">Market & Tarih</th>
+              <th class="py-3.5 px-4">Ürün & HEG Uzman Notu</th>
+              <th class="py-3.5 px-4 text-right">Market Fiyatı</th>
+              <th class="py-3.5 px-4 text-right">Online Taban</th>
+              <th class="py-3.5 px-5 text-right">HEG Durumu</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200" id="catalogTableBody">
+            {catalog.items.map((item) => {
+              const st = CATALOG_STATUS_META[item.status];
+              const diff = item.onlinePrice - item.marketPrice;
+              return (
+                <tr class="catalog-row hover:bg-slate-50 transition align-top" data-market={item.market}>
+                  <td class="py-4 px-5 whitespace-nowrap">
+                    <span class="inline-block font-mono font-extrabold text-xs bg-slate-900 text-white px-2.5 py-1 rounded">
+                      {item.market}
+                    </span>
+                    <div class="text-[11px] font-mono text-slate-500 mt-1.5">{item.validDates}</div>
+                    <div class="text-[11px] text-slate-400">{item.category}</div>
+                  </td>
+
+                  <td class="py-4 px-4 max-w-md">
+                    <div class="font-extrabold text-slate-900">{item.name}</div>
+                    <p class="text-xs text-slate-600 mt-1 leading-relaxed">{item.verdictNote}</p>
+                  </td>
+
+                  <td class="py-4 px-4 text-right font-mono font-extrabold text-slate-900 whitespace-nowrap tabular-nums">
+                    {formatTRY(item.marketPrice)}
+                  </td>
+
+                  <td class="py-4 px-4 text-right font-mono whitespace-nowrap tabular-nums">
+                    <div class="font-bold text-[#03519F]">{formatTRY(item.onlinePrice)}</div>
+                    <div class={`text-[10px] font-bold mt-0.5 ${diff > 0 ? 'text-emerald-700' : 'text-red-600'}`}>
+                      {diff > 0 ? `Market ${formatTRY(diff)} ucuz` : `Online ${formatTRY(Math.abs(diff))} ucuz`}
+                    </div>
+                  </td>
+
+                  <td class="py-4 px-5 text-right whitespace-nowrap space-y-2">
+                    <div>
+                      <span class={`inline-block text-[10px] font-mono font-extrabold px-2.5 py-1 rounded-md border ${st.bgClass} ${st.textClass} ${st.borderClass}`}>
+                        {st.label}
+                      </span>
+                    </div>
+                    {item.redirectSlug && (
+                      <div>
+                        <a
+                          href={`/git/${item.redirectSlug}`}
+                          target="_blank"
+                          rel={item.isAffiliate ? 'nofollow sponsored noopener noreferrer' : 'noopener noreferrer'}
+                          class="inline-flex items-center gap-1 text-xs font-bold text-[#03519F] hover:underline"
+                        >
+                          {item.onlineStore || 'Online Alternatif'} ↗
+                        </a>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="heg-dark-card rounded-2xl p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <div class="text-[11px] font-mono text-[#FAD002] uppercase font-bold">HAFTALIK VİDEO ELEMESİ</div>
+        <h3 class="text-lg font-extrabold mt-0.5">Katalog Elemelerini YouTube & Instagram'da da Takip Edin</h3>
+        <p class="text-xs text-slate-400 mt-1">Stoklar tükenmeden haftalık özetler ve 60 saniyelik Shorts uyarıları için kanala katılın.</p>
+      </div>
+      <div class="flex gap-2.5 shrink-0">
+        <a href={SITE.social.youtubeUrl} target="_blank" rel="noopener noreferrer" class="bg-red-600 hover:bg-red-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">
+          ▶ YouTube {SITE.social.youtubeHandle}
+        </a>
+        <a href={SITE.social.instagramUrl} target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-white/10 transition">
+          Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const buttons = document.querySelectorAll('.market-btn');
+    const rows = document.querySelectorAll('.catalog-row');
+    const countLabel = document.getElementById('catalogCountLabel');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selected = btn.getAttribute('data-market') || 'Tümü';
+        buttons.forEach((b) => {
+          b.className = 'market-btn px-4 py-2 rounded-xl text-xs font-mono font-extrabold cursor-pointer transition bg-white/10 hover:bg-white/20 text-white border border-white/10';
+        });
+        btn.className = 'market-btn px-4 py-2 rounded-xl text-xs font-mono font-extrabold cursor-pointer transition bg-[#FAD002] text-[#0B0B0D] shadow';
+
+        let visible = 0;
+        rows.forEach((row) => {
+          const market = row.getAttribute('data-market');
+          const hide = selected !== 'Tümü' && market !== selected;
+          row.classList.toggle('hidden', hide);
+          if (!hide) visible++;
+        });
+        if (countLabel) {
+          countLabel.textContent = selected === 'Tümü'
+            ? `${visible} Elenmiş Ürün`
+            : `${selected}: ${visible} / ${rows.length} Elenmiş Ürün`;
+        }
+      });
+    });
+  </script>
+</BaseLayout>

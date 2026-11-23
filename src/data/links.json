@@ -1,0 +1,134 @@
+{
+  "z-fold-8-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Samsung+Galaxy+Z+Fold+8+256GB",
+    "store": "Hepsiburada",
+    "product": "Samsung Galaxy Z Fold 8 256GB",
+    "isAffiliate": false
+  },
+  "z-fold-8-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Samsung+Galaxy+Z+Fold+8&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Samsung Galaxy Z Fold 8 256GB",
+    "isAffiliate": true
+  },
+  "z-fold-8-samsung": {
+    "url": "https://www.samsung.com/tr/smartphones/galaxy-z/",
+    "store": "Samsung Türkiye",
+    "product": "Samsung Galaxy Z Fold 8 256GB",
+    "isAffiliate": false
+  },
+  "z-fold-8-ty": {
+    "url": "https://www.trendyol.com/sr?q=Samsung+Galaxy+Z+Fold+8",
+    "store": "Trendyol",
+    "product": "Samsung Galaxy Z Fold 8 256GB",
+    "isAffiliate": false
+  },
+  "iphone-duo-apple": {
+    "url": "https://www.apple.com/tr/iphone/",
+    "store": "Apple Türkiye",
+    "product": "Apple iPhone Duo 256GB",
+    "isAffiliate": false
+  },
+  "iphone-duo-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Apple+iPhone+Duo",
+    "store": "Hepsiburada",
+    "product": "Apple iPhone Duo 256GB",
+    "isAffiliate": false
+  },
+  "iphone-duo-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Apple+iPhone+Duo&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Apple iPhone Duo 256GB",
+    "isAffiliate": true
+  },
+  "roborock-s8-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Roborock+S8+Sonic+Mopping",
+    "store": "Hepsiburada",
+    "product": "Roborock S8 Sonic Mopping",
+    "isAffiliate": false
+  },
+  "roborock-s8-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Roborock+S8+Sonic+Mopping&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Roborock S8 Sonic Mopping",
+    "isAffiliate": true
+  },
+  "roborock-s8-ty": {
+    "url": "https://www.trendyol.com/sr?q=Roborock+S8+Sonic+Mopping",
+    "store": "Trendyol",
+    "product": "Roborock S8 Sonic Mopping",
+    "isAffiliate": false
+  },
+  "roborock-s8-pazarama": {
+    "url": "https://www.pazarama.com/arama?q=Roborock+S8",
+    "store": "Pazarama",
+    "product": "Roborock S8 Sonic Mopping",
+    "isAffiliate": false
+  },
+  "dreame-l10s-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Dreame+L10s+Ultra",
+    "store": "Hepsiburada",
+    "product": "Dreame L10s Ultra",
+    "isAffiliate": false
+  },
+  "dreame-l10s-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Dreame+L10s+Ultra&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Dreame L10s Ultra",
+    "isAffiliate": true
+  },
+  "liberty-4-nc-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Anker+Soundcore+Liberty+4+NC&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Anker Soundcore Liberty 4 NC",
+    "isAffiliate": true
+  },
+  "liberty-4-nc-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Anker+Soundcore+Liberty+4+NC",
+    "store": "Hepsiburada",
+    "product": "Anker Soundcore Liberty 4 NC",
+    "isAffiliate": false
+  },
+  "liberty-4-nc-ty": {
+    "url": "https://www.trendyol.com/sr?q=Anker+Soundcore+Liberty+4+NC",
+    "store": "Trendyol",
+    "product": "Anker Soundcore Liberty 4 NC",
+    "isAffiliate": false
+  },
+  "airpods-4-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Apple+AirPods+4&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Apple AirPods 4",
+    "isAffiliate": true
+  },
+  "airpods-4-anc-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Apple+AirPods+4+ANC&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Apple AirPods 4 (ANC)",
+    "isAffiliate": true
+  },
+  "airpods-4-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Apple+AirPods+4",
+    "store": "Hepsiburada",
+    "product": "Apple AirPods 4",
+    "isAffiliate": false
+  },
+  "stanley-termos-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Stanley+Klasik+Vakumlu+Termos+1L&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Stanley Klasik Vakumlu Termos 1L",
+    "isAffiliate": true
+  },
+  "philips-utu-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Philips+Azur+Buharli+Utu&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Philips Azur Buharlı Ütü",
+    "isAffiliate": true
+  },
+  "xiaomi-airfryer-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Xiaomi+Smart+Air+Fryer+6.5L&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Xiaomi Smart Air Fryer 6.5L",
+    "isAffiliate": true
+  }
+}

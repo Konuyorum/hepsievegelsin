@@ -1,0 +1,144 @@
+{
+  "slug": "samsung-galaxy-z-fold-8",
+  "name": "Samsung Galaxy Z Fold 8",
+  "brand": "Samsung",
+  "subtitle": "201 gr Ultra İnce Katlanabilir Amiral Gemisi • Snapdragon 8 Elite Gen 5",
+  "category": "Akıllı Telefon",
+  "categorySlug": "akilli-telefon",
+  "datePublished": "2026-11-23",
+  "dateModified": "2026-11-23",
+  "displayDate": "23 Kasım 2026",
+  "image": "/images/products/fold8-main.jpg",
+  "gallery": ["/images/products/fold8-main.jpg", "/images/products/fold8-open.jpg"],
+  "hegScore": 9.1,
+  "verdict": "KESIN_ALINIR",
+  "verdictHeadline": "2026'nın En Mantıklı ve En Olgun Katlanabilir Telefonu",
+  "tldr": "23 Kasım 2026 itibarıyla Samsung Galaxy Z Fold 8 (256 GB), resmi Samsung mağazasında 131.999 TL iken Hepsiburada resmi satıcısında 100.449 TL'ye inerek 31.550 TL net avantaj sunuyor. 201 gr hafifliği, 3.74M AnTuTu v11 skoru ve oturmuş One UI 9 çoklu pencere deneyimiyle 9.1/10 HEG Puanı alarak Kesin Alınır damgasını kazanıyor.",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "listPrice": 131999,
+  "currentLowestPrice": 100449,
+  "netSavings": 31550,
+  "discountPercent": 24,
+  "priceNote": "256 GB model için Hepsiburada resmi satıcı kampanyası; 512 GB versiyonu 109.499 TL seviyesinde.",
+  "reviewStats": {
+    "source": "GSMArena & Global Teknoloji Toplulukları",
+    "count": 1840,
+    "rating": 4.7,
+    "satisfactionPercent": 89
+  },
+  "criteria": [
+    {
+      "label": "Fiyat / Performans",
+      "score": 9.5,
+      "summary": "Rakibi Apple iPhone Duo'nun neredeyse yarı fiyatına (129.550 TL daha ucuz) üst düzey katlanabilir amiral gemisi deneyimi."
+    },
+    {
+      "label": "Tasarım & Ergonomi",
+      "score": 9.4,
+      "summary": "Yalnızca 201 gram ağırlık ve pasaport oranlı geniş kapak ekranıyla kapalıyken normal telefon konforu."
+    },
+    {
+      "label": "Performans & Termal",
+      "score": 9.1,
+      "summary": "Snapdragon 8 Elite Gen 5 (3 nm) ile AnTuTu v11'de 3.74M puan; çoklu pencere yükünde serin ve kararlı."
+    },
+    {
+      "label": "Gerçek Kullanıcı Memnuniyeti",
+      "score": 9.0,
+      "summary": "8 nesillik menteşe tecrübesi ve One UI 9 uygulama ölçekleme olgunluğu sayesinde ilk nesil sancısı yok."
+    },
+    {
+      "label": "Kamera & Ekran",
+      "score": 8.5,
+      "summary": "3.000 nit parlak 7.6\" LTPO OLED ve 50 MP 8K ana kamera güçlü; ancak özel telefoto lensin çıkarılması puan kırıyor."
+    }
+  ],
+  "specs": [
+    { "label": "İç Ekran", "value": "7.6 inç 120 Hz LTPO OLED, 3.000 nit tepe parlaklık" },
+    { "label": "İşlemci", "value": "Snapdragon 8 Elite Gen 5 (3 nm)" },
+    { "label": "Benchmark", "value": "Geekbench 3.645 / 11.100 • AnTuTu v11 3.740.000" },
+    { "label": "Ağırlık & Kasa", "value": "201 gr • Armor Aluminum • IP48 suya/toza dayanıklılık" },
+    { "label": "Kamera", "value": "50 MP Ana Kamera (8K Video) — Özel telefoto lens yok" },
+    { "label": "Batarya & Şarj", "value": "4.800 mAh Silikon-Karbon • 45W Hızlı Şarj" },
+    { "label": "Yazılım", "value": "One UI 9 (Oturmuş çoklu pencere ve DeX ekosistemi)" }
+  ],
+  "pros": [
+    "201 gramlık ağırlığıyla katlanabilir telefonların en büyük sorunu olan kalınlık ve hantallığı bitiriyor.",
+    "Hepsiburada 100.449 TL kampanya fiyatı, resmi liste fiyatına göre 31.550 TL gerçek tasarruf sağlıyor.",
+    "One UI 9 ile bölünmüş ekran ve üçüncü parti uygulama ölçeklemesi rakiplerinden yıllarca önde.",
+    "AnTuTu v11'de 3.74 milyon skor ve uzun süreli yük altında yüksek termal kararlılık.",
+    "4.800 mAh silikon-karbon pil ve 45W hızlı şarj kombinasyonu."
+  ],
+  "cons": [
+    "Gövdeyi inceltmek adına özel optik telefoto kamera lensi çıkarılmış.",
+    "Katlama izi önceki nesillere göre çok azalsa da doğrudan ışık altında hâlâ hafifçe seçilebiliyor.",
+    "Klasik yarım açılı Flex Mode menteşe esnekliği önceki nesillere kıyasla biraz daha sınırlı."
+  ],
+  "whoShouldBuy": "Hafif, sorunsuz, çoklu görevde rakipsiz ve 230 bin TL ödemeden olgun bir katlanabilir amiral gemisine sahip olmak isteyen kullanıcılar.",
+  "whoShouldSkip": "Yüksek optik telefoto zoom fotoğrafçılığını önceliklendirenler veya tamamen Apple ekosistemine bağlı olanlar.",
+  "offers": [
+    {
+      "store": "Hepsiburada",
+      "price": 100449,
+      "oldPrice": 131999,
+      "seller": "Hepsiburada Resmi Satıcı",
+      "inStock": true,
+      "isLowest": true,
+      "isAffiliate": false,
+      "redirectSlug": "z-fold-8-hb",
+      "note": "256 GB — Piyasanın En Dip Fiyatı"
+    },
+    {
+      "store": "Amazon TR",
+      "price": 106999,
+      "oldPrice": 131999,
+      "seller": "Amazon.com.tr",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": true,
+      "redirectSlug": "z-fold-8-amz",
+      "note": "Prime Hızlı Teslimat"
+    },
+    {
+      "store": "Trendyol",
+      "price": 108499,
+      "oldPrice": 131999,
+      "seller": "Yetkili Distribütör",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "z-fold-8-ty",
+      "note": "256 GB"
+    },
+    {
+      "store": "Samsung Türkiye",
+      "price": 131999,
+      "seller": "Samsung Resmi Mağaza",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "z-fold-8-samsung",
+      "note": "Resmi Liste Fiyatı"
+    }
+  ],
+  "social": {
+    "youtubeUrl": "https://www.youtube.com/@hepsievegelsin",
+    "youtubeTitle": "Samsung Galaxy Z Fold 8 vs Apple iPhone Duo | 129.550 TL Farkla Hangisi Alınır? (2026)",
+    "instagramUrl": "https://www.instagram.com/hepsievegelsin"
+  },
+  "faqs": [
+    {
+      "question": "Samsung Galaxy Z Fold 8'in 23 Kasım 2026 Türkiye fiyatı ne kadar?",
+      "answer": "Resmi Samsung Türkiye mağazasında 256 GB modeli 131.999 TL, 512 GB modeli 143.999 TL'dir. Ancak 23 Kasım 2026 itibarıyla Hepsiburada resmi satıcısında 256 GB modeli 100.449 TL, 512 GB modeli ise 109.499 TL'den satılmaktadır."
+    },
+    {
+      "question": "Galaxy Z Fold 8 ile iPhone Duo arasında ne kadar fiyat farkı var?",
+      "answer": "256 GB baz modellerin güncel Türkiye fiyatları kıyaslandığında Galaxy Z Fold 8 (100.449 TL) ile Apple iPhone Duo (229.999 TL) arasında tam 129.550 TL fark bulunmaktadır."
+    },
+    {
+      "question": "Galaxy Z Fold 8 alınır mı, katlama izi belli oluyor mu?",
+      "answer": "Katlama izi ışık altında hafifçe seçilse de 201 gr ağırlığı, 8 nesillik menteşe güvenilirliği ve 100.449 TL'lik kampanya fiyatıyla HEG puanlamasında 9.1/10 alarak Kesin Alınır kategorisinde yer almaktadır."
+    }
+  ]
+}

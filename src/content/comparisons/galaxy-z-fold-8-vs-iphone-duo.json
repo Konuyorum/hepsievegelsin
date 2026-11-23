@@ -1,0 +1,226 @@
+{
+  "slug": "galaxy-z-fold-8-vs-iphone-duo",
+  "title": "Samsung Galaxy Z Fold 8 vs Apple iPhone Duo",
+  "hookBadge": "129.550 TL FARK!",
+  "subtitle": "2026'nın En Büyük Katlanabilir Telefon Kapışması: 8 Nesillik Tecrübe mi, Apple'ın İlk Katlanabilir Mühendisliği mi?",
+  "category": "Akıllı Telefon",
+  "datePublished": "2026-11-23",
+  "dateModified": "2026-11-23",
+  "displayDate": "23 Kasım 2026",
+  "thumbnail": "/images/thumbnails/fold8-vs-duo.jpg",
+  "tldr": "23 Kasım 2026 canlı Türkiye fiyatlarıyla Samsung Galaxy Z Fold 8 (100.449 TL) ile Apple iPhone Duo (229.999 TL) arasında tam 129.550 TL fark bulunuyor. Apple ekran/katlama izi ve tek çekirdek CPU'da öne geçse de; Z Fold 8 201 gr hafifliği, One UI 9 olgunluğu, 3.74M AnTuTu skoru ve yarı fiyatıyla 6 raundluk HEG VS kapışmasını 4-3 kazanıyor (HEG Puanı: 9.1 vs 8.3).",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "scoreA": 4,
+  "scoreB": 3,
+  "winnerSide": "A",
+  "winnerName": "Samsung Galaxy Z Fold 8",
+  "priceDiffText": "129.550 TL daha ucuz (1 iPhone Duo = 2 Z Fold 8 + 29.101 TL para üstü)",
+  "productA": {
+    "name": "Samsung Galaxy Z Fold 8",
+    "shortName": "Z FOLD 8",
+    "brand": "Samsung",
+    "image": "/images/products/fold8-main.jpg",
+    "hegScore": 9.1,
+    "verdict": "KESIN_ALINIR",
+    "lowestPrice": 100449,
+    "officialPrice": 131999,
+    "bestStore": "Hepsiburada Resmi Satıcı",
+    "productSlug": "samsung-galaxy-z-fold-8",
+    "whoShouldBuy": "Daha hafif (201 gr), ilk nesil yazılım/menteşe sancısı olmayan, oturmuş çoklu pencere deneyimi isteyen ve aynı bütçeyle iki kat mantıklı satın alma yapmak isteyen herkes.",
+    "offers": [
+      {
+        "store": "Hepsiburada",
+        "price": 100449,
+        "oldPrice": 131999,
+        "seller": "Hepsiburada Resmi",
+        "inStock": true,
+        "isLowest": true,
+        "isAffiliate": false,
+        "redirectSlug": "z-fold-8-hb",
+        "note": "256 GB En Dip Fiyat"
+      },
+      {
+        "store": "Amazon TR",
+        "price": 106999,
+        "oldPrice": 131999,
+        "seller": "Amazon.com.tr",
+        "inStock": true,
+        "isLowest": false,
+        "isAffiliate": true,
+        "redirectSlug": "z-fold-8-amz",
+        "note": "Prime Teslimat"
+      },
+      {
+        "store": "Samsung Türkiye",
+        "price": 131999,
+        "seller": "Resmi Mağaza",
+        "inStock": true,
+        "isLowest": false,
+        "isAffiliate": false,
+        "redirectSlug": "z-fold-8-samsung",
+        "note": "Resmi Liste"
+      }
+    ]
+  },
+  "productB": {
+    "name": "Apple iPhone Duo",
+    "shortName": "iPHONE DUO",
+    "brand": "Apple",
+    "image": "/images/products/duo-main.webp",
+    "hegScore": 8.3,
+    "verdict": "SARTLI_ALINIR",
+    "lowestPrice": 229999,
+    "officialPrice": 229999,
+    "bestStore": "Apple Türkiye",
+    "whoShouldBuy": "Bütçe sınırı olmayan, Apple ekosisteminden vazgeçemeyen, neredeyse görünmez katlama izi, Apple Pencil desteği ve en yüksek tek çekirdek CPU gücünü arayanlar.",
+    "offers": [
+      {
+        "store": "Apple Türkiye",
+        "price": 229999,
+        "seller": "Apple Resmi Mağaza",
+        "inStock": true,
+        "isLowest": true,
+        "isAffiliate": false,
+        "redirectSlug": "iphone-duo-apple",
+        "note": "256 GB (512 GB: 246.999 TL)"
+      },
+      {
+        "store": "Hepsiburada",
+        "price": 229999,
+        "seller": "Yetkili Satıcı",
+        "inStock": true,
+        "isLowest": false,
+        "isAffiliate": false,
+        "redirectSlug": "iphone-duo-hb",
+        "note": "256 GB"
+      },
+      {
+        "store": "Amazon TR",
+        "price": 231499,
+        "seller": "Amazon.com.tr",
+        "inStock": true,
+        "isLowest": false,
+        "isAffiliate": true,
+        "redirectSlug": "iphone-duo-amz",
+        "note": "Prime"
+      }
+    ]
+  },
+  "rounds": [
+    {
+      "number": 1,
+      "title": "Tasarım, Ağırlık & Ergonomi",
+      "productAValue": "201 gr • Armor Aluminum • IP48 • İnce pasaport oranı",
+      "productBValue": "254 gr (+53 gr ağır) • 5. Sınıf Titanyum • Yan tuş Touch ID",
+      "winner": "A",
+      "winnerLabel": "Z Fold 8 (1-0)",
+      "summary": "iPhone Duo titanyum kasayla çok premium hissettirse de 254 gr ağırlığı ve kalınlığıyla cepte yoruyor. 201 gr Z Fold 8 normal telefon ergonomisinde."
+    },
+    {
+      "number": 2,
+      "title": "Ekran & Katlama İzi",
+      "productAValue": "7.6\" 120Hz LTPO OLED • 3.000 nit • Hafif seçilen katlama izi",
+      "productBValue": "7.6\" Nano-Texture • Ekran altı kamera • Apple Pencil • Görünmez iz",
+      "winner": "B",
+      "winnerLabel": "iPhone Duo (1-1)",
+      "summary": "Apple mühendislik şovu yapıyor: nano-texture yansıma önleme ve neredeyse sıfır katlama iziyle ekran raundunu net alıyor."
+    },
+    {
+      "number": 3,
+      "title": "İşlemci & Benchmark Skorları",
+      "productAValue": "Snapdragon 8 Elite Gen 5 (3nm) • GB 3.645/11.100 • AnTuTu 3.74M",
+      "productBValue": "Apple A20 Pro (2nm) • GB 4.710/12.640 (+%30 SC) • AnTuTu 3.42M",
+      "winner": "B",
+      "winnerLabel": "iPhone Duo (1-2)",
+      "summary": "Z Fold 8 AnTuTu toplam sistem skorunda ve uzun süreli yük soğutmasında önde olsa da, A20 Pro tek çekirdekte +%30 farkla saf CPU lideri."
+    },
+    {
+      "number": 4,
+      "title": "Kamera & Batarya Performansı",
+      "productAValue": "50 MP (8K) • 4.800 mAh Si-C • 45W Hızlı Şarj (Telefoto yok)",
+      "productBValue": "Çift 48 MP Fusion 2x • 4.883 mAh • 44 saat video ömrü (Telefoto yok)",
+      "winner": "TIE",
+      "winnerLabel": "Berabere (2-3 → 3-2)",
+      "summary": "İki marka da özel telefoto lensi çıkarmış. Pil ömründe iPhone Duo, hızlı şarjda Z Fold 8 önde olduğu için bu raund dengede bitiyor."
+    },
+    {
+      "number": 5,
+      "title": "GSMArena & Gerçek Kullanıcı Yorumları",
+      "productAValue": "One UI 9 olgunluğu, 201g hafiflik övülüyor; telefoto eksikliği eleştiriliyor",
+      "productBValue": "iPad Mini hissi seviliyor ama ilk nesil menteşe yumuşaklığı & uygulama ölçekleme sancısı var",
+      "winner": "A",
+      "winnerLabel": "Z Fold 8 (3-3)",
+      "summary": "8 nesillik yazılım ve menteşe olgunluğu, ilk nesil iOS katlanabilir uygulama ölçekleme sancıları karşısında Z Fold 8'i öne çıkarıyor."
+    },
+    {
+      "number": 6,
+      "title": "23 Kasım 2026 Canlı Türkiye Fiyatları",
+      "productAValue": "100.449 TL (Hepsiburada Resmi) • 131.999 TL (Samsung Resmi)",
+      "productBValue": "229.999 TL (256 GB) • 246.999 TL (512 GB) • 335.999 TL (2 TB)",
+      "winner": "A",
+      "winnerLabel": "Z Fold 8 (Final 4-3)",
+      "summary": "Bir iPhone Duo parasına iki adet Z Fold 8 alıp 29.101 TL para üstü kalıyor. Fiyat/performans raundunun tartışmasız kazananı Z Fold 8."
+    }
+  ],
+  "benchmarks": [
+    {
+      "metric": "Geekbench Tek Çekirdek (Single-Core)",
+      "subtitle": "Apple iPhone Duo +%29.2 Önde",
+      "productALabel": "Z Fold 8",
+      "productAValue": 3645,
+      "productADisplay": "3.645",
+      "productBLabel": "iPhone Duo",
+      "productBValue": 4710,
+      "productBDisplay": "4.710"
+    },
+    {
+      "metric": "Geekbench Çoklu Çekirdek (Multi-Core)",
+      "subtitle": "Apple iPhone Duo +%13.9 Önde",
+      "productALabel": "Z Fold 8",
+      "productAValue": 11100,
+      "productADisplay": "11.100",
+      "productBLabel": "iPhone Duo",
+      "productBValue": 12640,
+      "productBDisplay": "12.640"
+    },
+    {
+      "metric": "AnTuTu v11 Toplam Sistem Skoru",
+      "subtitle": "Z Fold 8 Çoklu Görevde ve Termalde Önde",
+      "productALabel": "Z Fold 8",
+      "productAValue": 374,
+      "productADisplay": "3,74 M",
+      "productBLabel": "iPhone Duo",
+      "productBValue": 342,
+      "productBDisplay": "3,42 M"
+    }
+  ],
+  "social": {
+    "youtubeUrl": "https://www.youtube.com/@hepsievegelsin",
+    "youtubeTitle": "Samsung Galaxy Z Fold 8 vs Apple iPhone Duo | 129.550 TL Farkla Hangisi Alınır? (2026)",
+    "instagramUrl": "https://www.instagram.com/hepsievegelsin",
+    "chapters": [
+      { "time": "00:00", "label": "Büyük Kapışma: 129.550 TL Fark!" },
+      { "time": "00:35", "label": "Raund 1: Tasarım & Ağırlık (201 gr vs 254 gr)" },
+      { "time": "01:05", "label": "Raund 2: Ekran & Katlama İzi" },
+      { "time": "01:34", "label": "Raund 3: Geekbench & AnTuTu v11 Skorları" },
+      { "time": "02:12", "label": "Raund 4: Kamera & Batarya" },
+      { "time": "02:44", "label": "Raund 5: GSMArena Gerçek Kullanıcı Yorumları" },
+      { "time": "03:25", "label": "Raund 6: 23 Kasım 2026 Türkiye Fiyatları & HEG Kararı" }
+    ]
+  },
+  "faqs": [
+    {
+      "question": "Samsung Galaxy Z Fold 8 mi Apple iPhone Duo mu daha iyi?",
+      "answer": "Saf ekran katlama izi görünmezliği ve tek çekirdek işlemci gücünde Apple iPhone Duo öndedir. Ancak 53 gram daha hafif gövde, oturmuş çoklu pencere yazılımı, yüksek AnTuTu v11 sistem performansı ve 129.550 TL daha düşük fiyatıyla Samsung Galaxy Z Fold 8, HEG VS analizini 4-3 (9.1 vs 8.3 puan) kazanmaktadır."
+    },
+    {
+      "question": "Apple iPhone Duo Türkiye fiyatı 2026 yılında ne kadar?",
+      "answer": "23 Kasım 2026 itibarıyla Apple Türkiye resmi fiyatları: 256 GB için 229.999 TL, 512 GB için 246.999 TL ve 2 TB için 335.999 TL'dir."
+    },
+    {
+      "question": "iPhone Duo'da Face ID var mı?",
+      "answer": "Hayır. Apple iPhone Duo, katlanabilir gövde inceliğini korumak amacıyla Face ID yerine yan güç tuşuna entegre Touch ID parmak izi okuyucu ile gelmektedir."
+    }
+  ]
+}

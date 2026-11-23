@@ -1,0 +1,34 @@
+---
+import { VERDICT_META } from '../data/site';
+import type { VerdictKey } from '../lib/types';
+
+interface Props {
+  verdict: VerdictKey;
+  score?: number;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { verdict, score, size = 'md' } = Astro.props;
+const meta = VERDICT_META[verdict];
+
+const sizeClasses = {
+  sm: 'text-[11px] px-2.5 py-1 gap-1.5',
+  md: 'text-xs px-3 py-1.5 gap-2',
+  lg: 'text-sm px-4 py-2 gap-2.5',
+}[size];
+---
+
+<span
+  class={`inline-flex items-center font-mono font-extrabold uppercase tracking-wider rounded-lg border ${meta.bgClass} ${meta.textClass} ${meta.borderClass} ${sizeClasses}`}
+>
+  <span
+    class="w-2 h-2 rounded-full shrink-0"
+    style={`background-color: ${meta.hex}`}
+  ></span>
+  <span>{meta.label}</span>
+  {score !== undefined && (
+    <span class="pl-1.5 ml-0.5 border-l border-current/30 tabular-nums">
+      {score.toFixed(1)}/10
+    </span>
+  )}
+</span>

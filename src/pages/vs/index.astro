@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ComparisonCard from '../../components/ComparisonCard.astro';
+import { getAllComparisons } from '../../lib/content';
+
+const comparisons = getAllComparisons();
+---
+
+<BaseLayout
+  title="HEG VS — Bölünmüş Ekran Karşılaştırma & Puanlama"
+  description="Türkiye'nin en çok merak edilen teknoloji ve ev ürünlerinin raund bazlı, Geekbench/AnTuTu benchmark destekli ve canlı çoklu mağaza fiyatlı tarafsız karşılaştırmaları."
+  canonicalPath="/vs"
+  activeNav="vs"
+>
+  <section class="heg-hero-surface text-white border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+      <div>
+        <div class="text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#FAD002]">
+          HEG VS — KARAR AŞAMASI KARŞILAŞTIRMALARI
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-2 tracking-tight">
+          İki Ürün. Net Raund Skorları. Sıfır Sponsorluk.
+        </h1>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 max-w-2xl leading-relaxed">
+          Sol köşede İtalyan Mavisi, sağ köşede İkonik Sarı: her kriterde verilerle kazananı belirliyor, finalde <strong class="text-white">"Hangisi Kime Göre?"</strong> net cevabını veriyoruz.
+        </p>
+      </div>
+      <a
+        href="/asistan?vs=1"
+        class="inline-flex items-center gap-2 bg-[#FAD002] hover:bg-[#ffe03a] text-[#0B0B0D] font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shrink-0"
+      >
+        ⚖️ Kendi 2 Ürününü AI ile Kıyasla →
+      </a>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-7">
+      {comparisons.map((comp) => <ComparisonCard comparison={comp} />)}
+    </div>
+  </section>
+</BaseLayout>

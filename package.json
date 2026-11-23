@@ -1,24 +1,24 @@
 {
   "name": "hepsievegelsin",
-  "version": "1.0.0",
-  "description": "AI-Powered Smart Shopping Assistant & Product Comparison Engine for Turkish E-Commerce",
-  "main": "_worker.js",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "HEG (Hepsi Eve Gelsin) — Tarafsız Ürün Derecelendirme, Çoklu Mağaza Fiyat Analizi, HEG VS ve AI Alışveriş Platformu",
   "scripts": {
-    "dev": "wrangler pages dev .",
-    "deploy": "wrangler pages deploy ."
+    "dev": "astro dev --port 4321",
+    "build": "astro build",
+    "preview": "astro preview --port 4321",
+    "cf:dev": "wrangler pages dev dist --port 8788",
+    "cf:deploy": "wrangler pages deploy dist"
   },
-  "keywords": [
-    "ai",
-    "claude-api",
-    "anthropic",
-    "claude-3-5-haiku",
-    "e-commerce",
-    "shopping-assistant",
-    "cloudflare-pages"
-  ],
-  "author": "Konuyorum",
-  "license": "MIT",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@tailwindcss/vite": "^4.1.4",
+    "astro": "^5.7.10",
+    "tailwindcss": "^4.1.4"
+  },
   "devDependencies": {
     "wrangler": "^3.80.0"
-  }
+  },
+  "author": "Konuyorum",
+  "license": "MIT"
 }

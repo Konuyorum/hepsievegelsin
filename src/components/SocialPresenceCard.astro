@@ -1,0 +1,106 @@
+---
+import type { SocialLinks } from '../lib/types';
+import { SITE } from '../data/site';
+
+interface Props {
+  social?: SocialLinks;
+  thumbnail?: string;
+  itemTitle: string;
+}
+
+const { social, thumbnail, itemTitle } = Astro.props;
+const hasYoutube = Boolean(social?.youtubeUrl);
+const hasInstagram = Boolean(social?.instagramUrl);
+---
+
+<section class="heg-dark-card rounded-2xl p-6 text-white">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+    <div>
+      <div class="text-[11px] font-mono uppercase tracking-widest text-[#FAD002]">
+        VİDEO & SOSYAL MEDYA BAĞLANTILARI
+      </div>
+      <h3 class="text-base font-bold text-white mt-0.5">
+        {hasYoutube ? 'Bu Analizin YouTube Videosu Yayında' : 'HEG Web-Özel Bağımsız Analiz'}
+      </h3>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      {hasYoutube && (
+        <a
+          href={social!.youtubeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition"
+        >
+          <span>▶ YouTube'da İzle</span>
+        </a>
+      )}
+      {hasInstagram && (
+        <a
+          href={social!.instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-3.5 py-2 rounded-lg border border-white/10 transition"
+        >
+          <span>Instagram'da Gör ↗</span>
+        </a>
+      )}
+    </div>
+  </div>
+
+  {hasYoutube ? (
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+      {thumbnail && (
+        <a
+          href={social!.youtubeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="md:col-span-5 relative group rounded-xl overflow-hidden border border-white/15 block"
+        >
+          <img
+            src={thumbnail}
+            alt={social?.youtubeTitle || itemTitle}
+            class="w-full aspect-video object-cover group-hover:scale-105 transition duration-300"
+          />
+          <div class="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition flex items-center justify-center">
+            <div class="w-14 h-14 rounded-full bg-red-600/95 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 transition">
+              <svg class="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      )}
+      <div class={thumbnail ? 'md:col-span-7 space-y-3' : 'md:col-span-12 space-y-3'}>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          <strong class="text-white">{social?.youtubeTitle || itemTitle}</strong> — Tüm görsel kıyaslamalar, sesli uzman anlatımı ve güncel değerlendirmeler <a href={SITE.social.youtubeUrl} target="_blank" class="text-[#FAD002] hover:underline">{SITE.social.youtubeHandle}</a> kanalımızda.
+        </p>
+
+        {social?.chapters && social.chapters.length > 0 && (
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+            {social.chapters.map((ch) => (
+              <div class="flex items-center gap-2 text-xs bg-white/5 border border-white/5 rounded-lg px-2.5 py-1.5">
+                <span class="font-mono font-bold text-[#FAD002] shrink-0">{ch.time}</span>
+                <span class="text-slate-300 truncate">{ch.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  ) : (
+    <div class="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+        Bu ürün incelemesi <strong>doğrudan hepsievegelsin.com için hazırlanmış bağımsız web derecelendirmesidir</strong> (henüz YouTube videosu çekilmemiştir). Video veya Instagram Reels yayınlandığında bağlantısı otomatik olarak burada aktif olacaktır.
+      </p>
+      <a
+        href={SITE.social.youtubeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="shrink-0 text-xs font-bold text-[#FAD002] hover:underline"
+      >
+        Tüm Videolarımız →
+      </a>
+    </div>
+  )}
+</section>

@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getAllProducts } from '../lib/content';
+import { SITE } from '../data/site';
+
+const products = getAllProducts();
+const categories = [...new Set(products.map((p) => p.category))];
+
+const listSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'HEG Bağımsız Ürün Derecelendirme ve Fırsat Dizini',
+  numberOfItems: products.length,
+  itemListElement: products.map((p, idx) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    name: p.name,
+    url: `${SITE.url}/urun/${p.slug}`,
+  })),
+};
+---
+
+<BaseLayout
+  title="Bağımsız Ürün Derecelendirme & Canlı Fırsatlar"
+  description="YouTube videolarımız ve web platformumuza özel, marka sponsorluğu olmadan 5 kriterle puanlanmış tüm ürün incelemeleri, çoklu mağaza fiyatları ve sahte indirim uyarıları."
+  canonicalPath="/urunler"
+  activeNav="urunler"
+  jsonLd={listSchema}
+>
+  <section class="heg-hero-surface text-white border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div class="text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#FAD002]">
+        BAĞIMSIZ ÜRÜN DERECELENDİRME MERKEZİ
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-2 tracking-tight">
+        HEG Puanlı İncelemeler & Gerçek Fırsatlar
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base mt-3 max-w-2xl leading-relaxed">
+        Yalnızca YouTube kanalımızdaki videolar değil — web sitemize özel bağımsız derecelendirmeler, çoklu mağaza fiyat tabloları ve sahte indirim denetimleri tek merkezde.
+      </p>
+
+      <!-- Interactive Filter Bar -->
+      <div class="mt-7 flex flex-wrap gap-2" id="verdictFilters">
+        <button data-filter="ALL" class="filter-btn active px-4 py-2 rounded-xl text-xs font-mono font-extrabold bg-[#FAD002] text-[#0B0B0D] cursor-pointer transition">
+          TÜMÜ ({products.length})
+        </button>
+        <button data-filter="KESIN_ALINIR" class="filter-btn px-4 py-2 rounded-xl text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10 cursor-pointer transition">
+          KESİN ALINIR
+        </button>
+        <button data-filter="FP_SAMPIYONU" class="filter-btn px-4 py-2 rounded-xl text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-sky-300 border border-white/10 cursor-pointer transition">
+          F/P ŞAMPİYONU
+        </button>
+        <button data-filter="SARTLI_ALINIR" class="filter-btn px-4 py-2 rounded-xl text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-[#FAD002] border border-white/10 cursor-pointer transition">
+          ŞARTLI ALINIR
+        </button>
+        <button data-filter="ALINMAZ" class="filter-btn px-4 py-2 rounded-xl text-xs font-mono font-bold bg-red-500/20 hover:bg-red-500/35 text-red-300 border border-red-500/30 cursor-pointer transition">
+          ⚠ ALINMAZ / SAHTE İNDİRİM
+        </button>
+        <button data-filter="WEB_ONLY" class="filter-btn px-4 py-2 rounded-xl text-xs font-mono font-bold bg-[#03519F]/40 hover:bg-[#03519F] text-white border border-sky-400/30 cursor-pointer transition">
+          ✦ SADECE WEB ANALİZİ
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-wrap items-center justify-between gap-2 mb-6 text-xs font-mono text-slate-600">
+      <span>Kategoriler: {categories.join(' • ')}</span>
+      <span id="visibleCount">Gösterilen: {products.length} ürün</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="productGrid">
+      {products.map((product) => (
+        <div
+          class="product-item"
+          data-verdict={product.verdict}
+          data-web-only={product.social?.youtubeUrl ? 'false' : 'true'}
+        >
+          <ProductCard product={product} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    const btns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.product-item');
+    const countEl = document.getElementById('visibleCount');
+
+    btns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter') || 'ALL';
+        btns.forEach((b) => {
+          b.classList.remove('bg-[#FAD002]', 'text-[#0B0B0D]');
+          b.classList.add('bg-white/10');
+        });
+        btn.classList.remove('bg-white/10');
+        btn.classList.add('bg-[#FAD002]', 'text-[#0B0B0D]');
+
+        let count = 0;
+        items.forEach((el) => {
+          const verdict = el.getAttribute('data-verdict');
+          const webOnly = el.getAttribute('data-web-only') === 'true';
+          const show =
+            filter === 'ALL' ||
+            (filter === 'WEB_ONLY' && webOnly) ||
+            verdict === filter;
+          el.classList.toggle('hidden', !show);
+          if (show) count++;
+        });
+        if (countEl) countEl.textContent = `Gösterilen: ${count} ürün`;
+      });
+    });
+  </script>
+</BaseLayout>

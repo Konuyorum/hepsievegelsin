@@ -1,0 +1,111 @@
+{
+  "slug": "kasim-2026-hafta-4",
+  "title": "Haftanın Akıllı Katalog Elemesi — Kasım 2026 (4. Hafta)",
+  "weekLabel": "23 – 29 Kasım 2026",
+  "dateModified": "2026-11-23",
+  "displayDate": "23 Kasım 2026",
+  "summary": "A101, BİM, ŞOK ve Migros'un 40+ sayfalık haftalık aktüel broşürlerini tek tek taradık; sıradan ürünleri eledik ve yalnızca gerçek fiyat avantajı sunanlar ile 'online'da daha ucuz' tuzaklarını çıkardık.",
+  "social": {
+    "youtubeUrl": "https://www.youtube.com/@hepsievegelsin",
+    "instagramUrl": "https://www.instagram.com/hepsievegelsin"
+  },
+  "items": [
+    {
+      "id": "bim-stanley-1l",
+      "market": "BİM",
+      "validDates": "27 Kasım 2026 Cuma",
+      "name": "Stanley Klasik Vakumlu Termos 1.0 Litre",
+      "category": "Kamp & Mutfak",
+      "marketPrice": 1799,
+      "onlinePrice": 2190,
+      "status": "GERCEK_FIRSAT",
+      "verdictNote": "Online piyasa tabanından 391 TL daha ucuz. Orijinal ömür boyu garantili seri; sabah saatlerinde stok bitmeden alınır.",
+      "onlineStore": "Amazon TR Alternatifi",
+      "redirectSlug": "stanley-termos-amz",
+      "isAffiliate": true
+    },
+    {
+      "id": "a101-onvo-55",
+      "market": "A101",
+      "validDates": "26 Kasım 2026 Perşembe",
+      "name": "Onvo 55\" 4K Ultra HD Frameless Google TV",
+      "category": "TV & Teknoloji",
+      "marketPrice": 14499,
+      "onlinePrice": 15299,
+      "status": "GERCEK_FIRSAT",
+      "verdictNote": "İkinci oda/yazlık için piyasa ortalamasının 800 TL altında. Ancak panel parlaklığı giriş seviyesi; ana salon sineması için beklemeyin."
+    },
+    {
+      "id": "sok-philips-utu",
+      "market": "ŞOK",
+      "validDates": "25 Kasım 2026 Çarşamba",
+      "name": "Philips Azur 2800W Buharlı Ütü (DST7020)",
+      "category": "Küçük Ev Aletleri",
+      "marketPrice": 3199,
+      "onlinePrice": 2849,
+      "status": "ONLINEDA_DAHA_UCUZ",
+      "verdictNote": "Market kataloğunda 'aktüel fırsat' diye sunulsa da Amazon TR'de 350 TL daha ucuza ve Prime iade güvencesiyle satılıyor!",
+      "onlineStore": "Amazon TR'de 2.849 TL",
+      "redirectSlug": "philips-utu-amz",
+      "isAffiliate": true
+    },
+    {
+      "id": "migros-zeytinyagi",
+      "market": "Migros",
+      "validDates": "23 – 30 Kasım 2026",
+      "name": "Soğuk Sıkım Natürel Sızma Zeytinyağı 2L (Money İndirimi)",
+      "category": "Gıda & Market",
+      "marketPrice": 649,
+      "onlinePrice": 790,
+      "status": "GERCEK_FIRSAT",
+      "verdictNote": "Litresi 324,5 TL'ye geliyor. Asit oranı <%0.8 ve erken hasat soğuk sıkım ibaresi doğrulanmış; Money kart ile net gerçek fırsat."
+    },
+    {
+      "id": "a101-airfryer",
+      "market": "A101",
+      "validDates": "26 Kasım 2026 Perşembe",
+      "name": "Xiaomi Smart Air Fryer 6.5L",
+      "category": "Mutfak",
+      "marketPrice": 4299,
+      "onlinePrice": 3899,
+      "status": "ONLINEDA_DAHA_UCUZ",
+      "verdictNote": "A101 katalog fiyatı online kampanyanın 400 TL üzerinde kalmış. Mağazada sıra beklemek yerine online almak daha kârlı.",
+      "onlineStore": "Amazon TR'de 3.899 TL",
+      "redirectSlug": "xiaomi-airfryer-amz",
+      "isAffiliate": true
+    },
+    {
+      "id": "bim-protein-bar",
+      "market": "BİM",
+      "validDates": "24 Kasım 2026 Salı",
+      "name": "'Şekersiz & Fit' Kakaolu Protein Bar 50g",
+      "category": "Gıda & Atıştırmalık",
+      "marketPrice": 42,
+      "onlinePrice": 45,
+      "status": "ICERIK_UYARISI",
+      "verdictNote": "İçindekiler taraması: İlk sırada yüksek maltitol şurubu ve palm yağı bulunuyor; protein oranı sadece %18. 'Fit' etiketine aldanmayın."
+    },
+    {
+      "id": "migros-kahve",
+      "market": "Migros",
+      "validDates": "23 – 30 Kasım 2026",
+      "name": "Jacobs Monarch Filtre Kahve 500g (2 Al 1 Öde)",
+      "category": "Gıda & İçecek",
+      "marketPrice": 285,
+      "onlinePrice": 365,
+      "status": "GERCEK_FIRSAT",
+      "verdictNote": "Kilogram maliyeti 570 TL'ye iniyor. Son 6 ayın en iyi filtre kahve stoklama fırsatlarından biri."
+    },
+    {
+      "id": "sok-akilli-saat",
+      "market": "ŞOK",
+      "validDates": "25 Kasım 2026 Çarşamba",
+      "name": "Markasız 'Ultra Max Amoled' Akıllı Saat",
+      "category": "Teknoloji",
+      "marketPrice": 999,
+      "onlinePrice": 620,
+      "status": "ICERIK_UYARISI",
+      "verdictNote": "Gerçek AMOLED değil düşük kontrastlı TFT ekran ve sağlık sensörleri tutarsız. Bütçeyi biraz artırıp bilindik marka bileklik alın."
+    }
+  ]
+}

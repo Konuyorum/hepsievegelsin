@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { VERDICT_META, SITE } from '../data/site';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Hepsi Eve Gelsin (HEG) incelemeleri sponsorlu mu?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Hayır. HEG (hepsievegelsin.com ve @hepsievegelsin) hiçbir markadan inceleme ücreti, gizli sponsorluk veya puan yönlendirmesi kabul etmez. Tüm puanlar 5 şeffaf kriter, çoklu mağaza fiyat geçmişi ve gerçek kullanıcı yorumlarıyla belirlenir.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'HEG sahte indirimleri nasıl tespit ediyor?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ürünün yalnızca tek bir mağazadaki üstü çizili liste fiyatına bakılmaz; Hepsiburada, Amazon TR, Trendyol, n11, Pazarama canlı fiyatları ile son 3–6 aylık fiyat ortalamaları kıyaslanır. Önce zam yapılıp sonra indirim gösterilen ürünler Alınmaz / Sahte İndirim damgasıyla işaretlenir.',
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Tarafsızlık Manifestosu & HEG Puanlama Metodolojisi"
+  description="Hepsi Eve Gelsin (HEG) ürün puanlarını nasıl hesaplar? Sahte indirim denetimi, çoklu mağaza fiyat doğrulama ve %100 sponsorluksuz tarafsızlık ilkelerimiz."
+  canonicalPath="/metodoloji"
+  activeNav="metodoloji"
+  jsonLd={faqSchema}
+>
+  <section class="heg-hero-surface text-white border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 relative z-10">
+      <div class="text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#FAD002]">
+        EDİTÖRYAL BAĞIMSIZLIK & VERİ BİLİMİ
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold mt-2 tracking-tight">
+        Tarafsızlık Manifestosu & Puanlama Metodolojisi
+      </h1>
+      <p class="text-slate-300 text-base mt-4 max-w-3xl leading-relaxed">
+        Türkiye e-ticaret ekosisteminde her indirim etiketinin övüldüğü gürültülü bir ortamda, <strong class="text-white">Hepsi Eve Gelsin (HEG)</strong> yalnızca tek bir tarafı tutar: <span class="text-[#FAD002] font-bold">tüketiciyi.</span>
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="heg-white-card rounded-2xl p-6 space-y-2">
+        <div class="text-xs font-mono font-extrabold text-[#03519F]">İLKE 01</div>
+        <h2 class="text-lg font-extrabold text-slate-950">Sıfır Marka Sponsorluğu & Gizli Reklam</h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Hiçbir marka, distribütör veya satıcı HEG puanını satın alamaz. Affiliate (satış ortaklığı) bağlantısı bulunsa dahi, bir ürün fiyatını hak etmiyorsa açıkça <strong>"Alınmaz"</strong> damgası yer ve daha iyi alternatif önerilir.
+        </p>
+      </div>
+
+      <div class="heg-white-card rounded-2xl p-6 space-y-2">
+        <div class="text-xs font-mono font-extrabold text-[#03519F]">İLKE 02</div>
+        <h2 class="text-lg font-extrabold text-slate-950">Çoklu Mağaza Canlı Fiyat Kanıtı</h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Tek bir sitenin "sepette %40 indirim" etiketine asla güvenmeyiz. Hepsiburada, Amazon TR, Trendyol, Pazarama ve resmi mağazalar yan yana taranır; tarih damgasıyla gerçek dip fiyat kanıtlanır.
+        </p>
+      </div>
+
+      <div class="heg-white-card rounded-2xl p-6 space-y-2">
+        <div class="text-xs font-mono font-extrabold text-[#03519F]">İLKE 03</div>
+        <h2 class="text-lg font-extrabold text-slate-950">Binlerce Gerçek Kullanıcı Yorumu Sentezi</h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Yapay zeka destekli tarama motorumuz; tek bir kişinin saatlerce okuyamayacağı kadar geniş doğrulanmış alıcı yorumunu (Hepsiburada, Amazon, GSMArena vb.) analiz ederek kronik sorunları yüzeye çıkarır.
+        </p>
+      </div>
+
+      <div class="heg-white-card rounded-2xl p-6 space-y-2">
+        <div class="text-xs font-mono font-extrabold text-[#03519F]">İLKE 04</div>
+        <h2 class="text-lg font-extrabold text-slate-950">Ticaret Bakanlığı & Reklam Kurulu Şeffaflığı</h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Satış ortaklığı komisyonu içerebilecek tüm mağaza bağlantıları açıkça <code class="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded">#reklam</code> etiketiyle işaretlenir. Komisyon bulunmayan analizlerde ise "Sponsorluk & Komisyon Yok" ibaresi yer alır.
+        </p>
+      </div>
+    </section>
+
+    <section class="heg-dark-card rounded-3xl p-6 sm:p-8 text-white space-y-6">
+      <div>
+        <div class="text-xs font-mono uppercase tracking-widest text-[#FAD002]">HEG KARAR DAMGASI SİSTEMİ</div>
+        <h2 class="text-2xl font-extrabold mt-1">10 Üzerinden Puanlar Ne Anlama Gelir?</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {Object.values(VERDICT_META).map((m) => (
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-mono font-extrabold text-sm" style={`color: ${m.hex}`}>{m.label}</span>
+              <span class="font-mono text-xs text-slate-300 bg-white/10 px-2.5 py-0.5 rounded">{m.range}</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">{m.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-slate-900/10 p-6 sm:p-8 shadow-sm space-y-3">
+      <h2 class="text-xl font-extrabold text-slate-950">Yapay Zeka Motorları ve Açık Veri Kaynağı (GEO)</h2>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        <strong>{SITE.name}</strong> üzerindeki tüm ürün derecelendirmeleri, çoklu mağaza fiyat tabloları ve VS karşılaştırmaları; hem insanlar hem de yapay zeka arama motorları (ChatGPT, Perplexity, Gemini, Claude) tarafından hatasız okunabilmesi için <strong>Schema.org JSON-LD</strong>, semantik HTML tablolar ve <a href="/llms.txt" class="text-[#03519F] font-mono font-bold underline">/llms.txt</a> / <a href="/llms-full.txt" class="text-[#03519F] font-mono font-bold underline">/llms-full.txt</a> standartlarıyla yayınlanır.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

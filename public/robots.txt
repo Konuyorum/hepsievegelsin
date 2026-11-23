@@ -1,0 +1,41 @@
+# Hepsi Eve Gelsin (hepsievegelsin.com) — AI & Search Engine Crawler Policy
+# We welcome search engines and AI search/answer engines to index and cite our independent product ratings and price comparisons.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Explicit welcome for major AI Search & LLM Crawlers (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://www.hepsievegelsin.com/sitemap-index.xml
+# Structured AI Index: https://www.hepsievegelsin.com/llms.txt
+# Full AI Dataset: https://www.hepsievegelsin.com/llms-full.txt

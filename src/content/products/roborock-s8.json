@@ -1,0 +1,143 @@
+{
+  "slug": "roborock-s8",
+  "name": "Roborock S8 Sonic Mopping",
+  "brand": "Roborock",
+  "subtitle": "6.000 Pa HyperForce Emiş • Çift DuoRoller Fırça • VibraRise Sonik Paspas",
+  "category": "Robot Süpürge",
+  "categorySlug": "robot-supurge",
+  "datePublished": "2026-11-23",
+  "dateModified": "2026-11-23",
+  "displayDate": "23 Kasım 2026",
+  "image": "/images/products/roborock-s8.jpg",
+  "gallery": ["/images/products/roborock-s8.jpg", "/images/products/roborock-s8-2.jpg"],
+  "hegScore": 8.4,
+  "verdict": "SARTLI_ALINIR",
+  "verdictHeadline": "3.950 TL Gerçek İndirim — Ama Otomatik İstasyon Olmadığını Bilin",
+  "tldr": "23 Kasım 2026 itibarıyla Roborock S8 Sonic Mopping, Hepsiburada Efsane Kasım kampanyasında 39.499 TL'den sepette %10 net indirimle 35.549 TL'ye düşerek 3.950 TL somut kazanç sağlıyor. 6.000 Pa emiş, DuoRoller fırça ve 4.322 kullanıcı yorumunda 4,6/5 ortalamayla güçlü; ancak otomatik çöp istasyonu olmadığı için 8.4/10 puanla Şartlı Alınır.",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "listPrice": 39499,
+  "currentLowestPrice": 35549,
+  "netSavings": 3950,
+  "discountPercent": 10,
+  "priceNote": "Hepsiburada sepette %10 net indirimli fiyat; satıcı stoklarına göre anlık değişebilir.",
+  "reviewStats": {
+    "source": "Hepsiburada Doğrulanmış Alıcılar",
+    "count": 4322,
+    "rating": 4.6,
+    "satisfactionPercent": 85
+  },
+  "criteria": [
+    {
+      "label": "Fiyat / Performans",
+      "score": 8.6,
+      "summary": "35.549 TL kampanya tutarı son 3 ayın en rekabetçi seviyelerinden; 3.950 TL net avantaj gerçek."
+    },
+    {
+      "label": "Temizlik & Emiş Gücü",
+      "score": 9.1,
+      "summary": "6.000 Pa HyperForce emiş + çift kauçuk DuoRoller fırça halılarda ve evcil hayvan tüylerinde dolanmayı minimuma indirir."
+    },
+    {
+      "label": "Haritalama & Engel Algılama",
+      "score": 9.2,
+      "summary": "Reactive 3D engel algılama + PreciSense LiDAR (4 kat harita) ile terlik ve kablolardan yüksek isabetle kaçar."
+    },
+    {
+      "label": "Gerçek Kullanıcı Memnuniyeti",
+      "score": 8.8,
+      "summary": "4.322 değerlendirmede 4,6/5 puan; kullanıcıların %85'i haritalama ve mobil uygulama kararlılığından çok memnun."
+    },
+    {
+      "label": "Konfor & Bakım (İstasyon)",
+      "score": 6.5,
+      "summary": "Otomatik çöp boşaltma istasyonu yok; 300 ml toz haznesi elle boşaltılır ve yedek paspas kutudan çıkmaz."
+    }
+  ],
+  "specs": [
+    { "label": "Emiş Gücü", "value": "6.000 Pa HyperForce" },
+    { "label": "Ana Fırça", "value": "Çift Kauçuk DuoRoller (Tüy dolanma karşıtı)" },
+    { "label": "Paspas Sistemi", "value": "VibraRise Sonik Titreşimli (Halıda otomatik kalkma)" },
+    { "label": "Navigasyon", "value": "PreciSense LiDAR + Reactive 3D Engel Algılama (4 Kat)" },
+    { "label": "Batarya", "value": "5.200 mAh • 120 dk kesintisiz çalışma" },
+    { "label": "Toz Haznesi", "value": "300 ml (Otomatik boşaltma istasyonu YOK)" }
+  ],
+  "pros": [
+    "Sepette 3.950 TL net indirimle sahte zam-indirim oyununa düşmeyen gerçek kampanya fiyatı.",
+    "6.000 Pa emiş gücü ve çift kauçuk DuoRoller fırça ile evcil hayvanlı evlerde üstün halı temizliği.",
+    "VibraRise sonik paspas halıyı algıladığı anda kendini kaldırarak halıları ıslatmıyor.",
+    "Reactive 3D engel algılama ve 4 katlı LiDAR haritalama sınıfının en kararlı yazılımlarından.",
+    "4.322 gerçek kullanıcı değerlendirmesinde 4,6/5 yüksek memnuniyet."
+  ],
+  "cons": [
+    "Otomatik çöp boşaltma ve paspas yıkama istasyonu yok; 300 ml toz haznesini düzenli elle boşaltmanız gerekir.",
+    "Maksimum emiş gücünde çalışma sesi belirgin şekilde yükseliyor.",
+    "Kutu içeriğinden yedek mikrofiber paspas çıkmıyor."
+  ],
+  "whoShouldBuy": "Otomatik istasyon kaplayacak yere veya ekstra bütçeye ihtiyaç duymayan; yüksek emiş gücü, sorunsuz haritalama ve uzun ömürlü Roborock yazılımı arayanlar.",
+  "whoShouldSkip": "Toz haznesini haftalarca ellemek istemeyen ve paspasın kendi kendini yıkamasını bekleyenler (Bunun yerine tam istasyonlu modellere bakın).",
+  "offers": [
+    {
+      "store": "Hepsiburada",
+      "price": 35549,
+      "oldPrice": 39499,
+      "seller": "Nena / Efsane Kasım",
+      "inStock": true,
+      "isLowest": true,
+      "isAffiliate": false,
+      "redirectSlug": "roborock-s8-hb",
+      "note": "Sepette %10 Net İndirim — En Dip Fiyat"
+    },
+    {
+      "store": "Amazon TR",
+      "price": 37299,
+      "oldPrice": 39499,
+      "seller": "Amazon.com.tr",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": true,
+      "redirectSlug": "roborock-s8-amz",
+      "note": "Prime Teslimat"
+    },
+    {
+      "store": "Trendyol",
+      "price": 37850,
+      "oldPrice": 39999,
+      "seller": "Yetkili Satıcı",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "roborock-s8-ty",
+      "note": "Resmi Garantili"
+    },
+    {
+      "store": "Pazarama",
+      "price": 38490,
+      "seller": "Pazarama Mağaza",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "roborock-s8-pazarama",
+      "note": "Taksit Seçenekli"
+    }
+  ],
+  "social": {
+    "youtubeUrl": "https://www.youtube.com/@hepsievegelsin",
+    "youtubeTitle": "Roborock S8 Sonic Mopping — 3.950 TL Net İndirim Gerçekten Alınır mı?",
+    "instagramUrl": "https://www.instagram.com/hepsievegelsin"
+  },
+  "faqs": [
+    {
+      "question": "Roborock S8 halıyı ıslatır mı?",
+      "answer": "Hayır. Roborock S8, ultrasonik halı sensörü ve VibraRise sistemi sayesinde halıya çıktığı anda sonik paspas modülünü otomatik olarak yukarı kaldırır."
+    },
+    {
+      "question": "Roborock S8'de otomatik çöp boşaltma istasyonu var mı?",
+      "answer": "Standart Roborock S8 Sonic Mopping modelinde otomatik çöp istasyonu yoktur; 300 ml dahili toz haznesi manuel boşaltılır. İstasyonlu versiyonlar S8+ veya S8 Pro Ultra olarak ayrıca satılır."
+    },
+    {
+      "question": "Roborock S8 35.549 TL fiyata alınır mı?",
+      "answer": "İstasyon beklentiniz yoksa 6.000 Pa emiş gücü, DuoRoller fırça ve Reactive 3D engel algılama özellikleriyle 35.549 TL'lik kampanya fiyatı HEG analizine göre 8.4/10 puanla Şartlı Alınır kategorisindedir."
+    }
+  ]
+}

@@ -1,20 +1,8 @@
-# Environment Variables & Secrets
-.env
-.env.*
-.dev.vars
-
-# Dependencies
 node_modules/
-
-# Cloudflare Pages / Workers build cache
-.wrangler/
 dist/
-
-# Archive & temporary files
-*.zip
-*.tar.gz
-*.bak
-
-# OS specific files
+.astro/
+.env
+.dev.vars
+.wrangler/
 .DS_Store
 Thumbs.db

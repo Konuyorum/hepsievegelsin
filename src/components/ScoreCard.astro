@@ -1,0 +1,79 @@
+---
+import type { ScoreCriterion, VerdictKey } from '../lib/types';
+import { VERDICT_META } from '../data/site';
+import VerdictBadge from './VerdictBadge.astro';
+
+interface Props {
+  score: number;
+  verdict: VerdictKey;
+  criteria: ScoreCriterion[];
+  verdictHeadline?: string;
+}
+
+const { score, verdict, criteria, verdictHeadline } = Astro.props;
+const meta = VERDICT_META[verdict];
+
+function barColor(val: number): string {
+  if (val >= 9.0) return '#10B981';
+  if (val >= 8.0) return '#0B6BCB';
+  if (val >= 6.5) return '#FAD002';
+  return '#EF4444';
+}
+---
+
+<section class="heg-dark-card rounded-2xl p-6 sm:p-8 text-white" aria-label="HEG 5 Kriterli Bağımsız Derecelendirme">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+    <div>
+      <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-400 mb-1.5">
+        HEG BAĞIMSIZ DERECELENDİRME KARNESİ
+      </div>
+      {verdictHeadline && (
+        <h2 class="text-lg sm:text-xl font-bold text-white leading-snug">{verdictHeadline}</h2>
+      )}
+    </div>
+
+    <div class="flex items-center gap-4 shrink-0">
+      <div class="text-right">
+        <div class="font-mono font-extrabold text-4xl sm:text-5xl tabular-nums leading-none" style={`color: ${meta.hex}`}>
+          {score.toFixed(1)}
+          <span class="text-lg text-slate-500 font-bold">/10</span>
+        </div>
+        <div class="mt-2">
+          <VerdictBadge verdict={verdict} size="sm" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 Transparent Criteria Bars -->
+  <div class="mt-6 space-y-5">
+    {criteria.map((item) => {
+      const pct = Math.min(100, Math.max(5, item.score * 10));
+      const color = barColor(item.score);
+      return (
+        <div>
+          <div class="flex items-baseline justify-between gap-2 mb-1.5">
+            <span class="text-sm font-bold text-slate-100">{item.label}</span>
+            <span class="font-mono font-extrabold text-sm tabular-nums" style={`color: ${color}`}>
+              {item.score.toFixed(1)} / 10
+            </span>
+          </div>
+          <div class="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
+            <div
+              class="h-full rounded-full transition-all duration-500"
+              style={`width: ${pct}%; background-color: ${color};`}
+            ></div>
+          </div>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">{item.summary}</p>
+        </div>
+      );
+    })}
+  </div>
+
+  <div class="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-slate-400">
+    <span>Puanlama: Teknik veri + çoklu mağaza fiyat geçmişi + gerçek kullanıcı yorum sentezi</span>
+    <a href="/metodoloji" class="text-[#FAD002] hover:underline font-bold">
+      Puanlama Metodolojimiz →
+    </a>
+  </div>
+</section>

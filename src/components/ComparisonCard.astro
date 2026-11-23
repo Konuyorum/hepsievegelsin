@@ -1,0 +1,94 @@
+---
+import type { ComparisonArticle } from '../lib/types';
+import { formatTRY } from '../data/site';
+
+interface Props {
+  comparison: ComparisonArticle;
+}
+
+const { comparison } = Astro.props;
+const hasYoutube = Boolean(comparison.social?.youtubeUrl);
+---
+
+<article class="heg-dark-card rounded-2xl overflow-hidden flex flex-col h-full group text-white hover:border-[#FAD002]/45 transition">
+  <!-- Top Visual Header -->
+  <a href={`/vs/${comparison.slug}`} class="relative block aspect-[16/9] overflow-hidden bg-[#070B14]">
+    <img
+      src={comparison.thumbnail}
+      alt={comparison.title}
+      loading="lazy"
+      class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-transparent"></div>
+
+    <!-- Top Badges -->
+    <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+      <span class="text-[11px] font-mono font-extrabold bg-[#FAD002] text-[#0B0B0D] px-2.5 py-1 rounded-lg shadow">
+        {comparison.hookBadge}
+      </span>
+      {hasYoutube ? (
+        <span class="text-[10px] font-mono font-bold bg-red-600/95 text-white px-2.5 py-1 rounded-lg shadow">
+          ▶ YOUTUBE + WEB
+        </span>
+      ) : (
+        <span class="text-[10px] font-mono font-bold bg-[#03519F] text-white px-2.5 py-1 rounded-lg shadow">
+          ✦ WEB-ÖZEL VS
+        </span>
+      )}
+    </div>
+  </a>
+
+  <!-- Dedicated Live Scoreboard Strip (Zero Thumbnail Overlap!) -->
+  <div class="bg-[#070B14] border-y border-white/10 px-5 py-2.5 flex items-center justify-center">
+    <div class="inline-flex items-center gap-2 text-xs font-mono font-extrabold">
+      <span class="text-sky-300">{comparison.productA.shortName}</span>
+      <span class="bg-[#03519F] text-white px-2 py-0.5 rounded tabular-nums">{comparison.scoreA}</span>
+      <span class="text-slate-500">VS</span>
+      <span class="bg-[#FAD002] text-[#0B0B0D] px-2 py-0.5 rounded tabular-nums">{comparison.scoreB}</span>
+      <span class="text-[#FAD002]">{comparison.productB.shortName}</span>
+    </div>
+  </div>
+
+  <!-- Content Body -->
+  <div class="p-6 flex flex-col flex-1">
+    <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-2">
+      <span>{comparison.category.toUpperCase()}</span>
+      <span>📅 {comparison.displayDate}</span>
+    </div>
+
+    <a href={`/vs/${comparison.slug}`}>
+      <h3 class="text-xl font-extrabold text-white group-hover:text-[#FAD002] transition leading-snug">
+        {comparison.title}
+      </h3>
+    </a>
+    <p class="text-xs sm:text-sm text-slate-400 mt-2 line-clamp-2 leading-relaxed flex-1">
+      {comparison.subtitle}
+    </p>
+
+    <!-- Side-by-Side Quick Price Strip -->
+    <div class="mt-5 grid grid-cols-2 gap-2.5 pt-4 border-t border-white/10 text-xs">
+      <div class="bg-white/5 rounded-xl p-2.5 border border-[#03519F]/40">
+        <div class="font-mono text-[10px] text-sky-300 truncate">{comparison.productA.shortName}</div>
+        <div class="font-mono font-extrabold text-sm text-white mt-0.5 tabular-nums">
+          {formatTRY(comparison.productA.lowestPrice)}
+        </div>
+        <div class="text-[10px] font-mono text-emerald-400 mt-0.5">HEG {comparison.productA.hegScore.toFixed(1)}/10</div>
+      </div>
+      <div class="bg-white/5 rounded-xl p-2.5 border border-[#FAD002]/35">
+        <div class="font-mono text-[10px] text-[#FAD002] truncate">{comparison.productB.shortName}</div>
+        <div class="font-mono font-extrabold text-sm text-white mt-0.5 tabular-nums">
+          {formatTRY(comparison.productB.lowestPrice)}
+        </div>
+        <div class="text-[10px] font-mono text-slate-300 mt-0.5">HEG {comparison.productB.hegScore.toFixed(1)}/10</div>
+      </div>
+    </div>
+
+    <a
+      href={`/vs/${comparison.slug}`}
+      class="mt-4 w-full inline-flex items-center justify-center gap-2 bg-[#03519F] hover:bg-[#0B6BCB] text-white text-xs font-bold py-3 rounded-xl transition"
+    >
+      <span>Raund Tablosu & Kazananı İncele</span>
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>

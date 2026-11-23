@@ -1,0 +1,167 @@
+{
+  "slug": "roborock-s8-vs-dreame-l10s-ultra",
+  "title": "Roborock S8 vs Dreame L10s Ultra",
+  "hookBadge": "İSTASYON FARKI!",
+  "subtitle": "Saf Emiş & Yazılım Olgunluğu mu, Tam Otomatik Çöp Boşaltma ve Sıcak Su Paspas Yıkama İstasyonu mu?",
+  "category": "Robot Süpürge",
+  "datePublished": "2026-11-22",
+  "dateModified": "2026-11-23",
+  "displayDate": "23 Kasım 2026",
+  "thumbnail": "/images/thumbnails/roborock-s8-video.jpg",
+  "tldr": "Web-özel bağımsız HEG VS analizimizde Roborock S8 (35.549 TL) ile tam istasyonlu Dreame L10s Ultra (42.999 TL) karşı karşıya. Roborock S8 çift kauçuk fırçası ve 6.000 Pa emişiyle halıda lider; ancak Dreame L10s Ultra sadece 7.450 TL farkla otomatik çöp boşaltma ve paspas yıkama/kurutma istasyonu sunarak 5 raundda 3-2 öne geçiyor.",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "scoreA": 2,
+  "scoreB": 3,
+  "winnerSide": "B",
+  "winnerName": "Dreame L10s Ultra (Konfor Odaklı)",
+  "priceDiffText": "7.450 TL farkla tam otomatik istasyon konforu",
+  "productA": {
+    "name": "Roborock S8 Sonic Mopping",
+    "shortName": "ROBOROCK S8",
+    "brand": "Roborock",
+    "image": "/images/products/roborock-s8.jpg",
+    "hegScore": 8.4,
+    "verdict": "SARTLI_ALINIR",
+    "lowestPrice": 35549,
+    "officialPrice": 39499,
+    "bestStore": "Hepsiburada",
+    "productSlug": "roborock-s8",
+    "whoShouldBuy": "Evde büyük istasyon koyacak alanı olmayan, halı yoğunluğu yüksek, evcil hayvan tüylerinde çift kauçuk fırça avantajı ve en kararlı haritalama yazılımını isteyenler.",
+    "offers": [
+      {
+        "store": "Hepsiburada",
+        "price": 35549,
+        "oldPrice": 39499,
+        "seller": "Hepsiburada",
+        "inStock": true,
+        "isLowest": true,
+        "isAffiliate": false,
+        "redirectSlug": "roborock-s8-hb",
+        "note": "Sepette %10 Net İndirim"
+      },
+      {
+        "store": "Amazon TR",
+        "price": 37299,
+        "oldPrice": 39499,
+        "seller": "Amazon.com.tr",
+        "inStock": true,
+        "isLowest": false,
+        "isAffiliate": true,
+        "redirectSlug": "roborock-s8-amz",
+        "note": "Prime Teslimat"
+      }
+    ]
+  },
+  "productB": {
+    "name": "Dreame L10s Ultra",
+    "shortName": "DREAME L10s ULTRA",
+    "brand": "Dreame",
+    "image": "/images/products/dreame-l10s-ultra.jpg",
+    "hegScore": 8.8,
+    "verdict": "FP_SAMPIYONU",
+    "lowestPrice": 42999,
+    "officialPrice": 48999,
+    "bestStore": "Hepsiburada",
+    "whoShouldBuy": "Toz haznesi boşaltmak ve her temizlik sonrası bez yıkamak istemeyen, sert zeminde döner çift mop performansı ve 60 gün el değmeden kullanım arayanlar.",
+    "offers": [
+      {
+        "store": "Hepsiburada",
+        "price": 42999,
+        "oldPrice": 48999,
+        "seller": "Dreame Türkiye",
+        "inStock": true,
+        "isLowest": true,
+        "isAffiliate": false,
+        "redirectSlug": "dreame-l10s-hb",
+        "note": "Tam İstasyon Dahil"
+      },
+      {
+        "store": "Amazon TR",
+        "price": 44499,
+        "oldPrice": 48999,
+        "seller": "Amazon.com.tr",
+        "inStock": true,
+        "isLowest": false,
+        "isAffiliate": true,
+        "redirectSlug": "dreame-l10s-amz",
+        "note": "Prime Teslimat"
+      }
+    ]
+  },
+  "rounds": [
+    {
+      "number": 1,
+      "title": "Emiş Gücü & Halı Performansı",
+      "productAValue": "6.000 Pa • Çift Kauçuk DuoRoller Fırça",
+      "productBValue": "5.300 Pa • Tekli Kauçuk Fırça",
+      "winner": "A",
+      "winnerLabel": "Roborock S8 (1-0)",
+      "summary": "6.000 Pa gücü ve çift ters dönen DuoRoller fırçasıyla derin halı liflerindeki tüy ve toz toplamada Roborock S8 belirgin önde."
+    },
+    {
+      "number": 2,
+      "title": "Paspaslama & Sert Zemin",
+      "productAValue": "VibraRise sonik titreşimli düz bez (Elle yıkama)",
+      "productBValue": "Çift döner Mop (180 RPM) + İstasyon içi otomatik yıkama & sıcak kurutma",
+      "winner": "B",
+      "winnerLabel": "Dreame L10s Ultra (1-1)",
+      "summary": "Döner çift mop kuruyan lekeleri daha iyi çıkarıyor; üstelik paspas istasyonda otomatik yıkanıp sıcak havayla kurutuluyor."
+    },
+    {
+      "number": 3,
+      "title": "Bakım Konforu & İstasyon",
+      "productAValue": "Otomatik istasyon yok • 300 ml manuel hazne",
+      "productBValue": "3L otomatik toz torbası + temiz/kirli su tankı (60 gün otonom)",
+      "winner": "B",
+      "winnerLabel": "Dreame L10s Ultra (1-2)",
+      "summary": "Robot süpürgenin asıl lüksü olan 'unut ve çalışsın' deneyimini yalnızca tam istasyonlu Dreame L10s Ultra veriyor."
+    },
+    {
+      "number": 4,
+      "title": "Yazılım, Haritalama & Marka Güveni",
+      "productAValue": "PreciSense LiDAR + Reactive 3D • 4.6/5 (4.322 yorum)",
+      "productBValue": "AI RGB Kamera + LiDAR • Uygulama zaman zaman bildirim gecikmesi yaşayabiliyor",
+      "winner": "A",
+      "winnerLabel": "Roborock S8 (2-2)",
+      "summary": "Roborock uygulaması ve uzun vadeli yedek parça / kararlılık skoru Türkiye kullanıcı yorumlarında hâlâ altın standart."
+    },
+    {
+      "number": 5,
+      "title": "Fiyat / Değer Dengesi (7.450 TL Fark)",
+      "productAValue": "35.549 TL (İstasyonsuz)",
+      "productBValue": "42.999 TL (Tam Otomatik İstasyonlu)",
+      "winner": "B",
+      "winnerLabel": "Dreame L10s Ultra (Final 2-3)",
+      "summary": "7.450 TL fark karşılığında tam otomatik çöp boşaltma ve paspas yıkama istasyonu almak uzun vadede çok yüksek kullanım değeri yaratıyor."
+    }
+  ],
+  "benchmarks": [
+    {
+      "metric": "Maksimum Emiş Gücü (Pascal)",
+      "subtitle": "Roborock S8 +%13.2 Daha Yüksek Emiş",
+      "productALabel": "Roborock S8",
+      "productAValue": 6000,
+      "productADisplay": "6.000 Pa",
+      "productBLabel": "Dreame L10s Ultra",
+      "productBValue": 5300,
+      "productBDisplay": "5.300 Pa"
+    },
+    {
+      "metric": "Otonom Bakımsız Kullanım (Gün)",
+      "subtitle": "Tam İstasyon Avantajıyla Dreame Açık Ara Önde",
+      "productALabel": "Roborock S8",
+      "productAValue": 3,
+      "productADisplay": "2–3 Gün",
+      "productBLabel": "Dreame L10s Ultra",
+      "productBValue": 60,
+      "productBDisplay": "60 Gün"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Roborock S8 ile Dreame L10s Ultra arasında 7.450 TL farka değer mi?",
+      "answer": "Evinizde büyük bir istasyon koyacak yeriniz varsa ve paspas yıkamak/hazne boşaltmakla uğraşmak istemiyorsanız 7.450 TL fark Dreame L10s Ultra için fazlasıyla değerlidir. Küçük ve yoğun halılı evlerde ise Roborock S8 daha kompakt ve halıda daha güçlüdür."
+    }
+  ]
+}

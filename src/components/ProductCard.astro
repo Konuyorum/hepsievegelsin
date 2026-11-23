@@ -1,0 +1,112 @@
+---
+import type { ProductReview } from '../lib/types';
+import { formatTRY, VERDICT_META } from '../data/site';
+
+interface Props {
+  product: ProductReview;
+}
+
+const { product } = Astro.props;
+const verdictMeta = VERDICT_META[product.verdict];
+const hasYoutube = Boolean(product.social?.youtubeUrl);
+const hasInstagram = Boolean(product.social?.instagramUrl);
+---
+
+<article class="heg-white-card rounded-2xl overflow-hidden flex flex-col h-full group">
+  <!-- Pure White Product Stage -->
+  <a href={`/urun/${product.slug}`} class="relative block bg-white p-6 border-b border-slate-100">
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500">
+        {product.category}
+      </span>
+
+      <div class="flex items-center gap-1.5">
+        {hasYoutube ? (
+          <span class="text-[10px] font-mono font-bold bg-red-600 text-white px-2 py-0.5 rounded">
+            ▶ YOUTUBE + WEB
+          </span>
+        ) : (
+          <span class="text-[10px] font-mono font-bold bg-[#03519F]/10 text-[#03519F] border border-[#03519F]/20 px-2 py-0.5 rounded">
+            ✦ WEB ANALİZİ
+          </span>
+        )}
+        {hasInstagram && !hasYoutube && (
+          <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+            IG
+          </span>
+        )}
+      </div>
+    </div>
+
+    <div class="aspect-[4/3] w-full flex items-center justify-center overflow-hidden rounded-xl bg-white">
+      <img
+        src={product.image}
+        alt={`${product.name} — HEG Tarafsız İnceleme`}
+        loading="lazy"
+        class="w-full h-full object-contain group-hover:scale-105 transition duration-300"
+      />
+    </div>
+
+    <!-- Floating HEG Score Badge -->
+    <div class="absolute bottom-3 right-3 bg-[#111827] text-white px-3 py-1.5 rounded-xl shadow-lg border border-white/10 flex items-center gap-2">
+      <span class="text-[10px] font-mono uppercase text-slate-400">HEG</span>
+      <span class="font-mono font-extrabold text-base tabular-nums" style={`color: ${verdictMeta.hex}`}>
+        {product.hegScore.toFixed(1)}
+      </span>
+    </div>
+  </a>
+
+  <!-- Card Editorial Body -->
+  <div class="p-5 sm:p-6 flex flex-col flex-1">
+    <div class="flex flex-wrap items-center gap-2 mb-2.5">
+      <span
+        class="text-[10px] font-mono font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md text-white"
+        style={`background-color: ${verdictMeta.hex === '#FAD002' ? '#111827' : verdictMeta.hex}; color: ${verdictMeta.hex === '#FAD002' ? '#FAD002' : '#FFFFFF'}`}
+      >
+        {verdictMeta.label}
+      </span>
+      <span class="text-[11px] font-mono text-slate-400">📅 {product.displayDate}</span>
+    </div>
+
+    <a href={`/urun/${product.slug}`} class="block">
+      <h3 class="text-lg font-extrabold text-slate-900 group-hover:text-[#03519F] transition leading-snug">
+        {product.name}
+      </h3>
+    </a>
+    <p class="text-xs text-slate-600 mt-1.5 line-clamp-2 leading-relaxed flex-1">
+      {product.verdictHeadline}
+    </p>
+
+    <!-- Price & Savings Telemetry Box -->
+    <div class="mt-4 pt-4 border-t border-slate-100 flex items-end justify-between gap-3">
+      <div class="tabular-nums">
+        {product.listPrice > product.currentLowestPrice && (
+          <div class="text-xs font-mono text-red-500 line-through">
+            {formatTRY(product.listPrice)}
+          </div>
+        )}
+        <div class="font-mono font-extrabold text-xl text-slate-900 leading-tight">
+          {formatTRY(product.currentLowestPrice)}
+        </div>
+      </div>
+
+      {product.isFakeDealAlert ? (
+        <span class="text-[11px] font-mono font-extrabold bg-red-100 text-red-700 border border-red-200 px-2.5 py-1 rounded-lg">
+          ⚠ İNDİRİM TUZAĞI
+        </span>
+      ) : product.netSavings > 0 ? (
+        <span class="text-[11px] font-mono font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded-lg tabular-nums">
+          +{formatTRY(product.netSavings)} KAZANÇ
+        </span>
+      ) : null}
+    </div>
+
+    <a
+      href={`/urun/${product.slug}`}
+      class="mt-4 w-full inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-[#03519F] text-white text-xs font-bold py-3 rounded-xl transition"
+    >
+      <span>Derecelendirme & {product.offers.length} Mağaza Fiyatı</span>
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>

@@ -1,0 +1,371 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllProducts, getAllComparisons } from '../lib/content';
+import { SITE, formatTRY } from '../data/site';
+
+const verifiedProducts = getAllProducts().map((p) => ({
+  type: 'urun',
+  slug: p.slug,
+  title: p.name,
+  subtitle: p.subtitle,
+  hegScore: p.hegScore,
+  verdict: p.verdict,
+  price: formatTRY(p.currentLowestPrice),
+  tldr: p.tldr,
+  href: `/urun/${p.slug}`,
+  keywords: `${p.name} ${p.brand} ${p.category} ${p.subtitle}`.toLowerCase(),
+}));
+
+const verifiedComparisons = getAllComparisons().map((c) => ({
+  type: 'vs',
+  slug: c.slug,
+  title: c.title,
+  subtitle: `${c.hookBadge} • Skor ${c.scoreA}-${c.scoreB}`,
+  hegScore: `${c.scoreA}-${c.scoreB}`,
+  verdict: c.winnerName,
+  price: c.priceDiffText,
+  tldr: c.tldr,
+  href: `/vs/${c.slug}`,
+  keywords: `${c.title} ${c.productA.name} ${c.productB.name} ${c.category}`.toLowerCase(),
+}));
+
+const verifiedCatalog = [...verifiedComparisons, ...verifiedProducts];
+const amazonTag = SITE.amazonTag;
+---
+
+<BaseLayout
+  title="HEG AI Alışveriş Asistanı & Canlı VS Motoru"
+  description="İstediğiniz ürün veya iki model için anlık yapay zeka destekli tarafsız inceleme, HEG puan tahmini, artı/eksi analizi ve çoklu mağaza fiyat bağlantıları."
+  canonicalPath="/asistan"
+  activeNav="asistan"
+>
+  <section class="heg-hero-surface text-white border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 text-center space-y-5">
+      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-3.5 py-1.5 rounded-full text-[11px] font-mono">
+        <span class="text-[#FAD002] font-extrabold">HEG AI ENGINE v2</span>
+        <span class="text-slate-400">•</span>
+        <span class="text-sky-300">DOĞRULANMIŞ VERİ + CANLI AI ANALİZİ</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+        Hangi Ürünü Merak Ediyorsunuz?
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Önce HEG'in doğrulanmış veritabanını tararız; henüz incelemediğimiz bir ürünse yapay zeka motorumuz saniyeler içinde tarafsız artı/eksi analizi ve çoklu mağaza bağlantıları üretir.
+      </p>
+
+      <div class="max-w-3xl mx-auto bg-[#070B14]/85 backdrop-blur-xl border border-white/15 rounded-2xl p-2.5 shadow-2xl text-left">
+        <form id="aiSearchForm" class="space-y-2">
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input
+              id="aiQ1"
+              type="text"
+              placeholder="Örn: Roborock S8, Dyson V15, Airfryer, iPhone 16 Pro..."
+              class="flex-1 bg-white/[0.06] text-white placeholder-slate-400 px-4 py-3.5 rounded-xl text-sm sm:text-base border border-white/10 focus:border-[#FAD002] focus:outline-none"
+            />
+            <button
+              id="aiVsToggle"
+              type="button"
+              class="px-4 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 border border-white/10 text-xs font-mono font-bold uppercase cursor-pointer transition"
+            >
+              ⚖️ VS Modu
+            </button>
+            <button
+              type="submit"
+              class="px-6 py-3.5 rounded-xl bg-[#FAD002] hover:bg-[#ffe03a] text-[#0B0B0D] font-extrabold text-sm cursor-pointer transition"
+            >
+              ANALİZ ET →
+            </button>
+          </div>
+
+          <div id="aiVsWrap" class="hidden">
+            <input
+              id="aiQ2"
+              type="text"
+              placeholder="Karşılaştırılacak 2. Ürün (Örn: Galaxy S25 Ultra, Dreame L10s Ultra...)"
+              class="w-full bg-white/[0.06] text-white placeholder-slate-400 px-4 py-3.5 rounded-xl text-sm sm:text-base border border-[#03519F] focus:border-[#FAD002] focus:outline-none"
+            />
+          </div>
+        </form>
+      </div>
+
+      <div class="max-w-3xl mx-auto flex flex-wrap justify-center gap-2 pt-2">
+        {[
+          'Roborock S8',
+          'Z Fold 8',
+          'Liberty 4 NC',
+          'En İyi Robot Süpürgeler',
+          'Espresso Kahve Makineleri',
+        ].map((preset) => (
+          <button
+            type="button"
+            data-preset={preset}
+            class="preset-btn text-xs font-medium bg-white/10 hover:bg-[#03519F] text-slate-200 hover:text-white px-3.5 py-1.5 rounded-lg border border-white/10 transition cursor-pointer"
+          >
+            {preset}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-6">
+    <div id="verifiedMatchBox" class="hidden bg-white rounded-2xl border-2 border-[#03519F] p-6 shadow-md space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <span class="text-xs font-mono font-extrabold bg-[#03519F] text-white px-3 py-1 rounded-lg">
+          ✓ DOĞRULANMIŞ HEG EDİTÖRYAL ANALİZİ BULUNDU
+        </span>
+        <span class="text-xs font-mono text-slate-500">Canlı fiyat & 5 kriterli karne mevcut</span>
+      </div>
+      <div id="verifiedMatchList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </div>
+
+    <div id="aiLoading" class="hidden heg-dark-card rounded-2xl p-10 text-center text-white space-y-4">
+      <div class="w-12 h-12 rounded-full border-4 border-white/15 border-t-[#FAD002] animate-spin mx-auto"></div>
+      <div class="font-extrabold text-lg">HEG Yapay Zeka Motoru Analiz Ediyor...</div>
+      <p class="text-xs text-slate-400 font-mono">Teknik veriler, kullanıcı yorumları ve Türkiye mağaza seçenekleri derleniyor.</p>
+    </div>
+
+    <div id="aiNotice" class="hidden bg-white rounded-2xl border border-amber-400/60 p-6 shadow-sm space-y-3"></div>
+    <div id="aiOutput" class="hidden space-y-6"></div>
+  </section>
+
+  <script define:vars={{ verifiedCatalog, amazonTag }}>
+    const q1 = document.getElementById('aiQ1');
+    const q2 = document.getElementById('aiQ2');
+    const vsToggle = document.getElementById('aiVsToggle');
+    const vsWrap = document.getElementById('aiVsWrap');
+    const form = document.getElementById('aiSearchForm');
+    const loading = document.getElementById('aiLoading');
+    const notice = document.getElementById('aiNotice');
+    const output = document.getElementById('aiOutput');
+    const verifiedBox = document.getElementById('verifiedMatchBox');
+    const verifiedList = document.getElementById('verifiedMatchList');
+
+    let isVS = false;
+
+    function setVS(state) {
+      isVS = state;
+      vsWrap?.classList.toggle('hidden', !isVS);
+      if (vsToggle) {
+        vsToggle.textContent = isVS ? '✕ VS Kapat' : '⚖️ VS Modu';
+        vsToggle.classList.toggle('bg-[#03519F]', isVS);
+        vsToggle.classList.toggle('text-white', isVS);
+      }
+    }
+
+    vsToggle?.addEventListener('click', () => {
+      setVS(!isVS);
+      if (isVS) q2?.focus();
+    });
+
+    function buildStoreLinks(keyword) {
+      const enc = encodeURIComponent(keyword);
+      return `
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-4">
+          <a href="https://www.amazon.com.tr/s?k=${enc}&tag=${amazonTag}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="text-center bg-[#FAD002] hover:bg-[#ffe03a] text-[#0B0B0D] font-extrabold text-xs py-3 px-3 rounded-xl transition">Amazon TR (#reklam) ↗</a>
+          <a href="https://www.hepsiburada.com/ara?q=${enc}" target="_blank" rel="noopener noreferrer" class="text-center bg-[#03519F] hover:bg-[#0B6BCB] text-white font-bold text-xs py-3 px-3 rounded-xl transition">Hepsiburada ↗</a>
+          <a href="https://www.trendyol.com/sr?q=${enc}" target="_blank" rel="noopener noreferrer" class="text-center bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs py-3 px-3 rounded-xl transition">Trendyol ↗</a>
+          <a href="https://www.akakce.com/arama/?q=${enc}" target="_blank" rel="noopener noreferrer" class="text-center bg-white/10 hover:bg-white/20 text-white border border-white/15 font-bold text-xs py-3 px-3 rounded-xl transition">Akakçe Fiyat ↗</a>
+        </div>`;
+    }
+
+    function checkVerifiedMatches(queryText) {
+      const norm = queryText.toLowerCase();
+      const words = norm.split(/\s+/).filter((w) => w.length > 1);
+      const hits = verifiedCatalog.filter((item) => {
+        if (item.keywords.includes(norm)) return true;
+        return words.length > 0 && words.every((w) => item.keywords.includes(w));
+      });
+
+      if (hits.length > 0 && verifiedBox && verifiedList) {
+        verifiedList.innerHTML = hits
+          .map(
+            (h) => `
+          <a href="${h.href}" class="block rounded-xl border border-slate-200 hover:border-[#03519F] p-4 transition bg-slate-50 hover:bg-blue-50/40">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-[10px] font-mono font-extrabold uppercase text-[#03519F]">${h.type === 'vs' ? 'HEG VS KARŞILAŞTIRMA' : 'HEG ÜRÜN KARNESİ'}</span>
+              <span class="text-xs font-mono font-extrabold bg-[#111827] text-[#FAD002] px-2 py-0.5 rounded">${h.hegScore}</span>
+            </div>
+            <div class="font-extrabold text-slate-900">${h.title}</div>
+            <div class="text-xs text-slate-600 mt-1">${h.subtitle} • <strong>${h.price}</strong></div>
+            <div class="text-xs font-bold text-[#03519F] mt-2">Doğrulanmış Analizi Aç →</div>
+          </a>`
+          )
+          .join('');
+        verifiedBox.classList.remove('hidden');
+        return true;
+      }
+      verifiedBox?.classList.add('hidden');
+      return false;
+    }
+
+    async function runSearch(query1, query2 = '', vsMode = false) {
+      if (!query1) return;
+      notice?.classList.add('hidden');
+      output?.classList.add('hidden');
+
+      const combined = vsMode && query2 ? `${query1} ${query2}` : query1;
+      checkVerifiedMatches(combined);
+      loading?.classList.remove('hidden');
+
+      try {
+        const res = await fetch('/api/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: query1, query2, isVS: vsMode }),
+        });
+
+        if (!res.ok) throw new Error('API_UNAVAILABLE');
+        const data = await res.json();
+        loading?.classList.add('hidden');
+
+        if (data.type === 'error') {
+          if (notice) {
+            notice.innerHTML = `<div class="text-sm font-bold text-red-700">${data.message}</div>`;
+            notice.classList.remove('hidden');
+          }
+          return;
+        }
+
+        if (output) {
+          if (data.type === 'list') {
+            output.innerHTML = `
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <h2 class="text-2xl font-extrabold text-slate-950">${data.title}</h2>
+                  <span class="text-xs font-mono bg-[#111827] text-[#FAD002] px-3 py-1 rounded-lg">AI CANLI ÖNERİ</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  ${(data.items || [])
+                    .map(
+                      (item) => `
+                    <div class="heg-dark-card rounded-2xl p-6 text-white flex flex-col justify-between gap-4">
+                      <div>
+                        <span class="text-[10px] font-mono font-extrabold bg-[#03519F] text-white px-2.5 py-1 rounded">${item.tag || 'HEG AI'}</span>
+                        <h3 class="text-xl font-extrabold mt-3">${item.name}</h3>
+                        <p class="text-sm text-slate-300 mt-2 leading-relaxed">${item.desc}</p>
+                      </div>
+                      ${buildStoreLinks(item.name)}
+                    </div>`
+                    )
+                    .join('')}
+                </div>
+              </div>`;
+          } else if (data.type === 'comparison') {
+            output.innerHTML = `
+              <div class="heg-dark-card rounded-3xl p-6 sm:p-8 text-white space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4">
+                  <h2 class="text-2xl sm:text-3xl font-extrabold"><span class="text-sky-300">${data.p1_name}</span> <span class="text-slate-500 font-light mx-1">vs</span> <span class="text-[#FAD002]">${data.p2_name}</span></h2>
+                  <span class="text-xs font-mono bg-[#FAD002] text-[#0B0B0D] font-extrabold px-3 py-1 rounded-lg">HEG AI CANLI VS</span>
+                </div>
+                <div class="bg-white/[0.06] border-l-4 border-[#FAD002] rounded-r-xl p-4 text-sm text-slate-100 leading-relaxed">${data.summary}</div>
+                <div class="overflow-x-auto bg-white rounded-2xl text-slate-900">
+                  <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                      <tr class="bg-slate-100 text-[11px] font-mono uppercase text-slate-500">
+                        <th class="py-3 px-4">Kriter</th>
+                        <th class="py-3 px-4 text-[#03519F]">${data.p1_name}</th>
+                        <th class="py-3 px-4 text-amber-700">${data.p2_name}</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                      ${(data.table || [])
+                        .map(
+                          (row) => `
+                        <tr>
+                          <td class="py-3 px-4 font-bold text-slate-700">${row.feature}</td>
+                          <td class="py-3 px-4 ${row.winner === 1 ? 'bg-emerald-50 font-bold text-emerald-800' : 'text-slate-600'}">${row.val1} ${row.winner === 1 ? '✓' : ''}</td>
+                          <td class="py-3 px-4 ${row.winner === 2 ? 'bg-emerald-50 font-bold text-emerald-800' : 'text-slate-600'}">${row.val2} ${row.winner === 2 ? '✓' : ''}</td>
+                        </tr>`
+                        )
+                        .join('')}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                  <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                    <div class="text-xs font-mono text-sky-300 font-bold mb-1">${data.p1_name} Fiyatları</div>
+                    ${buildStoreLinks(data.p1_name)}
+                  </div>
+                  <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                    <div class="text-xs font-mono text-[#FAD002] font-bold mb-1">${data.p2_name} Fiyatları</div>
+                    ${buildStoreLinks(data.p2_name)}
+                  </div>
+                </div>
+              </div>`;
+          } else {
+            output.innerHTML = `
+              <div class="heg-dark-card rounded-3xl p-6 sm:p-8 text-white space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+                  <div>
+                    <div class="text-[11px] font-mono text-[#FAD002] uppercase">HEG AI CANLI ÖN DEĞERLENDİRME</div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold mt-0.5">${data.title || query1}</h2>
+                  </div>
+                  ${data.heg_score ? `<div class="bg-white/10 border border-[#FAD002]/40 px-4 py-2 rounded-xl font-mono font-extrabold text-xl text-[#FAD002]">${data.heg_score}/10</div>` : ''}
+                </div>
+                <div class="bg-white/[0.06] border-l-4 border-[#03519F] rounded-r-xl p-5 text-sm text-slate-100 leading-relaxed">${data.verdict}</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-5">
+                    <h3 class="font-extrabold text-emerald-400 mb-2">✓ Avantajları</h3>
+                    <div class="text-slate-200 space-y-1">${data.pros}</div>
+                  </div>
+                  <div class="bg-red-500/10 border border-red-500/30 rounded-2xl p-5">
+                    <h3 class="font-extrabold text-red-400 mb-2">✕ Dikkat Edilmesi Gerekenler</h3>
+                    <div class="text-slate-200 space-y-1">${data.cons}</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="text-xs font-mono text-slate-400 uppercase mb-1">Çoklu Mağaza Canlı Fiyat Kontrolü</div>
+                  ${buildStoreLinks(data.amazon_keyword || query1)}
+                </div>
+              </div>`;
+          }
+          output.classList.remove('hidden');
+        }
+      } catch (err) {
+        loading?.classList.add('hidden');
+        if (notice) {
+          notice.innerHTML = `
+            <div class="flex items-start gap-3">
+              <span class="text-amber-600 font-extrabold text-lg">ℹ</span>
+              <div class="space-y-2 text-sm text-slate-700 w-full">
+                <div class="font-extrabold text-slate-900">Yerel Önizleme Modu — Canlı AI API Cloudflare Pages'te Aktif Olur</div>
+                <p>Şu an yerel önizleme sunucusundasınız. <code>/api/search</code> (Claude 3.5 Haiku + Gemini Edge Worker) Cloudflare Pages ortamında API anahtarınızla otomatik çalışır. Yine de <strong>"${query1}"</strong> için çoklu mağaza fiyatlarına doğrudan bakabilirsiniz:</p>
+                <div class="bg-[#111827] rounded-xl p-4">${buildStoreLinks(query1)}</div>
+              </div>
+            </div>`;
+          notice.classList.remove('hidden');
+        }
+      }
+    }
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      runSearch(q1?.value.trim() || '', q2?.value.trim() || '', isVS);
+    });
+
+    document.querySelectorAll('.preset-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const text = btn.getAttribute('data-preset') || '';
+        if (q1) q1.value = text;
+        setVS(false);
+        runSearch(text, '', false);
+      });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('vs') === '1') {
+      setVS(true);
+      const p1 = params.get('q1') || '';
+      const p2 = params.get('q2') || '';
+      if (q1) q1.value = p1;
+      if (q2) q2.value = p2;
+      if (p1 && p2) runSearch(p1, p2, true);
+    } else if (params.get('ara')) {
+      const q = params.get('ara') || '';
+      if (q1) q1.value = q;
+      runSearch(q, '', false);
+    }
+  </script>
+</BaseLayout>

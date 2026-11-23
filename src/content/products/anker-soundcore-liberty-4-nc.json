@@ -1,0 +1,125 @@
+{
+  "slug": "anker-soundcore-liberty-4-nc",
+  "name": "Anker Soundcore Liberty 4 NC",
+  "brand": "Anker Soundcore",
+  "subtitle": "Adaptif ANC 2.0 • LDAC Hi-Res Ses • 50 Saat Toplam Pil Ömrü",
+  "category": "Kablosuz Kulaklık",
+  "categorySlug": "kablosuz-kulaklik",
+  "datePublished": "2026-11-22",
+  "dateModified": "2026-11-23",
+  "displayDate": "23 Kasım 2026",
+  "image": "/images/products/liberty-4-nc.jpg",
+  "hegScore": 8.9,
+  "verdict": "FP_SAMPIYONU",
+  "verdictHeadline": "3.000 TL Bandında Gürültü Engellemenin Tartışmasız Fiyat/Performans Şampiyonu",
+  "tldr": "Anker Soundcore Liberty 4 NC, 23 Kasım 2026 itibarıyla 2.999 TL seviyesinde sunduğu Adaptif ANC 2.0 gürültü engelleme, LDAC yüksek çözünürlüklü ses ve kutuyla 50 saat pil ömrüyle 7.000 TL'lik rakiplerine kafa tutuyor. Web-özel bağımsız HEG analizimizde 8.9/10 puanla F/P Şampiyonu damgası aldı.",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "listPrice": 4299,
+  "currentLowestPrice": 2999,
+  "netSavings": 1300,
+  "discountPercent": 30,
+  "priceNote": "Lacivert ve Siyah renk seçeneklerinde Amazon TR & Hepsiburada canlı fiyatları taranmıştır.",
+  "reviewStats": {
+    "source": "Amazon TR & Hepsiburada Birleşik Yorum Analizi",
+    "count": 6890,
+    "rating": 4.7,
+    "satisfactionPercent": 91
+  },
+  "criteria": [
+    {
+      "label": "Fiyat / Performans",
+      "score": 9.6,
+      "summary": "3.000 TL altında bu seviye ANC, LDAC ve kablosuz şarjı bir arada sunan neredeyse rakipsiz paket."
+    },
+    {
+      "label": "Aktif Gürültü Engelleme (ANC)",
+      "score": 9.1,
+      "summary": "Metro, uçak ve ofis uğultusunda düşük frekanslı sesleri sınıfının açık ara en iyi şekilde kesiyor."
+    },
+    {
+      "label": "Ses Kalitesi & EQ",
+      "score": 8.7,
+      "summary": "11 mm sürücüler ve LDAC desteğiyle canlı; kutudan çıktığında bas ağırlıklı ama Soundcore EQ ile dengeleniyor."
+    },
+    {
+      "label": "Batarya & Şarj",
+      "score": 9.2,
+      "summary": "Tek şarjda 8–10 saat, kutuyla 50 saat kullanım + kablosuz şarj + 10 dk şarjla 4 saat dinleme."
+    },
+    {
+      "label": "Mikrofon & Konfor",
+      "score": 7.9,
+      "summary": "6 mikrofonlu çağrı performansı kapalı mekanda iyi, rüzgarlı dış ortamda orta seviyede."
+    }
+  ],
+  "specs": [
+    { "label": "Gürültü Engelleme", "value": "Adaptif ANC 2.0 (Gerçek zamanlı kulak kanalı kalibrasyonu)" },
+    { "label": "Ses Kodekleri", "value": "LDAC (Hi-Res Wireless), AAC, SBC" },
+    { "label": "Sürücü", "value": "11 mm Özel Ayarlı Dinamik Sürücü" },
+    { "label": "Pil Ömrü", "value": "10 saat kulaklık / 50 saat kutu (ANC açık 8 / 40 saat)" },
+    { "label": "Bağlantı", "value": "Bluetooth 5.3 + Çoklu Cihaz (Multipoint)" },
+    { "label": "Dayanıklılık", "value": "IPX4 su sıçramalarına dayanıklı + Kablosuz Şarj" }
+  ],
+  "pros": [
+    "3.000 TL bandında 2 katı pahalı kulaklıklarla yarışan Adaptif ANC 2.0 performansı.",
+    "LDAC yüksek çözünürlüklü ses, Multipoint (aynı anda telefon + laptop) ve kablosuz şarj desteği eksiksiz.",
+    "Soundcore mobil uygulaması sektördeki en detaylı ekolayzır (HearID) deneyimini sunuyor.",
+    "4.299 TL normal satış fiyatına göre 2.999 TL kampanya fiyatında %30 gerçek avantaj."
+  ],
+  "cons": [
+    "Varsayılan ses profili biraz fazla bas odaklı; en temiz ses için uygulamadan ekolayzır ayarı yapmak gerekiyor.",
+    "Şiddetli rüzgarda dış mekan telefon görüşmelerinde mikrofon performansı düşebiliyor.",
+    "Şarj kutusu parlak değil ama cep için AirPods'tan bir miktar daha kalın."
+  ],
+  "whoShouldBuy": "Toplu taşımada veya ofiste güçlü gürültü engelleme, uzun pil ömrü ve 3.000 TL bandında maksimum özellik isteyen Android ve iOS kullanıcıları.",
+  "whoShouldSkip": "Sadece silikon uçsuz (yarım kulak içi) tasarım kullanabilenler veya önceliği yoğun rüzgarda kusursuz telefon görüşmesi olanlar.",
+  "offers": [
+    {
+      "store": "Amazon TR",
+      "price": 2999,
+      "oldPrice": 4299,
+      "seller": "Amazon.com.tr",
+      "inStock": true,
+      "isLowest": true,
+      "isAffiliate": true,
+      "redirectSlug": "liberty-4-nc-amz",
+      "note": "En Dip Fiyat • Prime Teslimat"
+    },
+    {
+      "store": "Hepsiburada",
+      "price": 3149,
+      "oldPrice": 4299,
+      "seller": "Anker Resmi Mağaza",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "liberty-4-nc-hb",
+      "note": "Resmi Distribütör"
+    },
+    {
+      "store": "Trendyol",
+      "price": 3249,
+      "oldPrice": 4299,
+      "seller": "Yetkili Satıcı",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "liberty-4-nc-ty",
+      "note": "Kargo Bedava"
+    }
+  ],
+  "social": {
+    "instagramUrl": "https://www.instagram.com/hepsievegelsin"
+  },
+  "faqs": [
+    {
+      "question": "Anker Soundcore Liberty 4 NC iPhone ile uyumlu mu?",
+      "answer": "Evet, iPhone ile AAC kodeği üzerinden sorunsuz çalışır ve Soundcore iOS uygulamasıyla tüm ANC/EQ ayarları yapılabilir. LDAC yüksek bit hızlı kodek yalnızca Android cihazlarda aktiftir."
+    },
+    {
+      "question": "Liberty 4 NC mi yoksa AirPods 4 (ANC'siz) mu alınmalı?",
+      "answer": "Gürültü engelleme, pil ömrü ve fiyat/performans açısından Liberty 4 NC (2.999 TL), aktif gürültü engellemesi bulunmayan 6.899 TL'lik standart AirPods 4'ten yarı fiyatına çok daha yüksek fayda sunar."
+    }
+  ]
+}
