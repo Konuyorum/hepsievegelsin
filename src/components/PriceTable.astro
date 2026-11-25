@@ -12,87 +12,79 @@ interface Props {
 const { productName, displayDate, offers, hasAffiliateLinks } = Astro.props;
 ---
 
-<section class="bg-white rounded-2xl border border-slate-900/10 shadow-sm overflow-hidden" aria-label={`${productName} Çoklu Mağaza Fiyat Karşılaştırması`}>
-  <div class="bg-[#111827] text-white px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+<section class="tactile-card overflow-hidden" aria-label={`${productName} Çoklu Mağaza Fiyat Karşılaştırması`}>
+  <div class="px-6 py-4 border-b border-[#E4E4E7] flex flex-wrap items-center justify-between gap-3">
     <div>
-      <div class="text-[11px] font-mono uppercase tracking-widest text-[#FAD002]">
-        CANLI ÇOKLU MAĞAZA FİYAT TABLOSU
+      <div class="flex items-center gap-2">
+        <span class="text-sm font-semibold text-[#111111]">{productName} — Canlı Türkiye Fiyatları</span>
+        <span class="badge-pill badge-neutral font-mono">📅 {displayDate}</span>
       </div>
-      <h2 class="text-base sm:text-lg font-bold mt-0.5">{productName} — Güncel Türkiye Fiyatları</h2>
     </div>
-    <div class="flex items-center gap-2 text-[11px] font-mono">
-      <span class="bg-white/10 text-slate-200 px-2.5 py-1 rounded-md">📅 {displayDate}</span>
+    <div class="flex items-center gap-2">
       {hasAffiliateLinks ? (
-        <span class="bg-[#FAD002]/15 text-[#FAD002] border border-[#FAD002]/30 px-2.5 py-1 rounded-md" title="Bazı bağlantılar satış ortaklığı içerebilir; sizin için fiyat değişmez.">
-          #reklam • Satış Ortaklığı İçerebilir
+        <span class="badge-pill badge-neutral font-mono" title="Bazı bağlantılar satış ortaklığı içerebilir; sizin için fiyat değişmez.">
+          #reklam · Satış Ortaklığı İçerebilir
         </span>
       ) : (
-        <span class="bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-md">
+        <span class="badge-pill badge-blue font-mono">
           Komisyonsuz Doğrudan Link
         </span>
       )}
     </div>
   </div>
 
-  <!-- Semantic HTML Table for maximum AI/GEO & Google extraction accuracy -->
+  <!-- Semantic HTML Table (Swiss Minimal + GEO/LLM Optimal) -->
   <div class="overflow-x-auto">
     <table class="w-full text-left border-collapse">
       <thead>
-        <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-mono uppercase tracking-wider text-slate-500">
-          <th class="py-3.5 px-6">Mağaza & Satıcı</th>
-          <th class="py-3.5 px-4">Not / Durum</th>
-          <th class="py-3.5 px-4 text-right">Fiyat (TRY)</th>
-          <th class="py-3.5 px-6 text-right">Bağlantı</th>
+        <tr class="bg-[#F9FAFB] border-b border-[#E4E4E7] text-[11px] font-mono uppercase tracking-[0.04em] text-[#71717A]">
+          <th class="py-3 px-6 font-semibold">Mağaza & Satıcı</th>
+          <th class="py-3 px-4 font-semibold">Not / Durum</th>
+          <th class="py-3 px-4 text-right font-semibold">Güncel Fiyat</th>
+          <th class="py-3 px-6 text-right font-semibold">Aksiyon</th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-slate-100 text-sm">
+      <tbody class="divide-y divide-[#E4E4E7] text-[13.5px]">
         {offers.map((offer) => (
-          <tr class={offer.isLowest ? 'bg-emerald-50/50 hover:bg-emerald-50/80 transition' : 'hover:bg-slate-50 transition'}>
-            <td class="py-4 px-6">
-              <div class="flex items-center gap-2.5">
-                <span class="font-bold text-slate-900">{offer.store}</span>
+          <tr class={offer.isLowest ? 'bg-[#FFFDF0] hover:bg-[#FEF9DC]/70 transition' : 'hover:bg-[#F9FAFB] transition'}>
+            <td class="py-3.5 px-6">
+              <div class="flex items-center gap-2 flex-wrap">
+                <strong class="text-[#111111] font-semibold">{offer.store}</strong>
                 {offer.isLowest && (
-                  <span class="text-[10px] font-mono font-extrabold uppercase bg-emerald-600 text-white px-2 py-0.5 rounded">
-                    EN DİP FİYAT
-                  </span>
+                  <span class="badge-pill badge-deal font-mono">DİP FİYAT</span>
                 )}
                 {offer.isAffiliate && (
-                  <span class="text-[10px] font-mono font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded" title="Satış ortaklığı bağlantısı — fiyatınız değişmez">
+                  <span class="text-[10px] font-mono text-[#71717A] bg-[#F4F4F5] border border-[#E4E4E7] px-1.5 py-0.5 rounded-full">
                     #reklam
                   </span>
                 )}
               </div>
-              {offer.seller && <div class="text-xs text-slate-500 mt-0.5">{offer.seller}</div>}
+              {offer.seller && <div class="text-xs text-[#71717A] mt-0.5">{offer.seller}</div>}
             </td>
 
-            <td class="py-4 px-4 text-xs text-slate-600">
+            <td class="py-3.5 px-4 text-xs text-[#52525B]">
               {offer.note || (offer.inStock ? 'Stokta Mevcut' : 'Stok Kontrol Ediniz')}
             </td>
 
-            <td class="py-4 px-4 text-right tabular-nums whitespace-nowrap">
+            <td class="py-3.5 px-4 text-right font-mono tabular-nums whitespace-nowrap">
               {offer.oldPrice && offer.oldPrice > offer.price && (
-                <div class="text-xs font-mono text-red-500 line-through">
+                <div class="text-xs text-[#71717A] line-through">
                   {formatTRY(offer.oldPrice)}
                 </div>
               )}
-              <div class={`font-mono font-extrabold text-base ${offer.isLowest ? 'text-emerald-700' : 'text-slate-900'}`}>
+              <div class="font-bold text-[16px] text-[#111111]">
                 {formatTRY(offer.price)}
               </div>
             </td>
 
-            <td class="py-4 px-6 text-right whitespace-nowrap">
+            <td class="py-3.5 px-6 text-right whitespace-nowrap">
               <a
                 href={`/git/${offer.redirectSlug}`}
                 target="_blank"
                 rel={offer.isAffiliate ? 'nofollow sponsored noopener noreferrer' : 'noopener noreferrer'}
-                class={`inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl transition ${
-                  offer.isLowest
-                    ? 'bg-[#03519F] hover:bg-[#023E7D] text-white shadow-sm shadow-[#03519F]/30'
-                    : 'bg-slate-900 hover:bg-[#03519F] text-white'
-                }`}
+                class={offer.isLowest ? 'btn-pill btn-pill-primary !py-2 !px-4 !text-xs' : 'btn-pill btn-pill-outline !py-2 !px-4 !text-xs'}
               >
-                Mağazaya Git
-                <span aria-hidden="true">↗</span>
+                Fırsata Git <span class="arrow">↗</span>
               </a>
             </td>
           </tr>
@@ -101,8 +93,8 @@ const { productName, displayDate, offers, hasAffiliateLinks } = Astro.props;
     </table>
   </div>
 
-  <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 text-[11px] text-slate-500 flex flex-wrap items-center justify-between gap-2">
-    <span>* Fiyatlar {displayDate} itibarıyla canlı kontrol edilmiştir; satıcı kampanyaları anlık değişebilir.</span>
-    <span class="font-mono text-slate-400">Ölmeyen Link: /git/ yönlendirme korumalı</span>
+  <div class="px-6 py-3 bg-[#F9FAFB] border-t border-[#E4E4E7] text-[11px] text-[#71717A] flex flex-wrap items-center justify-between gap-2">
+    <span>* Fiyatlar {displayDate} itibarıyla canlı kontrol edilmiştir; satıcı stokları anlık değişebilir.</span>
+    <span class="font-mono">/git/ ölmeyen yönlendirme korumalı</span>
   </div>
 </section>

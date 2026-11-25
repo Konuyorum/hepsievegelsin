@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import VerdictBadge from '../../components/VerdictBadge.astro';
 import PriceTable from '../../components/PriceTable.astro';
 import SocialPresenceCard from '../../components/SocialPresenceCard.astro';
+import SparkBars from '../../components/SparkBars.astro';
 import { getAllComparisons } from '../../lib/content';
 import { SITE, formatTRY } from '../../data/site';
 
@@ -55,151 +56,152 @@ const faqSchema = {
   activeNav="vs"
   jsonLd={[articleSchema, faqSchema]}
 >
-  <article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-    <!-- Top Bar -->
-    <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-      <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-slate-500">
-        <a href="/" class="hover:text-[#03519F]">Ana Sayfa</a>
+  <article class="max-w-[1160px] mx-auto px-5 py-7 space-y-6">
+    <!-- Breadcrumb -->
+    <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
+      <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-[#71717A]">
+        <a href="/" class="hover:text-[#111111]">Radar</a>
         <span>/</span>
-        <a href="/vs" class="hover:text-[#03519F]">HEG VS</a>
+        <a href="/vs" class="hover:text-[#111111]">Karşılaştırmalar</a>
         <span>/</span>
-        <span class="text-slate-900 font-bold">{comparison.title}</span>
+        <span class="text-[#111111] font-medium">{comparison.title}</span>
       </nav>
       <div class="flex flex-wrap items-center gap-2">
-        <span class="bg-[#111827] text-[#FAD002] px-2.5 py-1 rounded-md font-bold">📅 {comparison.displayDate}</span>
-        <span class="bg-white border border-slate-300 text-slate-700 px-2.5 py-1 rounded-md font-semibold">
-          🛡️ SPONSORLUK YOK • TARAFSIZ VS
-        </span>
+        <span class="badge-pill badge-neutral font-mono">📅 {comparison.displayDate}</span>
+        <span class="badge-pill badge-blue font-mono">%0 SPONSOR · TARAFSIZ VS</span>
       </div>
     </div>
 
-    <!-- Split-Screen Scoreboard Header (Mirroring Video Aesthetic!) -->
-    <header class="heg-dark-card rounded-3xl p-6 sm:p-8 text-white space-y-6">
+    <!-- Tactile Scoreboard Header Bento -->
+    <header class="tactile-card p-6 sm:p-7 space-y-6">
       <div class="flex flex-wrap items-center justify-between gap-3">
-        <span class="bg-[#FAD002] text-[#0B0B0D] font-mono font-extrabold text-xs px-3 py-1 rounded-lg">
-          {comparison.hookBadge}
-        </span>
-        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-4 py-1.5 rounded-full font-mono text-xs font-extrabold">
-          <span class="text-sky-300">{comparison.productA.shortName}</span>
-          <span class="bg-[#03519F] text-white px-2.5 py-0.5 rounded tabular-nums">{comparison.scoreA}</span>
-          <span class="text-slate-500">VS</span>
-          <span class="bg-[#FAD002] text-[#0B0B0D] px-2.5 py-0.5 rounded tabular-nums">{comparison.scoreB}</span>
-          <span class="text-[#FAD002]">{comparison.productB.shortName}</span>
+        <span class="badge-pill badge-deal font-mono">{comparison.hookBadge}</span>
+        <div class="inline-flex items-center gap-2 bg-[#F4F4F5] border border-[#E4E4E7] px-3.5 py-1.5 rounded-full font-mono text-xs font-bold">
+          <span class="text-[#02458A]">{comparison.productA.shortName}</span>
+          <span class="bg-[#111111] text-white px-2.5 py-0.5 rounded-full tabular-nums">{comparison.scoreA}</span>
+          <span class="text-[#71717A]">VS</span>
+          <span class="bg-[#FBD101] text-[#1A1500] px-2.5 py-0.5 rounded-full tabular-nums">{comparison.scoreB}</span>
+          <span class="text-[#111111]">{comparison.productB.shortName}</span>
         </div>
       </div>
 
       <div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-          <span class="text-sky-300">{comparison.productA.name}</span>
-          <span class="text-slate-500 font-light mx-2">vs</span>
-          <span class="text-[#FAD002]">{comparison.productB.name}</span>
+        <h1 class="text-[28px] sm:text-[38px] font-semibold tracking-[-0.03em] leading-[1.12] text-[#111111]">
+          {comparison.productA.name} <span class="text-[#71717A] font-normal">vs</span> {comparison.productB.name}
         </h1>
-        <p class="text-sm sm:text-base text-slate-300 mt-2 max-w-3xl">{comparison.subtitle}</p>
+        <p class="text-[14.5px] text-[#52525B] mt-2 max-w-3xl">{comparison.subtitle}</p>
       </div>
 
-      <!-- Two Contenders Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
-        <!-- Side A (Italian Blue) -->
-        <div class="rounded-2xl bg-white/[0.04] border-2 border-[#03519F] p-5 flex flex-col justify-between gap-4">
+      <!-- Two Contender Bento Boxes -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class={`rounded-[16px] p-5 border flex flex-col justify-between gap-4 ${comparison.winnerSide === 'A' ? 'bg-[#FFFDF0] border-[#E5B800]' : 'bg-[#F9FAFB] border-[#E4E4E7]'}`}>
           <div class="flex items-center gap-4">
-            <div class="w-24 h-24 bg-white rounded-xl p-2 shrink-0 flex items-center justify-center">
-              <img src={comparison.productA.image} alt={comparison.productA.name} class="max-h-full max-w-full object-contain" />
+            <div class="w-24 h-24 bg-white border border-[#E4E4E7] rounded-[12px] p-2 shrink-0 flex items-center justify-center">
+              <img src={comparison.productA.image} alt={comparison.productA.name} class="deal-photo max-h-full max-w-full object-contain" />
             </div>
-            <div>
-              <div class="text-[11px] font-mono text-sky-300 font-bold uppercase">SOL KÖŞE • {comparison.productA.brand}</div>
-              <h2 class="text-lg font-extrabold text-white">{comparison.productA.name}</h2>
-              <div class="mt-2">
+            <div class="space-y-1.5">
+              <div class="font-mono text-[10.5px] font-semibold text-[#02458A] uppercase">
+                {comparison.productA.brand} {comparison.winnerSide === 'A' ? '· HEG KAZANANI' : ''}
+              </div>
+              <h2 class="text-[17px] font-semibold text-[#111111] leading-snug">{comparison.productA.name}</h2>
+              <div class="flex items-center gap-2 pt-0.5">
+                <SparkBars score={comparison.productA.hegScore} tone={comparison.winnerSide === 'A' ? 'yellow' : 'blue'} />
                 <VerdictBadge verdict={comparison.productA.verdict} score={comparison.productA.hegScore} size="sm" />
               </div>
             </div>
           </div>
-          <div class="flex items-end justify-between pt-3 border-t border-white/10 font-mono">
+
+          <div class="flex items-end justify-between pt-3 border-t border-dashed border-[#E4E4E7] font-mono">
             <div>
-              <div class="text-[10px] text-slate-400">EN DİP TÜRKİYE FİYATI</div>
-              <div class="text-2xl font-extrabold text-white tabular-nums">{formatTRY(comparison.productA.lowestPrice)}</div>
+              <div class="text-[10px] text-[#71717A]">EN DİP TÜRKİYE FİYATI</div>
+              <div class="text-[22px] font-bold text-[#111111] tabular-nums">{formatTRY(comparison.productA.lowestPrice)}</div>
             </div>
             {comparison.productA.productSlug && (
-              <a href={`/urun/${comparison.productA.productSlug}`} class="text-xs font-bold text-sky-300 hover:underline">
-                Tam İnceleme →
+              <a href={`/urun/${comparison.productA.productSlug}`} class="btn-pill btn-pill-outline !py-1.5 !px-3 !text-xs">
+                Tam İnceleme ↗
               </a>
             )}
           </div>
         </div>
 
-        <!-- Side B (Iconic Yellow) -->
-        <div class="rounded-2xl bg-white/[0.04] border-2 border-[#FAD002]/80 p-5 flex flex-col justify-between gap-4">
+        <div class={`rounded-[16px] p-5 border flex flex-col justify-between gap-4 ${comparison.winnerSide === 'B' ? 'bg-[#FFFDF0] border-[#E5B800]' : 'bg-[#F9FAFB] border-[#E4E4E7]'}`}>
           <div class="flex items-center gap-4">
-            <div class="w-24 h-24 bg-white rounded-xl p-2 shrink-0 flex items-center justify-center">
-              <img src={comparison.productB.image} alt={comparison.productB.name} class="max-h-full max-w-full object-contain" />
+            <div class="w-24 h-24 bg-white border border-[#E4E4E7] rounded-[12px] p-2 shrink-0 flex items-center justify-center">
+              <img src={comparison.productB.image} alt={comparison.productB.name} class="deal-photo max-h-full max-w-full object-contain" />
             </div>
-            <div>
-              <div class="text-[11px] font-mono text-[#FAD002] font-bold uppercase">SAĞ KÖŞE • {comparison.productB.brand}</div>
-              <h2 class="text-lg font-extrabold text-white">{comparison.productB.name}</h2>
-              <div class="mt-2">
+            <div class="space-y-1.5">
+              <div class="font-mono text-[10.5px] font-semibold text-[#52525B] uppercase">
+                {comparison.productB.brand} {comparison.winnerSide === 'B' ? '· HEG KAZANANI' : ''}
+              </div>
+              <h2 class="text-[17px] font-semibold text-[#111111] leading-snug">{comparison.productB.name}</h2>
+              <div class="flex items-center gap-2 pt-0.5">
+                <SparkBars score={comparison.productB.hegScore} tone={comparison.winnerSide === 'B' ? 'yellow' : 'blue'} />
                 <VerdictBadge verdict={comparison.productB.verdict} score={comparison.productB.hegScore} size="sm" />
               </div>
             </div>
           </div>
-          <div class="flex items-end justify-between pt-3 border-t border-white/10 font-mono">
+
+          <div class="flex items-end justify-between pt-3 border-t border-dashed border-[#E4E4E7] font-mono">
             <div>
-              <div class="text-[10px] text-slate-400">EN DİP TÜRKİYE FİYATI</div>
-              <div class="text-2xl font-extrabold text-[#FAD002] tabular-nums">{formatTRY(comparison.productB.lowestPrice)}</div>
+              <div class="text-[10px] text-[#71717A]">EN DİP TÜRKİYE FİYATI</div>
+              <div class="text-[22px] font-bold text-[#111111] tabular-nums">{formatTRY(comparison.productB.lowestPrice)}</div>
             </div>
             {comparison.productB.productSlug && (
-              <a href={`/urun/${comparison.productB.productSlug}`} class="text-xs font-bold text-[#FAD002] hover:underline">
-                Tam İnceleme →
+              <a href={`/urun/${comparison.productB.productSlug}`} class="btn-pill btn-pill-outline !py-1.5 !px-3 !text-xs">
+                Tam İnceleme ↗
               </a>
             )}
           </div>
         </div>
       </div>
 
-      <!-- Answer-First TL;DR for Humans & AI Engines -->
-      <div class="bg-white/[0.06] border-l-4 border-emerald-400 rounded-r-xl p-5">
-        <div class="text-[10px] font-mono font-extrabold uppercase tracking-widest text-emerald-400 mb-1">
-          HEG VS KESİN SONUÇ ({comparison.winnerName} — {comparison.scoreA}-{comparison.scoreB})
+      <!-- TL;DR Answer-First Box -->
+      <div class="bg-[#F9FAFB] border border-[#E4E4E7] border-l-[3px] border-l-[#0251A0] rounded-r-[14px] p-4">
+        <div class="font-mono text-[10.5px] font-semibold uppercase tracking-[0.06em] text-[#02458A] mb-1">
+          HEG VS KESİN SONUÇ — {comparison.winnerName} ({comparison.scoreA}–{comparison.scoreB})
         </div>
-        <p class="text-sm text-slate-100 leading-relaxed">{comparison.tldr}</p>
+        <p class="text-[13.5px] text-[#111111] leading-relaxed">{comparison.tldr}</p>
       </div>
     </header>
 
-    <!-- Synthetic Benchmark / Quantitative Bar Chart (Directly inspired by 04_benchmarks.jpg!) -->
+    <!-- Quantitative Benchmark Bars (Tactile Swiss Style) -->
     {comparison.benchmarks.length > 0 && (
-      <section class="heg-dark-card rounded-2xl p-6 sm:p-8 text-white space-y-6">
-        <div>
-          <div class="text-[11px] font-mono uppercase tracking-widest text-slate-400">
-            SAYISAL PERFORMANS & VERİ KIYASLAMASI
+      <section class="tactile-card p-6 sm:p-7 space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#E4E4E7]">
+          <div>
+            <h2 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111]">Sayısal Benchmark & Performans Ölçümleri</h2>
+            <p class="text-xs text-[#71717A] mt-0.5">{comparison.priceDiffText}</p>
           </div>
-          <h2 class="text-xl font-extrabold text-white mt-0.5">Benchmark & Ölçüm Karşılaştırması</h2>
+          <span class="badge-pill badge-blue font-mono">DOĞRULANMIŞ TEST VERİSİ</span>
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-5">
           {comparison.benchmarks.map((b) => {
             const maxVal = Math.max(b.productAValue, b.productBValue) || 1;
             const pctA = Math.round((b.productAValue / maxVal) * 100);
             const pctB = Math.round((b.productBValue / maxVal) * 100);
             return (
-              <div class="space-y-2.5">
+              <div class="space-y-2">
                 <div class="flex flex-wrap items-baseline justify-between gap-2">
-                  <span class="text-sm font-extrabold text-[#FAD002]">{b.metric}</span>
-                  <span class="text-xs font-mono text-slate-400">{b.subtitle}</span>
+                  <span class="text-sm font-semibold text-[#111111]">{b.metric}</span>
+                  <span class="text-xs font-mono text-[#02458A]">{b.subtitle}</span>
                 </div>
 
                 <div class="space-y-2">
                   <div class="grid grid-cols-12 items-center gap-3 text-xs font-mono">
-                    <span class="col-span-3 sm:col-span-2 text-slate-300 truncate">{b.productALabel}</span>
-                    <div class="col-span-6 sm:col-span-8 h-3.5 bg-white/10 rounded-full overflow-hidden">
-                      <div class="h-full bg-[#0B6BCB] rounded-full" style={`width: ${pctA}%`}></div>
+                    <span class="col-span-3 sm:col-span-2 text-[#52525B] truncate">{b.productALabel}</span>
+                    <div class="col-span-6 sm:col-span-8 h-3 bg-[#F4F4F5] border border-[#E4E4E7] rounded-full overflow-hidden">
+                      <div class="h-full bg-[#0251A0] rounded-full" style={`width: ${pctA}%`}></div>
                     </div>
-                    <span class="col-span-3 sm:col-span-2 text-right font-extrabold text-white tabular-nums">{b.productADisplay}</span>
+                    <span class="col-span-3 sm:col-span-2 text-right font-bold text-[#111111] tabular-nums">{b.productADisplay}</span>
                   </div>
 
                   <div class="grid grid-cols-12 items-center gap-3 text-xs font-mono">
-                    <span class="col-span-3 sm:col-span-2 text-slate-300 truncate">{b.productBLabel}</span>
-                    <div class="col-span-6 sm:col-span-8 h-3.5 bg-white/10 rounded-full overflow-hidden">
-                      <div class="h-full bg-[#FAD002] rounded-full" style={`width: ${pctB}%`}></div>
+                    <span class="col-span-3 sm:col-span-2 text-[#52525B] truncate">{b.productBLabel}</span>
+                    <div class="col-span-6 sm:col-span-8 h-3 bg-[#F4F4F5] border border-[#E4E4E7] rounded-full overflow-hidden">
+                      <div class="h-full bg-[#FBD101] rounded-full" style={`width: ${pctB}%`}></div>
                     </div>
-                    <span class="col-span-3 sm:col-span-2 text-right font-extrabold text-[#FAD002] tabular-nums">{b.productBDisplay}</span>
+                    <span class="col-span-3 sm:col-span-2 text-right font-bold text-[#111111] tabular-nums">{b.productBDisplay}</span>
                   </div>
                 </div>
               </div>
@@ -209,50 +211,39 @@ const faqSchema = {
       </section>
     )}
 
-    <!-- Round-by-Round Semantic HTML Comparison Table (GEO Gold!) -->
-    <section class="bg-white rounded-2xl border border-slate-900/10 shadow-sm overflow-hidden">
-      <div class="px-6 py-4 bg-[#111827] text-white flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <div class="text-[11px] font-mono text-[#FAD002] uppercase tracking-widest">RAUND BAZLI DEĞERLENDİRME</div>
-          <h2 class="text-lg font-extrabold">{comparison.rounds.length} Raundluk Teknik & Kullanıcı Karşılaştırma Tablosu</h2>
-        </div>
-        <span class="text-xs font-mono text-slate-300">{comparison.priceDiffText}</span>
+    <!-- Round-by-Round Semantic Table -->
+    <section class="tactile-card overflow-hidden">
+      <div class="px-6 py-4 border-b border-[#E4E4E7] flex flex-wrap items-center justify-between gap-2">
+        <h2 class="text-[16px] font-semibold text-[#111111]">{comparison.rounds.length} Raundluk Teknik & Kullanıcı Karşılaştırması</h2>
+        <span class="badge-pill badge-neutral font-mono">RAUND BAZLI PUANLAMA</span>
       </div>
 
       <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse text-sm">
+        <table class="w-full text-left border-collapse text-[13.5px]">
           <thead>
-            <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-mono uppercase tracking-wider text-slate-500">
-              <th class="py-3.5 px-5">Raund / Kriter</th>
-              <th class="py-3.5 px-4 text-[#03519F]">{comparison.productA.shortName}</th>
-              <th class="py-3.5 px-4 text-amber-700">{comparison.productB.shortName}</th>
-              <th class="py-3.5 px-5 text-right">Raund Kazananı</th>
+            <tr class="bg-[#F9FAFB] border-b border-[#E4E4E7] text-[11px] font-mono uppercase tracking-[0.04em] text-[#71717A]">
+              <th class="py-3 px-5 font-semibold">Raund / Kriter</th>
+              <th class="py-3 px-4 font-semibold text-[#02458A]">{comparison.productA.shortName}</th>
+              <th class="py-3 px-4 font-semibold text-[#111111]">{comparison.productB.shortName}</th>
+              <th class="py-3 px-5 text-right font-semibold">Kazanan</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-200">
+          <tbody class="divide-y divide-[#E4E4E7]">
             {comparison.rounds.map((r) => (
-              <tr class="hover:bg-slate-50/80 transition align-top">
+              <tr class="hover:bg-[#F9FAFB] transition align-top">
                 <td class="py-4 px-5">
-                  <div class="font-mono text-[10px] font-bold text-slate-400">RAUND 0{r.number}</div>
-                  <div class="font-extrabold text-slate-900 mt-0.5">{r.title}</div>
-                  <p class="text-xs text-slate-500 mt-1 leading-relaxed max-w-xs">{r.summary}</p>
+                  <div class="font-mono text-[10.5px] text-[#71717A]">RAUND 0{r.number}</div>
+                  <div class="font-semibold text-[#111111] mt-0.5">{r.title}</div>
+                  <p class="text-xs text-[#52525B] mt-1 leading-relaxed max-w-xs">{r.summary}</p>
                 </td>
-                <td class={`py-4 px-4 text-xs sm:text-sm leading-relaxed ${r.winner === 'A' ? 'bg-blue-50/60 font-bold text-slate-900' : 'text-slate-600'}`}>
+                <td class={`py-4 px-4 text-xs sm:text-[13px] leading-relaxed ${r.winner === 'A' ? 'bg-[#EBF3FC]/60 font-medium text-[#111111]' : 'text-[#52525B]'}`}>
                   {r.productAValue}
                 </td>
-                <td class={`py-4 px-4 text-xs sm:text-sm leading-relaxed ${r.winner === 'B' ? 'bg-amber-50/70 font-bold text-slate-900' : 'text-slate-600'}`}>
+                <td class={`py-4 px-4 text-xs sm:text-[13px] leading-relaxed ${r.winner === 'B' ? 'bg-[#FFFDF0] font-medium text-[#111111]' : 'text-[#52525B]'}`}>
                   {r.productBValue}
                 </td>
                 <td class="py-4 px-5 text-right whitespace-nowrap">
-                  <span
-                    class={`inline-block text-[11px] font-mono font-extrabold px-2.5 py-1 rounded-lg ${
-                      r.winner === 'A'
-                        ? 'bg-[#03519F] text-white'
-                        : r.winner === 'B'
-                          ? 'bg-[#FAD002] text-[#0B0B0D]'
-                          : 'bg-slate-200 text-slate-800'
-                    }`}
-                  >
+                  <span class={`badge-pill font-mono ${r.winner === 'A' ? 'badge-blue' : r.winner === 'B' ? 'badge-deal' : 'badge-neutral'}`}>
                     {r.winnerLabel}
                   </span>
                 </td>
@@ -264,21 +255,21 @@ const faqSchema = {
     </section>
 
     <!-- Who Should Buy Which? -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-2xl border-t-4 border-[#03519F] p-6 shadow-sm space-y-2">
-        <div class="text-[11px] font-mono font-extrabold text-[#03519F] uppercase">KİMLER BUNU ALMALI?</div>
-        <h3 class="text-lg font-extrabold text-slate-950">{comparison.productA.name}</h3>
-        <p class="text-sm text-slate-600 leading-relaxed">{comparison.productA.whoShouldBuy}</p>
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-[18px]">
+      <div class="tactile-card p-6 space-y-2">
+        <span class="badge-pill badge-blue font-mono">KİMLER BUNU ALMALI?</span>
+        <h3 class="text-[17px] font-semibold text-[#111111] pt-1">{comparison.productA.name}</h3>
+        <p class="text-[13.5px] text-[#52525B] leading-relaxed">{comparison.productA.whoShouldBuy}</p>
       </div>
-      <div class="bg-white rounded-2xl border-t-4 border-[#FAD002] p-6 shadow-sm space-y-2">
-        <div class="text-[11px] font-mono font-extrabold text-amber-700 uppercase">KİMLER BUNU ALMALI?</div>
-        <h3 class="text-lg font-extrabold text-slate-950">{comparison.productB.name}</h3>
-        <p class="text-sm text-slate-600 leading-relaxed">{comparison.productB.whoShouldBuy}</p>
+      <div class="tactile-card p-6 space-y-2">
+        <span class="badge-pill badge-deal font-mono">KİMLER BUNU ALMALI?</span>
+        <h3 class="text-[17px] font-semibold text-[#111111] pt-1">{comparison.productB.name}</h3>
+        <p class="text-[13.5px] text-[#52525B] leading-relaxed">{comparison.productB.whoShouldBuy}</p>
       </div>
     </section>
 
-    <!-- Dual Multi-Store Price Tables (Both products!) -->
-    <div class="grid grid-cols-1 gap-6">
+    <!-- Dual Price Tables -->
+    <div class="space-y-5">
       <PriceTable
         productName={comparison.productA.name}
         displayDate={comparison.displayDate}
@@ -293,7 +284,7 @@ const faqSchema = {
       />
     </div>
 
-    <!-- YouTube & Social Presence -->
+    <!-- Social / Video -->
     <SocialPresenceCard
       social={comparison.social}
       thumbnail={comparison.thumbnail}
@@ -302,13 +293,13 @@ const faqSchema = {
 
     <!-- FAQ -->
     {comparison.faqs.length > 0 && (
-      <section class="bg-white rounded-2xl border border-slate-900/10 p-6 sm:p-8 shadow-sm space-y-5">
-        <h2 class="text-xl font-extrabold text-slate-950">Sıkça Sorulan Sorular</h2>
-        <div class="space-y-4 divide-y divide-slate-100">
+      <section class="tactile-card p-6 sm:p-7 space-y-4">
+        <h2 class="text-[18px] font-semibold text-[#111111]">Sıkça Sorulan Sorular</h2>
+        <div class="divide-y divide-[#E4E4E7]">
           {comparison.faqs.map((faq) => (
-            <div class="pt-4 first:pt-0">
-              <h3 class="text-base font-bold text-slate-900">{faq.question}</h3>
-              <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">{faq.answer}</p>
+            <div class="py-4 first:pt-1 last:pb-0">
+              <h3 class="text-[15px] font-semibold text-[#111111]">{faq.question}</h3>
+              <p class="text-[13.5px] text-[#52525B] mt-1.5 leading-relaxed">{faq.answer}</p>
             </div>
           ))}
         </div>

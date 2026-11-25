@@ -1,37 +1,62 @@
 @import "tailwindcss";
 
 @theme {
-  --color-heg-slate: #DCE3EC;
-  --color-heg-slate-soft: #E6ECF3;
-  --color-heg-ink: #0B0B0D;
-  --color-heg-navy: #0B1120;
-  --color-heg-card: #111827;
-  --color-heg-card-alt: #1E293B;
-  --color-heg-blue: #03519F;
-  --color-heg-blue-bright: #0B6BCB;
-  --color-heg-yellow: #FAD002;
-  --color-heg-emerald: #10B981;
-  --color-heg-coral: #EF4444;
-  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --color-bg-canvas: #F4F4F5;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-subtle: #F9FAFB;
+  --color-border-default: #E4E4E7;
+  --color-border-strong: #D4D4D8;
+  --color-text-primary: #111111;
+  --color-text-secondary: #52525B;
+  --color-text-muted: #71717A;
+  --color-heg-yellow: #FBD101;
+  --color-heg-yellow-hover: #EAC200;
+  --color-heg-yellow-text: #1A1500;
+  --color-heg-blue: #0251A0;
+  --color-heg-blue-soft: #EBF3FC;
+  --color-heg-blue-border: #BDD6F2;
+  --color-heg-blue-text: #02458A;
+  --color-status-hot: #EF4444;
+  --color-status-yt: #FF0000;
+  --color-status-ig: #E1306C;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --bg-canvas: #F4F4F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F9FAFB;
+  --border-default: #E4E4E7;
+  --border-strong: #D4D4D8;
+  --text-primary: #111111;
+  --text-secondary: #52525B;
+  --text-muted: #71717A;
+  --accent-deal: #FBD101;
+  --accent-deal-hover: #EAC200;
+  --accent-deal-text: #1A1500;
+  --italian-blue: #0251A0;
+  --italian-blue-soft: #EBF3FC;
+  --italian-blue-border: #BDD6F2;
+  --italian-blue-text: #02458A;
+  --status-hot: #EF4444;
+  --youtube: #FF0000;
+  --instagram: #E1306C;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #DCE3EC;
-    color: #0B0B0D;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
 
   body {
     min-height: 100vh;
-    background-color: #DCE3EC;
-    background-image:
-      linear-gradient(to right, rgba(11, 17, 32, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(11, 17, 32, 0.03) 1px, transparent 1px);
-    background-size: 36px 36px;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
   }
 }
 
@@ -39,64 +64,359 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Signature HEG architectural slash accent echoing Banner A & B */
-.heg-hero-surface {
-  background:
-    radial-gradient(circle at 18% 20%, rgba(3, 81, 159, 0.28), transparent 46%),
-    radial-gradient(circle at 86% 78%, rgba(250, 208, 2, 0.14), transparent 42%),
-    linear-gradient(135deg, #070B14 0%, #0F172A 58%, #0B1324 100%);
-  position: relative;
-  overflow: hidden;
+/* Signature Tactile Bento Card */
+.tactile-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 16px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.heg-hero-surface::after {
-  content: "";
-  position: absolute;
-  top: -15%;
-  right: -6%;
-  width: 24%;
-  height: 140%;
-  background: linear-gradient(180deg, rgba(3, 81, 159, 0.26) 0%, rgba(3, 81, 159, 0.08) 100%);
-  border-left: 3px solid #FAD002;
-  transform: skewX(-12deg);
-  pointer-events: none;
+.tactile-card-hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
 }
 
-.heg-dark-card {
-  background: linear-gradient(180deg, #111827 0%, #0D1424 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 45px -24px rgba(11, 17, 32, 0.65);
+/* Segmented Pill Track (Swiss-Tech Nav & Filter Tabs) */
+.segmented {
+  display: inline-flex;
+  align-items: center;
+  background: #EAEAEF;
+  padding: 4px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-default);
+  gap: 2px;
 }
 
-.heg-white-card {
+.segmented a,
+.segmented button {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.segmented a:hover:not(.active),
+.segmented button:hover:not(.active) {
+  color: var(--text-primary);
+}
+
+.segmented a.active,
+.segmented button.active {
+  background: var(--bg-surface);
+  color: var(--italian-blue-text);
+  box-shadow: 0 1px 3px rgba(2, 81, 160, 0.12);
+  font-weight: 600;
+}
+
+/* Tactile Pill Buttons */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 9999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-pill:active {
+  transform: scale(0.98);
+}
+
+.btn-pill-primary {
+  background: #111111;
+  color: #FFFFFF;
+}
+
+.btn-pill-primary:hover {
+  background: #27272A;
+}
+
+.btn-pill-primary .arrow {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+
+.btn-pill-primary:hover .arrow {
+  transform: translate(2px, -2px);
+}
+
+.btn-pill-outline {
   background: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.09);
-  box-shadow: 0 12px 32px -18px rgba(15, 23, 42, 0.16);
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  color: #111111;
+  border-color: var(--border-default);
 }
 
-.heg-white-card:hover {
+.btn-pill-outline:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-subtle);
+}
+
+.btn-pill-deal {
+  background: var(--accent-deal);
+  color: var(--accent-deal-text);
+}
+
+.btn-pill-deal:hover {
+  background: var(--accent-deal-hover);
+}
+
+.btn-pill-video:hover {
+  color: var(--italian-blue);
+  border-color: var(--italian-blue-border);
+  background: var(--italian-blue-soft);
+}
+
+/* Tactile Badges */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.badge-deal {
+  background: var(--accent-deal);
+  color: var(--accent-deal-text);
+}
+
+.badge-blue {
+  background: var(--italian-blue-soft);
+  color: var(--italian-blue-text);
+  border: 1px solid var(--italian-blue-border);
+}
+
+.badge-neutral {
+  background: #F4F4F5;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+}
+
+.badge-hot {
+  background: #FEF2F2;
+  color: #B91C1C;
+  border: 1px solid #FECACA;
+}
+
+/* Pulsing HEG Yellow Live Dot */
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--accent-deal);
+  box-shadow: 0 0 0 3px rgba(251, 209, 1, 0.35);
+  display: inline-block;
+  animation: heg-pulse 2.2s infinite;
+}
+
+@keyframes heg-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(251, 209, 1, 0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(251, 209, 1, 0.12); }
+}
+
+/* Dot-Matrix & Hatched-Bar Chart Elements */
+.chart-canvas {
+  position: relative;
+  height: 178px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: 14px;
+  padding: 16px 16px 28px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.chart-col {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.dot-stack {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  align-items: center;
+}
+
+.dot-unit {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #18181B;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.dot-unit.accent {
+  background: #E5B800;
+}
+
+.chart-col:hover .dot-unit {
+  transform: scale(1.22);
+  background: var(--italian-blue);
+}
+
+.chart-col:hover .dot-unit.accent {
+  background: #E5B800;
+}
+
+.hatched-bar {
+  width: 72%;
+  border-radius: 6px 6px 2px 2px;
+  border: 1px solid #27272A;
+  background: repeating-linear-gradient(
+    -45deg,
+    #FFFFFF,
+    #FFFFFF 3px,
+    #E4E4E7 3px,
+    #E4E4E7 6px
+  );
+  transition: all 0.22s ease;
+}
+
+.hatched-bar.peak {
+  border-color: #9A7400;
+  background: repeating-linear-gradient(
+    -45deg,
+    #FEFCE8,
+    #FEFCE8 3px,
+    #FBD101 3px,
+    #FBD101 6px
+  );
+}
+
+.chart-col:hover .hatched-bar:not(.peak) {
   transform: translateY(-3px);
-  border-color: rgba(3, 81, 159, 0.35);
-  box-shadow: 0 22px 42px -20px rgba(3, 81, 159, 0.22);
+  border-color: var(--italian-blue);
+  background: repeating-linear-gradient(
+    -45deg,
+    #EEF4FF,
+    #EEF4FF 3px,
+    #C7DCFF 3px,
+    #C7DCFF 6px
+  );
 }
 
-.heg-stripe {
-  background: linear-gradient(90deg, #03519F 0%, #03519F 55%, #FAD002 55%, #FAD002 100%);
+.chart-col:hover .hatched-bar.peak {
+  transform: translateY(-3px);
 }
 
-/* Custom slim scrollbar */
+.chart-xlabel {
+  position: absolute;
+  bottom: -21px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* Barcode Sparkline Score Bars */
+.spark-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+.spark-bar {
+  width: 3px;
+  border-radius: 2px;
+  background: #D4D4D8;
+}
+
+.spark-bar.on {
+  background: #18181B;
+}
+
+.spark-bar.yellow {
+  background: #E5B800;
+}
+
+.spark-bar.blue {
+  background: var(--italian-blue);
+}
+
+.spark-bar.red {
+  background: var(--status-hot);
+}
+
+/* Expandable Editor Queue */
+.queue-item {
+  border: 1px solid var(--border-default);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--bg-subtle);
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.queue-item.expanded {
+  background: var(--bg-surface);
+  border-color: var(--border-strong);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.queue-item.approved {
+  border-color: #E5B800 !important;
+  box-shadow: 0 0 0 3px rgba(251, 209, 1, 0.45) !important;
+  background: #FFFBEB !important;
+}
+
+.queue-details {
+  display: none;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-default);
+}
+
+.queue-item.expanded .queue-details {
+  display: block;
+}
+
+/* Product Photo Clean Blending */
+.deal-photo {
+  mix-blend-mode: multiply;
+  transition: transform 0.28s ease;
+}
+
+/* Slim Swiss Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #DCE3EC;
+  background: #F4F4F5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #94A3B8;
+  background: #D4D4D8;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #03519F;
+  background: #71717A;
 }

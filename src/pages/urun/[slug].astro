@@ -18,8 +18,8 @@ export function getStaticPaths() {
 const { product } = Astro.props;
 const canonicalPath = `/urun/${product.slug}`;
 const fullUrl = new URL(canonicalPath, SITE.url).toString();
+const bestOffer = product.offers.find((o) => o.isLowest) || product.offers[0];
 
-// Rich Product + Review + Multi-Store Offers + FAQPage JSON-LD for Google SEO & AI Search Engines (GEO)
 const productSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -83,7 +83,7 @@ const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: SITE.url },
-    { '@type': 'ListItem', position: 2, name: 'Ürün Derecelendirme', item: `${SITE.url}/urunler` },
+    { '@type': 'ListItem', position: 2, name: 'İncelemeler', item: `${SITE.url}/urunler` },
     { '@type': 'ListItem', position: 3, name: product.name, item: fullUrl },
   ],
 };
@@ -98,113 +98,116 @@ const breadcrumbSchema = {
   activeNav="urunler"
   jsonLd={[productSchema, faqSchema, breadcrumbSchema]}
 >
-  <article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-    <!-- Breadcrumb + Transparency Metadata -->
-    <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-      <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-slate-500">
-        <a href="/" class="hover:text-[#03519F]">Ana Sayfa</a>
+  <article class="max-w-[1160px] mx-auto px-5 py-7 space-y-6">
+    <!-- Minimal Breadcrumb & Date Strip -->
+    <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
+      <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-[#71717A]">
+        <a href="/" class="hover:text-[#111111]">Radar</a>
         <span>/</span>
-        <a href="/urunler" class="hover:text-[#03519F]">Ürün Derecelendirme</a>
+        <a href="/urunler" class="hover:text-[#111111]">İncelemeler</a>
         <span>/</span>
-        <span class="text-slate-900 font-bold">{product.name}</span>
+        <span class="text-[#111111] font-medium">{product.name}</span>
       </nav>
       <div class="flex flex-wrap items-center gap-2">
-        <span class="bg-[#111827] text-[#FAD002] px-2.5 py-1 rounded-md font-bold">
-          📅 {product.displayDate} GÜNCEL
-        </span>
-        <span class="bg-white border border-slate-300 text-slate-700 px-2.5 py-1 rounded-md font-semibold">
-          🛡️ SPONSORLUK YOK • TARAFSIZ ANALİZ
-        </span>
+        <span class="badge-pill badge-neutral font-mono">📅 {product.displayDate}</span>
+        <span class="badge-pill badge-blue font-mono">%0 SPONSOR · TARAFSIZ ANALİZ</span>
       </div>
     </div>
 
-    <!-- Main Product Hero Panel -->
-    <header class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-      <!-- White Product Stage -->
-      <div class="lg:col-span-5 bg-white rounded-3xl border border-slate-900/10 p-6 sm:p-8 flex flex-col justify-between shadow-sm">
-        <div class="flex items-center justify-between gap-2 mb-4">
-          <span class="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">{product.brand} • {product.category}</span>
+    <!-- Bento Product Hero -->
+    <header class="grid grid-cols-1 lg:grid-cols-12 gap-[18px] items-stretch">
+      <!-- Left Photo Bento -->
+      <div class="lg:col-span-5 tactile-card p-6 flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span class="font-mono text-[11px] uppercase text-[#71717A]">{product.brand} · {product.category}</span>
           {product.social?.youtubeUrl ? (
-            <span class="text-[10px] font-mono font-extrabold bg-red-600 text-white px-2.5 py-1 rounded-md">▶ YOUTUBE + WEB</span>
+            <span class="badge-pill badge-blue font-mono">YOUTUBE + WEB</span>
           ) : (
-            <span class="text-[10px] font-mono font-extrabold bg-[#03519F] text-white px-2.5 py-1 rounded-md">✦ WEB-ÖZEL ANALİZ</span>
+            <span class="badge-pill badge-neutral font-mono">WEB-ÖZEL ANALİZ</span>
           )}
         </div>
 
-        <div class="aspect-[4/3] w-full flex items-center justify-center my-2">
-          <img src={product.image} alt={product.name} class="max-h-72 w-full object-contain" />
+        <div class="bg-[#F9FAFB] border border-[#E4E4E7] rounded-[14px] aspect-[4/3] flex items-center justify-center p-5">
+          <img src={product.image} alt={product.name} class="deal-photo max-h-full max-w-full object-contain" />
         </div>
 
         {product.reviewStats && (
-          <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-500">{product.reviewStats.source}</span>
-            <span class="font-mono font-extrabold text-slate-900">
-              ★ {product.reviewStats.rating}/5 ({product.reviewStats.count.toLocaleString('tr-TR')} Yorum)
-            </span>
+          <div class="mt-4 pt-3.5 border-t border-dashed border-[#E4E4E7] flex items-center justify-between text-xs text-[#52525B]">
+            <span>{product.reviewStats.source}</span>
+            <strong class="font-mono text-[#111111]">
+              ★ {product.reviewStats.rating}/5 ({product.reviewStats.count.toLocaleString('tr-TR')})
+            </strong>
           </div>
         )}
       </div>
 
-      <!-- Dark Telemetry & Answer-First TL;DR Panel -->
-      <div class="lg:col-span-7 heg-dark-card rounded-3xl p-6 sm:p-8 text-white flex flex-col justify-between space-y-6">
+      <!-- Right Summary & Price Bento -->
+      <div class="lg:col-span-7 tactile-card p-6 sm:p-7 flex flex-col justify-between gap-5">
         <div class="space-y-4">
           <VerdictBadge verdict={product.verdict} score={product.hegScore} size="lg" />
 
           <div>
-            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+            <h1 class="text-[26px] sm:text-[34px] font-semibold tracking-[-0.03em] leading-[1.15] text-[#111111]">
               {product.name}
             </h1>
-            <p class="text-sm text-slate-400 mt-1.5">{product.subtitle}</p>
+            <p class="text-[14px] text-[#52525B] mt-1">{product.subtitle}</p>
           </div>
 
-          <!-- Answer-First TL;DR Summary Box (Built for Humans & AI Citations) -->
-          <div class="bg-white/[0.06] border-l-4 border-[#FAD002] rounded-r-xl p-4 sm:p-5">
-            <div class="text-[10px] font-mono font-extrabold uppercase tracking-widest text-[#FAD002] mb-1.5">
+          <!-- Answer-First TL;DR Box -->
+          <div class="bg-[#F9FAFB] border border-[#E4E4E7] border-l-[3px] border-l-[#0251A0] rounded-r-[14px] p-4">
+            <div class="font-mono text-[10.5px] font-semibold uppercase tracking-[0.06em] text-[#02458A] mb-1">
               HEG ÖZET KARARI (TL;DR)
             </div>
-            <p class="text-sm text-slate-100 leading-relaxed">{product.tldr}</p>
+            <p class="text-[13.5px] text-[#111111] leading-relaxed">{product.tldr}</p>
           </div>
 
           {product.isFakeDealAlert && product.fakeDealReason && (
-            <div class="bg-red-500/15 border border-red-500/40 rounded-xl p-4 text-xs sm:text-sm text-red-200 leading-relaxed">
-              <strong class="text-red-400 font-mono uppercase block mb-1">⚠ SAHTE İNDİRİM / FİYAT UYARISI:</strong>
+            <div class="bg-[#FEF2F2] border border-[#FECACA] rounded-[14px] p-4 text-[13px] text-[#991B1B] leading-relaxed">
+              <strong class="font-mono text-[11px] uppercase block mb-1">⚠ SAHTE İNDİRİM / FİYAT UYARISI</strong>
               {product.fakeDealReason}
             </div>
           )}
         </div>
 
-        <!-- Bottom Price Highlight -->
-        <div class="pt-5 border-t border-white/10 flex flex-wrap items-end justify-between gap-4">
+        <!-- Price + Primary Black Pill CTA -->
+        <div class="pt-5 border-t border-[#E4E4E7] flex flex-wrap items-end justify-between gap-4">
           <div class="tabular-nums">
-            <div class="text-[11px] font-mono text-slate-400 uppercase">
-              {product.isFakeDealAlert ? 'GÜNCEL PİYASA SATIŞ FİYATI' : 'CANLI EN DİP FİYAT'}
+            <div class="font-mono text-[11px] text-[#71717A] uppercase">
+              {product.isFakeDealAlert ? 'GÜNCEL SATIŞ FİYATI' : 'CANLI EN DİP FİYAT'}
             </div>
-            <div class="flex items-baseline gap-3 mt-1">
-              <span class="font-mono font-extrabold text-3xl sm:text-4xl text-[#FAD002]">
+            <div class="flex items-baseline gap-2.5 mt-1 font-mono">
+              <span class="text-[32px] font-bold tracking-[-0.03em] text-[#111111] leading-none">
                 {formatTRY(product.currentLowestPrice)}
               </span>
               {product.listPrice > product.currentLowestPrice && (
-                <span class="font-mono text-base text-red-400 line-through">
+                <span class="text-[15px] text-[#71717A] line-through">
                   {formatTRY(product.listPrice)}
                 </span>
               )}
+              {!product.isFakeDealAlert && product.netSavings > 0 && (
+                <span class="badge-pill badge-deal font-mono">
+                  -{product.discountPercent}% · {formatTRY(product.netSavings)}
+                </span>
+              )}
             </div>
-            <p class="text-[11px] text-slate-400 mt-1">{product.priceNote}</p>
+            <p class="text-[11.5px] text-[#71717A] mt-1.5">{product.priceNote}</p>
           </div>
 
-          {product.netSavings > 0 && !product.isFakeDealAlert && (
-            <div class="bg-emerald-500/15 border border-emerald-500/40 rounded-xl px-4 py-2.5 text-right font-mono">
-              <div class="text-[10px] text-emerald-300 uppercase">SOMUT KAZANÇ</div>
-              <div class="text-lg font-extrabold text-emerald-400 tabular-nums">
-                {formatTRY(product.netSavings)} (-%{product.discountPercent})
-              </div>
-            </div>
+          {bestOffer && (
+            <a
+              href={`/git/${bestOffer.redirectSlug}`}
+              target="_blank"
+              rel={bestOffer.isAffiliate ? 'nofollow sponsored noopener noreferrer' : 'noopener noreferrer'}
+              class="btn-pill btn-pill-primary !py-3 !px-6"
+            >
+              {bestOffer.store}'da Gör <span class="arrow">↗</span>
+            </a>
           )}
         </div>
       </div>
     </header>
 
-    <!-- Multi-Store Live Price Table (Semantic HTML Table) -->
+    <!-- Multi-Store Live Price Table -->
     <PriceTable
       productName={product.name}
       displayDate={product.displayDate}
@@ -212,7 +215,7 @@ const breadcrumbSchema = {
       hasAffiliateLinks={product.hasAffiliateLinks}
     />
 
-    <!-- 5-Criteria HEG ScoreCard -->
+    <!-- 5-Criteria Sparkline ScoreCard -->
     <ScoreCard
       score={product.hegScore}
       verdict={product.verdict}
@@ -220,87 +223,86 @@ const breadcrumbSchema = {
       verdictHeadline={product.verdictHeadline}
     />
 
-    <!-- Pros & Cons + Who Should Buy / Skip -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-2xl border border-emerald-500/30 p-6 shadow-sm space-y-4">
-        <h2 class="text-base font-extrabold text-emerald-800 flex items-center gap-2">
-          <span class="w-6 h-6 rounded-md bg-emerald-100 text-emerald-700 inline-flex items-center justify-center font-mono text-xs">✓</span>
-          Güçlü Yönleri (Artılar)
-        </h2>
-        <ul class="space-y-2.5 text-sm text-slate-700">
+    <!-- Pros & Cons Bento -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-[18px]">
+      <div class="tactile-card p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-[16px] font-semibold text-[#111111]">Güçlü Yönleri (Artılar)</h2>
+          <span class="badge-pill badge-deal font-mono">✓ ARTI</span>
+        </div>
+        <ul class="space-y-2.5 text-[13.5px] text-[#52525B]">
           {product.pros.map((pro) => (
             <li class="flex items-start gap-2.5 leading-relaxed">
-              <span class="text-emerald-600 font-extrabold mt-0.5">✓</span>
+              <span class="font-mono font-bold text-[#111111] mt-0.5">+</span>
               <span>{pro}</span>
             </li>
           ))}
         </ul>
-        <div class="pt-4 border-t border-slate-100 text-xs text-slate-600 bg-emerald-50/70 rounded-xl p-3.5">
-          <strong class="text-emerald-900 block mb-1">Kimler Almalı?</strong>
+        <div class="pt-3.5 border-t border-dashed border-[#E4E4E7] text-xs text-[#52525B] bg-[#F9FAFB] rounded-[12px] p-3.5">
+          <strong class="text-[#111111] block mb-1">Kimler Almalı?</strong>
           {product.whoShouldBuy}
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl border border-red-500/30 p-6 shadow-sm space-y-4">
-        <h2 class="text-base font-extrabold text-red-800 flex items-center gap-2">
-          <span class="w-6 h-6 rounded-md bg-red-100 text-red-700 inline-flex items-center justify-center font-mono text-xs">✕</span>
-          Kritik Eksiler & Gerçek Şikayetler
-        </h2>
-        <ul class="space-y-2.5 text-sm text-slate-700">
+      <div class="tactile-card p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-[16px] font-semibold text-[#111111]">Kritik Eksiler & Gerçek Şikayetler</h2>
+          <span class="badge-pill badge-hot font-mono">✕ EKSİ</span>
+        </div>
+        <ul class="space-y-2.5 text-[13.5px] text-[#52525B]">
           {product.cons.map((con) => (
             <li class="flex items-start gap-2.5 leading-relaxed">
-              <span class="text-red-500 font-extrabold mt-0.5">✕</span>
+              <span class="font-mono font-bold text-[#EF4444] mt-0.5">−</span>
               <span>{con}</span>
             </li>
           ))}
         </ul>
-        <div class="pt-4 border-t border-slate-100 text-xs text-slate-600 bg-red-50/70 rounded-xl p-3.5">
-          <strong class="text-red-900 block mb-1">Kimler Uzak Durmalı?</strong>
+        <div class="pt-3.5 border-t border-dashed border-[#E4E4E7] text-xs text-[#52525B] bg-[#FEF2F2]/60 rounded-[12px] p-3.5">
+          <strong class="text-[#991B1B] block mb-1">Kimler Uzak Durmalı?</strong>
           {product.whoShouldSkip}
         </div>
       </div>
     </section>
 
     <!-- Technical Specs Semantic Table -->
-    <section class="bg-white rounded-2xl border border-slate-900/10 overflow-hidden shadow-sm">
-      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200">
-        <h2 class="text-base font-extrabold text-slate-900">Teknik Özellikler Tablosu — {product.name}</h2>
+    <section class="tactile-card overflow-hidden">
+      <div class="px-6 py-4 border-b border-[#E4E4E7] flex items-center justify-between">
+        <h2 class="text-[15px] font-semibold text-[#111111]">Teknik Özellikler — {product.name}</h2>
+        <span class="font-mono text-[11px] text-[#71717A]">DOĞRULANMIŞ VERİ</span>
       </div>
-      <table class="w-full text-left border-collapse text-sm">
-        <tbody class="divide-y divide-slate-100">
+      <table class="w-full text-left border-collapse text-[13.5px]">
+        <tbody class="divide-y divide-[#E4E4E7]">
           {product.specs.map((spec) => (
-            <tr class="hover:bg-slate-50">
-              <th class="py-3.5 px-6 w-1/3 font-mono text-xs uppercase tracking-wider text-slate-500 bg-slate-50/60">
+            <tr class="hover:bg-[#F9FAFB]">
+              <th class="py-3.5 px-6 w-1/3 font-mono text-[11.5px] uppercase tracking-[0.03em] text-[#71717A] bg-[#F9FAFB] font-medium">
                 {spec.label}
               </th>
-              <td class="py-3.5 px-6 font-medium text-slate-900">{spec.value}</td>
+              <td class="py-3.5 px-6 font-medium text-[#111111]">{spec.value}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </section>
 
-    <!-- YouTube & Instagram Cross-Links (Works cleanly with OR without video!) -->
+    <!-- YouTube & Social Presence -->
     <SocialPresenceCard
       social={product.social}
       thumbnail={product.slug === 'roborock-s8' ? '/images/thumbnails/roborock-s8-video.jpg' : product.slug === 'samsung-galaxy-z-fold-8' ? '/images/thumbnails/fold8-vs-duo.jpg' : undefined}
       itemTitle={product.name}
     />
 
-    <!-- FAQ Section (Directly feeds AI Search & Google Rich Snippets) -->
+    <!-- FAQ -->
     {product.faqs.length > 0 && (
-      <section class="bg-white rounded-2xl border border-slate-900/10 p-6 sm:p-8 shadow-sm space-y-5">
-        <div>
-          <div class="text-[11px] font-mono font-extrabold uppercase tracking-widest text-[#03519F]">
-            SIKÇA SORULAN SORULAR
-          </div>
-          <h2 class="text-xl font-extrabold text-slate-950 mt-0.5">{product.name} Hakkında Net Cevaplar</h2>
+      <section class="tactile-card p-6 sm:p-7 space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="badge-pill badge-neutral font-mono">SSS</span>
+          <h2 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111]">{product.name} Hakkında Net Cevaplar</h2>
         </div>
-        <div class="space-y-4 divide-y divide-slate-100">
+        <div class="divide-y divide-[#E4E4E7]">
           {product.faqs.map((faq) => (
-            <div class="pt-4 first:pt-0">
-              <h3 class="text-base font-bold text-slate-900">{faq.question}</h3>
-              <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">{faq.answer}</p>
+            <div class="py-4 first:pt-1 last:pb-0">
+              <h3 class="text-[15px] font-semibold text-[#111111]">{faq.question}</h3>
+              <p class="text-[13.5px] text-[#52525B] mt-1.5 leading-relaxed">{faq.answer}</p>
             </div>
           ))}
         </div>

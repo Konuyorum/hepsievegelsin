@@ -1,0 +1,27 @@
+---
+interface Props {
+  score: number; // 0-10
+  tone?: 'yellow' | 'blue' | 'neutral' | 'red';
+}
+
+const { score, tone = 'yellow' } = Astro.props;
+const filled = Math.round(score);
+const bars = Array.from({ length: 10 }, (_, idx) => {
+  const i = idx + 1;
+  const height = 6 + (i % 3) * 4 + (i > 6 ? 3 : 0);
+  let cls = 'spark-bar';
+  if (i <= filled) {
+    if (tone === 'red' && i > 4) cls += ' red';
+    else if (tone === 'yellow' && i > 7) cls += ' yellow';
+    else if (tone === 'blue' && i > 6) cls += ' blue';
+    else cls += ' on';
+  }
+  return { cls, height };
+});
+---
+
+<span class="spark-bars" aria-hidden="true">
+  {bars.map((b) => (
+    <span class={b.cls} style={`height: ${b.height}px;`}></span>
+  ))}
+</span>

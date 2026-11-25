@@ -8,56 +8,39 @@ import { SITE } from '../data/site';
   description="Hepsi Eve Gelsin (hepsievegelsin.com) KVKK aydınlatma metni, çerez ve gizlilik politikası, Ticaret Bakanlığı Reklam Kurulu satış ortaklığı (affiliate) şeffaflık kuralları."
   canonicalPath="/kvkk"
 >
-  <section class="heg-hero-surface text-white border-b border-white/10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-      <div class="text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#FAD002]">
-        YASAL UYUM & ŞEFFAFLIK
-      </div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold mt-2">
+  <div class="max-w-[900px] mx-auto px-5 py-9 space-y-6">
+    <header class="space-y-2">
+      <span class="badge-pill badge-neutral font-mono">YASAL UYUM · SON GÜNCELLEME: {SITE.lastUpdated.toUpperCase()}</span>
+      <h1 class="text-[28px] sm:text-[34px] font-semibold tracking-[-0.03em] text-[#111111]">
         KVKK, Gizlilik & Reklam Kurulu Şeffaflığı
       </h1>
-      <p class="text-slate-300 text-sm mt-2 font-mono">Son Güncelleme: {SITE.lastUpdated}</p>
-    </div>
-  </section>
+    </header>
 
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-    <section class="bg-white rounded-2xl border border-slate-900/10 p-6 sm:p-8 shadow-sm space-y-3">
-      <h2 class="text-xl font-extrabold text-slate-950">1. Ticaret Bakanlığı & Reklam Kurulu Satış Ortaklığı (Affiliate) Beyanı</h2>
-      <p class="text-sm text-slate-700 leading-relaxed">
-        <strong>Hepsi Eve Gelsin (hepsievegelsin.com)</strong> ve <strong>@hepsievegelsin</strong> YouTube/Instagram kanalları, bağımsız ürün inceleme, derecelendirme ve fiyat karşılaştırma içerikleri üretir. Hiçbir ürün incelemesi marka sponsorluğu ile yazılmaz veya puanlanmaz.
+    <section class="tactile-card p-6 sm:p-7 space-y-3">
+      <h2 class="text-[17px] font-semibold text-[#111111]">1. Ticaret Bakanlığı & Reklam Kurulu Satış Ortaklığı Beyanı</h2>
+      <p class="text-[13.5px] text-[#52525B] leading-relaxed">
+        <strong class="text-[#111111]">Hepsi Eve Gelsin (hepsievegelsin.com)</strong> ve <strong class="text-[#111111]">@hepsievegelsin</strong> YouTube/Instagram kanalları bağımsız ürün inceleme, derecelendirme ve fiyat karşılaştırma içerikleri üretir. Hiçbir ürün puanı marka sponsorluğu ile belirlenmez.
       </p>
-      <p class="text-sm text-slate-700 leading-relaxed">
-        Bununla birlikte, sitemizdeki bazı mağaza yönlendirme bağlantıları (örneğin Amazon Türkiye Gelir Ortaklığı — <code class="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded">{SITE.amazonTag}</code>, Hepsiburada veya Trendyol iş ortaklığı programları) üzerinden yapılan alışverişlerden platformumuza küçük bir komisyon aktarılabilir. Türkiye Ticaret Bakanlığı Reklam Kurulu mevzuatı uyarınca, komisyon içerebilen tüm bağlantılar açıkça <strong>#reklam / #işbirliği</strong> etiketiyle işaretlenir. Bu bağlantılar üzerinden alışveriş yapmanız ürün fiyatını hiçbir şekilde artırmaz.
+      <p class="text-[13.5px] text-[#52525B] leading-relaxed">
+        Bununla birlikte bazı mağaza bağlantıları (ör. Amazon TR Gelir Ortaklığı — <code class="font-mono text-xs bg-[#F4F4F5] px-1.5 py-0.5 rounded">{SITE.amazonTag}</code>) satış ortaklığı (affiliate) kapsamında olabileceğinden Türkiye Ticaret Bakanlığı Reklam Kurulu mevzuatı gereği <strong class="text-[#111111]">#reklam / #işbirliği</strong> etiketiyle işaretlenir. Bu bağlantılardan alışveriş yapmanız ürün fiyatını hiçbir şekilde artırmaz.
       </p>
     </section>
 
-    <section class="bg-white rounded-2xl border border-slate-900/10 p-6 sm:p-8 shadow-sm space-y-3">
-      <h2 class="text-xl font-extrabold text-slate-950">2. KVKK Aydınlatma Metni & Gizlilik Politikası</h2>
-      <p class="text-sm text-slate-700 leading-relaxed">
-        6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında, <strong>hepsievegelsin.com</strong> ziyaretçilerinden üyelik, kimlik bilgisi, telefon numarası veya ödeme bilgisi talep etmez ve saklamaz.
-      </p>
-      <ul class="list-disc pl-5 text-sm text-slate-700 space-y-1.5">
-        <li><strong>AI Asistan Sorguları:</strong> Arama kutusuna yazdığınız ürün isimleri yalnızca anlık analiz yanıtı üretmek amacıyla işlenir; kişisel kimliğinizle eşleştirilmez veya kalıcı veritabanına kaydedilmez.</li>
-        <li><strong>Üçüncü Taraf Mağaza Yönlendirmeleri:</strong> <code class="font-mono text-xs bg-slate-100 px-1 py-0.5 rounded">/git/</code> bağlantıları üzerinden Amazon TR, Hepsiburada, Trendyol gibi dış e-ticaret sitelerine geçtiğinizde ilgili platformun kendi gizlilik ve çerez politikası geçerli olur.</li>
-        <li><strong>Altyapı Güvenliği:</strong> Sitemiz Cloudflare küresel CDN ve SSL/TLS şifrelemesi altında barındırılmaktadır.</li>
-      </ul>
-    </section>
-
-    <section class="bg-white rounded-2xl border border-slate-900/10 p-6 sm:p-8 shadow-sm space-y-3">
-      <h2 class="text-xl font-extrabold text-slate-950">3. Kullanım Koşulları & Fiyat Güncelliği</h2>
-      <p class="text-sm text-slate-700 leading-relaxed">
-        Sitemizde paylaşılan tüm fiyatlar, kampanya oranları ve stok durumları belirtilen <strong>tarih damgası</strong> itibarıyla kontrol edilmiştir. E-ticaret platformları fiyatlarını dakikalar içinde değiştirebileceğinden satın alma öncesi nihai fiyatı ilgili mağazada teyit etmeniz önerilir. HEG analizleri ve yapay zeka önerileri tüketiciyi bilgilendirme amaçlıdır.
+    <section class="tactile-card p-6 sm:p-7 space-y-3">
+      <h2 class="text-[17px] font-semibold text-[#111111]">2. KVKK Aydınlatma Metni & Gizlilik</h2>
+      <p class="text-[13.5px] text-[#52525B] leading-relaxed">
+        6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında <strong class="text-[#111111]">hepsievegelsin.com</strong> ziyaretçilerinden üyelik, kimlik, telefon veya ödeme bilgisi talep etmez ve saklamaz. AI Asistan sorguları yalnızca anlık analiz üretmek için işlenir; dış mağaza yönlendirmelerinde ilgili e-ticaret sitesinin gizlilik politikası geçerlidir.
       </p>
     </section>
 
-    <section class="heg-dark-card rounded-2xl p-6 sm:p-8 text-white space-y-2">
-      <h2 class="text-lg font-extrabold text-[#FAD002]">İletişim & Düzeltme Talepleri</h2>
-      <p class="text-sm text-slate-300 leading-relaxed">
-        Hatalı bir fiyat, güncel olmayan teknik veri veya KVKK/yasal bildirim için bize doğrudan ulaşabilirsiniz:
+    <section class="tactile-card p-6 sm:p-7 space-y-2">
+      <h2 class="text-[17px] font-semibold text-[#111111]">3. İletişim & Düzeltme Talepleri</h2>
+      <p class="text-[13.5px] text-[#52525B]">
+        Fiyat güncellemesi, teknik veri düzeltmesi veya KVKK bildirimleri için:
       </p>
-      <div class="pt-2 font-mono text-sm space-y-1">
-        <div>E-posta: <a href={`mailto:${SITE.email}`} class="text-[#FAD002] underline">{SITE.email}</a></div>
-        <div>Alternatif: <a href={`mailto:${SITE.altEmail}`} class="text-slate-300 underline">{SITE.altEmail}</a></div>
+      <div class="pt-1 font-mono text-xs text-[#111111] space-y-1">
+        <div>E-posta: <a href={`mailto:${SITE.email}`} class="text-[#02458A] underline">{SITE.email}</a></div>
+        <div>Alternatif: <a href={`mailto:${SITE.altEmail}`} class="text-[#52525B] underline">{SITE.altEmail}</a></div>
       </div>
     </section>
   </div>

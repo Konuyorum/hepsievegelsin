@@ -3,16 +3,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSearchWidget from '../components/HeroSearchWidget.astro';
 import ProductCard from '../components/ProductCard.astro';
 import ComparisonCard from '../components/ComparisonCard.astro';
+import SparkBars from '../components/SparkBars.astro';
 import { getAllProducts, getAllComparisons, getLatestCatalog } from '../lib/content';
-import { SITE, formatTRY, CATALOG_STATUS_META } from '../data/site';
+import { SITE, formatTRY, VERDICT_META, CATALOG_STATUS_META } from '../data/site';
 
 const products = getAllProducts();
 const comparisons = getAllComparisons();
 const latestCatalog = getLatestCatalog();
 
-const heroComparison = comparisons[0];
+const topPicks = products.filter((p) => !p.isFakeDealAlert).slice(0, 3);
 const fakeDealAlerts = products.filter((p) => p.isFakeDealAlert);
-const topDeals = products.filter((p) => !p.isFakeDealAlert);
+const videoCount =
+  products.filter((p) => p.social?.youtubeUrl).length +
+  comparisons.filter((c) => c.social?.youtubeUrl).length;
 
 const websiteSchema = {
   '@context': 'https://schema.org',
@@ -27,280 +30,193 @@ const websiteSchema = {
     'query-input': 'required name=search_term_string',
   },
 };
+
+function catGroup(category: string): 'tech' | 'home' {
+  const lower = category.toLowerCase();
+  if (lower.includes('süpürge') || lower.includes('mutfak') || lower.includes('ev')) return 'home';
+  return 'tech';
+}
 ---
 
 <BaseLayout
-  title="HEG — Hepsi Eve Gelsin | Tarafsız Ürün Derecelendirme, Canlı Fiyat & HEG VS"
+  title="hepsievegelsin.com — Canlı Fırsat Radarı, Tarafsız Derecelendirme & HEG VS"
   description={SITE.description}
   canonicalPath="/"
   activeNav="home"
   jsonLd={websiteSchema}
 >
-  <!-- 1. ARCHITECTURAL HERO SECTION (50/50 Balance: Brand + AI Search | Featured VS) -->
-  <section class="heg-hero-surface text-white border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-        <!-- Left 7 Cols: Value Prop & Instant Search/VS -->
-        <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex flex-wrap items-center gap-2 bg-white/[0.07] border border-white/15 rounded-full px-3.5 py-1.5 text-[11px] font-mono">
-            <span class="text-[#FAD002] font-extrabold">GERÇEK İNDİRİM</span>
-            <span class="text-slate-500">•</span>
-            <span class="text-sky-300 font-bold">TARAFSIZ ANALİZ</span>
-            <span class="text-slate-500">•</span>
-            <span class="text-emerald-400 font-bold">NET KARAR</span>
-          </div>
-
-          <h1 class="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight leading-[1.08] text-white">
-            Gerçek indirimi sahte indirimden ayıran <span class="text-[#FAD002]">bağımsız</span> karar platformu.
-          </h1>
-
-          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
-            Marka sponsorluğu almadan; çoklu mağaza canlı fiyatları, teknik benchmark verileri ve binlerce gerçek kullanıcı yorumuyla ürünleri <strong class="text-white">10 üzerinden derecelendiriyor</strong>, gerektiğinde açıkça <strong class="text-red-400">"Alınmaz"</strong> diyoruz.
-          </p>
-
-          <!-- Unified Search & VS Widget -->
-          <HeroSearchWidget />
-
-          <!-- Trust Proof Metrics -->
-          <div class="grid grid-cols-3 gap-3 pt-2 max-w-xl">
-            <div class="bg-white/[0.04] border border-white/10 rounded-xl p-3">
-              <div class="font-mono font-extrabold text-lg text-[#FAD002] tabular-nums">4–5 Mağaza</div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Canlı Fiyat Tarama</div>
-            </div>
-            <div class="bg-white/[0.04] border border-white/10 rounded-xl p-3">
-              <div class="font-mono font-extrabold text-lg text-emerald-400 tabular-nums">%0 Sponsor</div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Tam Bağımsız Puan</div>
-            </div>
-            <div class="bg-white/[0.04] border border-white/10 rounded-xl p-3">
-              <div class="font-mono font-extrabold text-lg text-sky-300 tabular-nums">Web + YT</div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Çapraz Veri Merkezi</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right 5 Cols: Featured Flagship HEG VS Spotlight -->
-        {heroComparison && (
-          <div class="lg:col-span-5">
-            <div class="bg-[#0B1120]/90 backdrop-blur-xl border border-white/15 rounded-2xl overflow-hidden shadow-2xl">
-              <div class="px-5 py-3 bg-white/[0.04] border-b border-white/10 flex items-center justify-between text-[11px] font-mono">
-                <span class="text-[#FAD002] font-extrabold">🔥 ÖNE ÇIKAN HEG VS</span>
-                <span class="text-slate-400">📅 {heroComparison.displayDate}</span>
-              </div>
-
-              <a href={`/vs/${heroComparison.slug}`} class="block relative group overflow-hidden">
-                <img
-                  src={heroComparison.thumbnail}
-                  alt={heroComparison.title}
-                  class="w-full aspect-video object-cover group-hover:scale-[1.03] transition duration-500"
-                />
-              </a>
-
-              <div class="px-5 py-2.5 bg-[#070B14] border-y border-white/10 flex items-center justify-between font-mono text-xs font-extrabold">
-                <span class="text-slate-400">FİNAL SKOR</span>
-                <div>
-                  <span class="text-sky-300">{heroComparison.productA.shortName}</span>
-                  <span class="bg-[#03519F] text-white px-2 py-0.5 rounded mx-1 tabular-nums">{heroComparison.scoreA}</span>
-                  <span class="text-slate-500">–</span>
-                  <span class="bg-[#FAD002] text-[#0B0B0D] px-2 py-0.5 rounded mx-1 tabular-nums">{heroComparison.scoreB}</span>
-                  <span class="text-[#FAD002]">{heroComparison.productB.shortName}</span>
-                </div>
-              </div>
-
-              <div class="p-5 space-y-4">
-                <div>
-                  <h2 class="text-lg font-extrabold text-white leading-snug">
-                    <a href={`/vs/${heroComparison.slug}`} class="hover:text-[#FAD002] transition">
-                      {heroComparison.title}
-                    </a>
-                  </h2>
-                  <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
-                    {heroComparison.tldr}
-                  </p>
-                </div>
-
-                <div class="flex flex-wrap items-center gap-2.5">
-                  <a
-                    href={`/vs/${heroComparison.slug}`}
-                    class="flex-1 inline-flex items-center justify-center gap-2 bg-[#03519F] hover:bg-[#0B6BCB] text-white text-xs font-bold py-3 px-4 rounded-xl transition"
-                  >
-                    Raund Analizini Oku →
-                  </a>
-                  {heroComparison.social?.youtubeUrl && (
-                    <a
-                      href={heroComparison.social.youtubeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center justify-center gap-1.5 bg-red-600 hover:bg-red-500 text-white text-xs font-bold py-3 px-4 rounded-xl transition"
-                    >
-                      ▶ İzle
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. HEG VS COMPARISONS SECTION -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14">
-    <div class="flex flex-wrap items-end justify-between gap-4 mb-7">
+  <div class="max-w-[1240px] mx-auto px-5">
+    <!-- 1. PAGE INTRO HEADER + RANGE FILTER -->
+    <div class="flex flex-wrap items-end justify-between gap-4 pt-7 pb-5">
       <div>
-        <div class="text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#03519F]">
-          01 / BÖLÜNMÜŞ EKRAN KARŞILAŞTIRMA
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">
-          HEG VS — Raund Bazlı Kapışmalar
-        </h2>
-        <p class="text-sm text-slate-600 mt-1">
-          Karar aşamasındaki kullanıcılar için teknik benchmark, gerçek yorum ve canlı fiyat düelloları (YouTube & Web-Özel).
+        <h1 class="text-[28px] sm:text-[34px] font-semibold tracking-[-0.03em] leading-[1.15] text-[#111111]">
+          Günün Fırsat & Analiz Radarı
+        </h1>
+        <p class="text-[14px] text-[#52525B] mt-1">
+          {SITE.tagline} — Marka sponsorluğu olmadan doğrulanan dip fiyatlar, puanlamalar ve VS karşılaştırmaları.
         </p>
       </div>
-      <a href="/vs" class="text-sm font-bold text-[#03519F] hover:underline">
-        Tüm VS Analizleri →
-      </a>
-    </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {comparisons.map((comp) => <ComparisonCard comparison={comp} />)}
-    </div>
-  </section>
-
-  <!-- 3. INDEPENDENT PRODUCT RATINGS & VERIFIED DEALS -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-    <div class="flex flex-wrap items-end justify-between gap-4 mb-7">
-      <div>
-        <div class="text-xs font-mono font-extrabold uppercase tracking-[0.2em] text-[#03519F]">
-          02 / BAĞIMSIZ ÜRÜN DERECELENDİRME & FIRSATLAR
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">
-          HEG Puanlı İncelemeler & Canlı Fırsatlar
-        </h2>
-        <p class="text-sm text-slate-600 mt-1">
-          Yalnızca YouTube videolarımız değil — web platformumuza özel bağımsız 5 kriterli puanlamalar ve çoklu mağaza fiyat denetimleri.
-        </p>
+      <div class="segmented" id="rangeFilter">
+        <button class="active" data-range="today" type="button">Bugün</button>
+        <button data-range="7d" type="button">7 Gün</button>
+        <button data-range="30d" type="button">30 Gün</button>
       </div>
-      <a href="/urunler" class="text-sm font-bold text-[#03519F] hover:underline">
-        Tüm Derecelendirmeler ({products.length}) →
-      </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {topDeals.map((product) => <ProductCard product={product} />)}
+    <!-- 2. SLEEK TACTILE AI SEARCH & VS BAR -->
+    <div class="mb-5">
+      <HeroSearchWidget />
     </div>
-  </section>
 
-  <!-- 4. FAKE DEAL / "ALINMAZ" WARNING BAND (HEG SIGNATURE TRUST ANCHOR) -->
-  {fakeDealAlerts.length > 0 && (
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-      <div class="rounded-3xl bg-[#111827] border-2 border-red-500/40 overflow-hidden shadow-2xl">
-        <div class="bg-red-600/20 border-b border-red-500/30 px-6 sm:px-8 py-4 flex flex-wrap items-center justify-between gap-3">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-red-600 text-white font-extrabold text-sm">!</span>
-            <div>
-              <div class="text-[11px] font-mono font-extrabold uppercase tracking-widest text-red-400">
-                HEG SAHTE İNDİRİM & ALINMAZ RADARI
-              </div>
-              <h2 class="text-lg sm:text-xl font-extrabold text-white">
-                Her İndirimi Övmüyoruz — Uzak Durmanız Gerekenler
-              </h2>
+    <!-- 3. HERO BENTO GRID: LEFT RADAR + RIGHT EDITOR QUEUE -->
+    <section class="grid grid-cols-1 lg:grid-cols-[1.55fr_1fr] gap-[18px] mb-8">
+      <!-- Left Bento: Live Deal & Price Drop Radar -->
+      <div class="tactile-card p-[22px] flex flex-col justify-between">
+        <div>
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-[18px]">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-[14px] font-semibold text-[#111111]">Doğrulanan Fırsat & Veri Radarı</span>
+              <span class="badge-pill badge-deal font-mono">CANLI · {SITE.lastUpdated.toUpperCase()}</span>
+            </div>
+            <div class="segmented" id="chartMode">
+              <button class="active" data-mode="dots" type="button" title="Nokta Matrisi">Nokta</button>
+              <button data-mode="hatched" type="button" title="Taralı Bar">Bar</button>
             </div>
           </div>
-          <a href="/metodoloji" class="text-xs font-mono font-bold text-red-300 hover:text-white underline">
-            Sahte İndirimi Nasıl Yakalıyoruz?
-          </a>
-        </div>
 
-        <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          {fakeDealAlerts.map((alertItem) => (
-            <>
-              <div class="lg:col-span-4 bg-white rounded-2xl p-5 flex items-center justify-center">
-                <img src={alertItem.image} alt={alertItem.name} class="max-h-48 object-contain" />
+          <div class="grid grid-cols-1 sm:grid-cols-[215px_1fr] gap-6 items-stretch">
+            <!-- KPI Column -->
+            <div class="flex flex-col justify-between sm:border-r border-b sm:border-b-0 border-[#E4E4E7] pb-4 sm:pb-0 sm:pr-5">
+              <div>
+                <span class="font-mono text-[11px] text-[#71717A] uppercase">TARANAN AKTİF FIRSAT</span>
+                <div class="text-[54px] font-semibold tracking-[-0.04em] leading-none my-2 text-[#111111] tabular-nums" id="kpiCount">
+                  14
+                </div>
+                <span class="badge-pill badge-deal font-mono">↗ Ort. %21 Net İndirim</span>
               </div>
-              <div class="lg:col-span-8 space-y-4 text-white">
-                <div class="flex flex-wrap items-center gap-2.5">
-                  <span class="bg-red-600 text-white text-xs font-mono font-extrabold px-3 py-1 rounded-lg">
-                    ALINMAZ • {alertItem.hegScore.toFixed(1)}/10
+
+              <div class="mt-5 pt-3.5 border-t border-dashed border-[#E4E4E7] space-y-2.5 text-xs text-[#52525B]">
+                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
+                  <span>İnceleme</span>
+                  <strong class="font-mono text-[#111111]">{products.length} ürün · {comparisons.length} VS</strong>
+                </div>
+                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
+                  <span>Video Destekli</span>
+                  <strong class="font-mono text-[#02458A]">{videoCount} içerik</strong>
+                </div>
+                <div class="flex items-center justify-between gap-2 whitespace-nowrap">
+                  <span>Sponsorluk</span>
+                  <strong class="font-mono text-[#9A7400]">%0 Bağımsız</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Chart (Dot Matrix / Hatched Bar) -->
+            <div class="flex flex-col justify-between min-h-[218px] relative">
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <div class="flex items-center gap-3.5 text-[11px] font-mono text-[#71717A]">
+                  <span class="inline-flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#18181B]"></span> Fırsat
                   </span>
-                  <span class="text-xs font-mono text-slate-400">✦ HEG WEB-ÖZEL DENETİM • {alertItem.displayDate}</span>
+                  <span class="inline-flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#E5B800]"></span> Dip Fiyat
+                  </span>
                 </div>
-                <h3 class="text-2xl font-extrabold">{alertItem.name}</h3>
-                <p class="text-sm text-slate-300 leading-relaxed">
-                  {alertItem.fakeDealReason || alertItem.tldr}
-                </p>
-                <div class="flex flex-wrap items-center gap-4 pt-1">
-                  <div class="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 font-mono">
-                    <div class="text-[10px] text-slate-400">SÖZDE LİSTE → SATIŞ</div>
-                    <div class="text-sm font-extrabold">
-                      <span class="text-red-400 line-through mr-2">{formatTRY(alertItem.listPrice)}</span>
-                      <span class="text-white">{formatTRY(alertItem.currentLowestPrice)}</span>
-                    </div>
-                  </div>
-                  <a
-                    href={`/urun/${alertItem.slug}`}
-                    class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white text-xs font-extrabold px-5 py-3.5 rounded-xl transition"
-                  >
-                    Neden Alınmaz? Detaylı Kanıtı Gör →
-                  </a>
-                </div>
+                <span class="font-mono text-[11px] text-[#71717A]">SON 7 GÜN DÜŞÜŞ YOĞUNLUĞU</span>
               </div>
-            </>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
 
-  <!-- 5. WEEKLY SMART CATALOG PREVIEW (A101 / BİM / ŞOK / MİGROS) -->
-  {latestCatalog && (
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-      <div class="bg-white rounded-3xl border border-slate-900/10 shadow-sm overflow-hidden">
-        <div class="px-6 sm:px-8 py-6 bg-[#111827] text-white flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <div class="text-[11px] font-mono font-extrabold uppercase tracking-[0.2em] text-[#FAD002]">
-              03 / HAFTALIK AKILLI KATALOG ELEMESİ ({latestCatalog.weekLabel})
+              <div class="chart-canvas" id="chartCanvas">
+                <div
+                  id="chartTooltip"
+                  class="absolute top-2.5 left-3.5 bg-[#111111] text-white text-[11px] font-mono px-3 py-1 rounded-full pointer-events-none opacity-0 translate-y-1 transition-all duration-150 z-10 flex items-center gap-2"
+                ></div>
+              </div>
             </div>
-            <h2 class="text-2xl font-extrabold mt-1">A101 • BİM • ŞOK • Migros Fiyat Denetimi</h2>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
-              {latestCatalog.summary}
-            </p>
           </div>
-          <a
-            href="/katalog"
-            class="bg-[#FAD002] hover:bg-[#ffe03a] text-[#0B0B0D] text-xs font-extrabold px-5 py-3 rounded-xl transition shrink-0"
-          >
-            Tüm Katalog Elemesini Gör ({latestCatalog.items.length} Ürün) →
+        </div>
+
+        <div class="mt-4 pt-3.5 border-t border-[#E4E4E7] flex flex-wrap items-center justify-between gap-3 text-xs text-[#52525B]">
+          <span>
+            <strong class="text-[#111111]">Günün en büyük gerçek avantajı:</strong> Galaxy Z Fold 8 (31.550 ₺ net düşüş)
+          </span>
+          <a href="/urunler" class="btn-pill btn-pill-primary !py-1.5 !px-3.5 !text-xs">
+            Tüm Derecelendirmeler <span class="arrow">↗</span>
           </a>
         </div>
+      </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-          {latestCatalog.items.slice(0, 4).map((item) => {
-            const st = CATALOG_STATUS_META[item.status];
+      <!-- Right Bento: Expandable Editor Picks Queue -->
+      <div class="tactile-card p-[22px] flex flex-col">
+        <div class="flex items-center justify-between gap-2 mb-[16px]">
+          <div class="flex items-center gap-2">
+            <span class="text-[14px] font-semibold text-[#111111]">Editörün Seçimi</span>
+            <span class="badge-pill badge-blue font-mono">{topPicks.length} Doğrulandı</span>
+          </div>
+          <span class="font-mono text-[11px] text-[#71717A]">TIKLA & İNCELE</span>
+        </div>
+
+        <div class="flex flex-col gap-2.5 flex-1" id="editorQueue">
+          {topPicks.map((item, idx) => {
+            const bestOffer = item.offers.find((o) => o.isLowest) || item.offers[0];
             return (
-              <div class="p-5 flex flex-col justify-between gap-3 hover:bg-slate-50 transition">
-                <div>
-                  <div class="flex items-center justify-between gap-2 mb-2">
-                    <span class="text-xs font-mono font-extrabold bg-slate-900 text-white px-2.5 py-0.5 rounded">
-                      {item.market}
-                    </span>
-                    <span class={`text-[10px] font-mono font-extrabold px-2 py-0.5 rounded border ${st.bgClass} ${st.textClass} ${st.borderClass}`}>
-                      {st.label}
-                    </span>
-                  </div>
-                  <h3 class="text-sm font-extrabold text-slate-900 leading-snug">{item.name}</h3>
-                  <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">{item.verdictNote}</p>
+              <div class={`queue-item ${idx === 0 ? 'expanded' : ''}`} data-id={`HEG-0${idx + 1}`}>
+                <div class="flex items-center justify-between gap-2 mb-1.5">
+                  <span class="font-mono text-[11px] text-[#71717A] bg-white border border-[#E4E4E7] px-2 py-0.5 rounded-md">
+                    HEG-0{idx + 1} · {bestOffer.store.toUpperCase()}
+                  </span>
+                  <span class="badge-pill badge-deal font-mono">
+                    {item.discountPercent > 0 ? `-%${item.discountPercent}` : `${item.hegScore.toFixed(1)}/10`} · {VERDICT_META[item.verdict].shortLabel.toUpperCase()}
+                  </span>
                 </div>
 
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-mono tabular-nums">
-                  <div>
-                    <div class="text-[10px] text-slate-400">MARKET</div>
-                    <div class="font-extrabold text-slate-900">{formatTRY(item.marketPrice)}</div>
+                <div class="text-[14px] font-semibold text-[#111111]">{item.name}</div>
+                <div class="text-[12px] text-[#52525B] mt-0.5 line-clamp-1">{item.verdictHeadline}</div>
+
+                <div class="queue-details">
+                  <div class="flex items-baseline gap-2.5 mb-3 font-mono tabular-nums">
+                    <span class="text-[22px] font-bold tracking-[-0.02em] text-[#111111]">
+                      {formatTRY(item.currentLowestPrice)}
+                    </span>
+                    {item.listPrice > item.currentLowestPrice && (
+                      <span class="text-[13px] text-[#71717A] line-through">
+                        {formatTRY(item.listPrice)}
+                      </span>
+                    )}
+                    <span class="text-[11px] font-semibold text-[#02458A] ml-auto">
+                      HEG {item.hegScore.toFixed(1)}/10
+                    </span>
                   </div>
-                  <div class="text-right">
-                    <div class="text-[10px] text-slate-400">ONLİNE TABAN</div>
-                    <div class="font-extrabold text-[#03519F]">{formatTRY(item.onlinePrice)}</div>
+
+                  <div class="flex flex-wrap items-center gap-2">
+                    <a
+                      href={`/git/${bestOffer.redirectSlug}`}
+                      target="_blank"
+                      rel={bestOffer.isAffiliate ? 'nofollow sponsored noopener noreferrer' : 'noopener noreferrer'}
+                      class="btn-pill btn-pill-primary !py-1.5 !px-3.5 !text-xs"
+                    >
+                      Fırsata Git <span class="arrow">↗</span>
+                    </a>
+                    <a href={`/urun/${item.slug}`} class="btn-pill btn-pill-outline !py-1.5 !px-3 !text-xs">
+                      Karne
+                    </a>
+                    {item.social?.youtubeUrl && (
+                      <a
+                        href={item.social.youtubeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-pill btn-pill-outline btn-pill-video !py-1.5 !px-3 !text-xs"
+                      >
+                        ▶ YT
+                      </a>
+                    )}
+                    <button
+                      class="btn-pill btn-pill-outline !py-1.5 !px-3 !text-xs save-btn ml-auto"
+                      type="button"
+                      data-name={item.name}
+                    >
+                      ✓ Kaydet
+                    </button>
                   </div>
                 </div>
               </div>
@@ -309,34 +225,393 @@ const websiteSchema = {
         </div>
       </div>
     </section>
-  )}
 
-  <!-- 6. TRANSPARENCY, METHODOLOGY & AI CITATION AUTHORITY STRIP -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="heg-white-card rounded-2xl p-6 space-y-2.5">
-        <div class="w-10 h-10 rounded-xl bg-[#03519F]/10 text-[#03519F] flex items-center justify-center font-mono font-extrabold text-lg">01</div>
-        <h3 class="text-base font-extrabold text-slate-950">%100 Tarafsız & Sponsorluksuz Puan</h3>
-        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-          Hiçbir markadan inceleme ücreti almıyoruz. Beş sabit kriterle hesaplanan HEG Puanı, gerçek kullanıcı şikayetlerini saklamadan paylaşır.
-        </p>
+    <!-- 4. SEÇİLMİŞ FIRSATLAR & BAĞIMSIZ DERECELENDİRMELER GRID -->
+    <section id="firsatlar" class="mb-9">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <div>
+          <h2 class="text-[20px] font-semibold tracking-[-0.02em] text-[#111111]">
+            Seçilmiş Fırsatlar & Bağımsız Derecelendirmeler
+          </h2>
+          <p class="text-xs text-[#52525B] mt-0.5">
+            Hem YouTube incelemelerimiz hem de web sitemize özel 5 kriterli bağımsız puanlamalar.
+          </p>
+        </div>
+
+        <div class="segmented overflow-x-auto max-w-full" id="homeCatFilter">
+          <button class="active" data-cat="all" type="button">Tümü ({products.length})</button>
+          <button data-cat="tech" type="button">Teknoloji</button>
+          <button data-cat="home" type="button">Ev & Yaşam</button>
+          <button data-cat="web" type="button">Sadece Web</button>
+          <button data-cat="alert" type="button">⚠ Alınmaz</button>
+        </div>
       </div>
 
-      <div class="heg-white-card rounded-2xl p-6 space-y-2.5">
-        <div class="w-10 h-10 rounded-xl bg-[#FAD002]/25 text-[#0B0B0D] flex items-center justify-center font-mono font-extrabold text-lg">02</div>
-        <h3 class="text-base font-extrabold text-slate-950">YouTube + Instagram + Bağımsız Web</h3>
-        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-          Videolu analizlerimizde zaman damgalı YouTube oynatıcıları yer alırken, videosu olmayan onlarca ürün de sitede bağımsız karneyle yayınlanır.
-        </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[18px]" id="homeDealsGrid">
+        {products.map((product) => (
+          <div
+            class="home-deal-item"
+            data-cat={catGroup(product.category)}
+            data-web={product.social?.youtubeUrl ? 'false' : 'true'}
+            data-alert={product.isFakeDealAlert ? 'true' : 'false'}
+          >
+            <ProductCard product={product} />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 5. WORKFLOWS STYLE COMPARISON TABLE + HEG VS CARDS -->
+    <section id="karsilastirma" class="mb-9 space-y-5">
+      <div class="tactile-card p-[22px]">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div class="flex items-center gap-2.5 flex-wrap">
+            <h2 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111]">
+              HEG Puan Tablosu: Karşılaştırmalı Özet
+            </h2>
+            <span class="badge-pill badge-blue font-mono">{products.length} MODEL DOĞRULANDI</span>
+          </div>
+          <a href="/vs" class="btn-pill btn-pill-outline !py-1.5 !px-3.5 !text-xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#FF0000]"></span>
+            Tüm HEG VS Karşılaştırmaları ↗
+          </a>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[#E4E4E7] text-[11px] font-mono uppercase tracking-[0.04em] text-[#71717A]">
+                <th class="py-2.5 px-3.5 font-semibold">Model & Özet</th>
+                <th class="py-2.5 px-3.5 font-semibold">HEG Skoru</th>
+                <th class="py-2.5 px-3.5 font-semibold">Karar</th>
+                <th class="py-2.5 px-3.5 font-semibold">En İyi Fiyat</th>
+                <th class="py-2.5 px-3.5 text-right font-semibold">Aksiyon</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#E4E4E7] text-[13.5px]">
+              {products.map((p) => {
+                const vm = VERDICT_META[p.verdict];
+                const best = p.offers.find((o) => o.isLowest) || p.offers[0];
+                const tone = p.isFakeDealAlert ? 'red' : p.hegScore >= 8.9 ? 'yellow' : 'blue';
+                return (
+                  <tr class="hover:bg-[#F9FAFB] transition">
+                    <td class="py-3.5 px-3.5">
+                      <a href={`/urun/${p.slug}`} class="font-semibold text-[#111111] hover:text-[#0251A0] transition">
+                        {p.name}
+                      </a>
+                      <div class="text-xs text-[#52525B] mt-0.5 line-clamp-1">{p.subtitle}</div>
+                    </td>
+                    <td class="py-3.5 px-3.5 font-mono whitespace-nowrap">
+                      <span class="mr-2.5">
+                        <SparkBars score={p.hegScore} tone={tone} />
+                      </span>
+                      <strong class="text-[#111111] tabular-nums">{p.hegScore.toFixed(1)}</strong>
+                      <span class="text-[#71717A]">/10</span>
+                    </td>
+                    <td class="py-3.5 px-3.5 whitespace-nowrap">
+                      <span class={`badge-pill font-mono ${vm.badgeClass}`}>{vm.label}</span>
+                    </td>
+                    <td class="py-3.5 px-3.5 font-mono font-bold text-[#111111] whitespace-nowrap tabular-nums">
+                      {formatTRY(p.currentLowestPrice)}
+                    </td>
+                    <td class="py-3.5 px-3.5 text-right whitespace-nowrap">
+                      <div class="inline-flex items-center gap-1.5">
+                        <a href={`/urun/${p.slug}`} class="btn-pill btn-pill-outline !py-1.5 !px-3 !text-xs">
+                          İncele
+                        </a>
+                        <a
+                          href={`/git/${best.redirectSlug}`}
+                          target="_blank"
+                          rel={best.isAffiliate ? 'nofollow sponsored noopener noreferrer' : 'noopener noreferrer'}
+                          class={p.hegScore >= 8.9 ? 'btn-pill btn-pill-primary !py-1.5 !px-3.5 !text-xs' : 'btn-pill btn-pill-outline !py-1.5 !px-3.5 !text-xs'}
+                        >
+                          Fırsata Git <span class="arrow">↗</span>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div class="heg-white-card rounded-2xl p-6 space-y-2.5">
-        <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-700 flex items-center justify-center font-mono font-extrabold text-lg">03</div>
-        <h3 class="text-base font-extrabold text-slate-950">Açık Veri & AI Arama Standardı</h3>
-        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-          Tarih damgalı semantik fiyat tablolarımız, Schema.org verilerimiz ve <a href="/llms.txt" class="font-mono text-[#03519F] underline">/llms.txt</a> indeksimizle hem Google hem yapay zeka asistanları için doğrulanmış kaynağız.
-        </p>
+      <!-- Visual 2-Column HEG VS Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[18px]">
+        {comparisons.map((comp) => <ComparisonCard comparison={comp} />)}
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- 6. MINIMAL TACTILE FAKE-DEAL / "ALINMAZ" ALERT CARD -->
+    {fakeDealAlerts.length > 0 && (
+      <section class="mb-9">
+        {fakeDealAlerts.map((alertItem) => (
+          <div class="tactile-card !border-[#FECACA] p-5 sm:p-6 flex flex-col md:flex-row items-center gap-6">
+            <div class="w-full md:w-44 h-36 bg-[#F9FAFB] border border-[#E4E4E7] rounded-[14px] p-3 flex items-center justify-center shrink-0">
+              <img src={alertItem.image} alt={alertItem.name} class="deal-photo max-h-full max-w-full object-contain" />
+            </div>
+            <div class="flex-1 space-y-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="badge-pill badge-hot font-mono">SAHTE İNDİRİM RADARI · ALINMAZ ({alertItem.hegScore.toFixed(1)}/10)</span>
+                <span class="font-mono text-[11px] text-[#71717A]">{alertItem.displayDate}</span>
+              </div>
+              <h3 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111]">
+                {alertItem.name} — {alertItem.verdictHeadline}
+              </h3>
+              <p class="text-[13px] text-[#52525B] leading-relaxed">
+                {alertItem.fakeDealReason || alertItem.tldr}
+              </p>
+            </div>
+            <div class="flex flex-col sm:flex-row md:flex-col items-stretch sm:items-end gap-2.5 shrink-0 w-full md:w-auto">
+              <div class="text-left md:text-right font-mono tabular-nums">
+                <span class="text-xs text-[#71717A] line-through mr-1.5">{formatTRY(alertItem.listPrice)}</span>
+                <span class="text-lg font-bold text-[#111111]">{formatTRY(alertItem.currentLowestPrice)}</span>
+              </div>
+              <a href={`/urun/${alertItem.slug}`} class="btn-pill btn-pill-primary !py-2 !px-4 !text-xs">
+                Kanıtı İncele <span class="arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </section>
+    )}
+
+    <!-- 7. WEEKLY SMART CATALOG PREVIEW BENTO -->
+    {latestCatalog && (
+      <section class="mb-9">
+        <div class="tactile-card p-[22px]">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <h2 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111]">
+                Akıllı Katalog Elemesi: A101 · BİM · ŞOK · Migros
+              </h2>
+              <span class="badge-pill badge-neutral font-mono">{latestCatalog.weekLabel}</span>
+            </div>
+            <a href="/katalog" class="btn-pill btn-pill-outline !py-1.5 !px-3.5 !text-xs">
+              Tüm {latestCatalog.items.length} Ürünü Gör ↗
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {latestCatalog.items.slice(0, 4).map((item) => {
+              const st = CATALOG_STATUS_META[item.status];
+              return (
+                <div class="rounded-[14px] bg-[#F9FAFB] border border-[#E4E4E7] p-4 flex flex-col justify-between gap-3">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                      <span class="font-mono text-[11px] font-bold text-[#111111] bg-white border border-[#E4E4E7] px-2 py-0.5 rounded-md">
+                        {item.market}
+                      </span>
+                      <span class={`badge-pill font-mono !text-[10px] ${st.badgeClass}`}>
+                        {st.label}
+                      </span>
+                    </div>
+                    <h3 class="text-[13.5px] font-semibold text-[#111111] leading-snug">{item.name}</h3>
+                    <p class="text-[12px] text-[#52525B] mt-1 line-clamp-2">{item.verdictNote}</p>
+                  </div>
+                  <div class="pt-2.5 border-t border-dashed border-[#E4E4E7] flex items-center justify-between font-mono text-xs tabular-nums">
+                    <div>
+                      <span class="block text-[10px] text-[#71717A]">MARKET</span>
+                      <strong class="text-[#111111]">{formatTRY(item.marketPrice)}</strong>
+                    </div>
+                    <div class="text-right">
+                      <span class="block text-[10px] text-[#71717A]">ONLİNE</span>
+                      <strong class="text-[#02458A]">{formatTRY(item.onlinePrice)}</strong>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- 8. YOUTUBE & INSTAGRAM SOCIAL GROWTH BRIDGE (Exact Bento Aesthetic) -->
+    <section id="sosyal" class="grid grid-cols-1 md:grid-cols-2 gap-[18px]">
+      <div class="tactile-card p-6 flex items-center justify-between gap-5">
+        <div>
+          <span class="badge-pill badge-neutral font-mono">
+            <span class="w-[7px] h-[7px] rounded-full bg-[#FF0000]"></span>
+            YOUTUBE KANALI · {SITE.social.youtubeHandle}
+          </span>
+          <h3 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111] mt-2.5 mb-1.5">
+            Detaylı Testler & HEG VS Karşılaştırmalar
+          </h3>
+          <p class="text-[13px] text-[#52525B] mb-4 max-w-[360px] leading-relaxed">
+            Ürünü almadan önce gerçek benchmark ve fiyat geçmişi analizlerini izle. Her hafta tarafsız kıyaslamalar ve akıllı katalog elemeleri.
+          </p>
+          <a href={SITE.social.youtubeUrl} target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-primary">
+            YouTube'da Abone Ol <span class="arrow">↗</span>
+          </a>
+        </div>
+
+        <div class="hidden sm:grid w-[112px] h-[86px] rounded-[14px] bg-[#F9FAFB] border border-[#E4E4E7] place-items-center shrink-0" aria-hidden="true">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+            <rect width="42" height="42" rx="12" fill="#111111" />
+            <path d="M17.5 15L27 21L17.5 27V15Z" fill="#FBD101" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="tactile-card p-6 flex items-center justify-between gap-5">
+        <div>
+          <span class="badge-pill badge-neutral font-mono">
+            <span class="w-[7px] h-[7px] rounded-full bg-[#E1306C]"></span>
+            INSTAGRAM · {SITE.social.instagramHandle}
+          </span>
+          <h3 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111] mt-2.5 mb-1.5">
+            Anlık Dip Fiyatlar & 45 Sn Shorts
+          </h3>
+          <p class="text-[13px] text-[#52525B] mb-4 max-w-[360px] leading-relaxed">
+            Yalnızca birkaç saat süren gerçek indirimleri ve hızlı ürün karar damgalarını kaçırmamak için takip et.
+          </p>
+          <a href={SITE.social.instagramUrl} target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-outline">
+            Instagram'da Takip Et ↗
+          </a>
+        </div>
+
+        <div class="hidden sm:grid w-[112px] h-[86px] rounded-[14px] bg-[#F9FAFB] border border-[#E4E4E7] place-items-center shrink-0" aria-hidden="true">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+            <rect width="42" height="42" rx="12" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5" />
+            <rect x="12" y="12" width="18" height="18" rx="5" stroke="#111111" stroke-width="2" />
+            <circle cx="21" cy="21" r="4" stroke="#111111" stroke-width="2" />
+            <circle cx="26.5" cy="15.5" r="1.4" fill="#E1306C" />
+          </svg>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // 1. Interactive Dot-Matrix & Hatched-Bar Chart
+    const chartData = [
+      { day: 'Pzt', deals: 6, dip: 2, avg: '%18', peak: false },
+      { day: 'Sal', deals: 8, dip: 3, avg: '%22', peak: false },
+      { day: 'Çar', deals: 5, dip: 1, avg: '%16', peak: false },
+      { day: 'Per', deals: 10, dip: 4, avg: '%30', peak: true },
+      { day: 'Cum', deals: 9, dip: 3, avg: '%26', peak: false },
+      { day: 'Cmt', deals: 7, dip: 2, avg: '%21', peak: false },
+      { day: 'Paz', deals: 11, dip: 5, avg: '%32', peak: true },
+    ];
+
+    let currentMode = 'dots';
+    const canvas = document.getElementById('chartCanvas');
+    const tooltip = document.getElementById('chartTooltip');
+
+    function renderChart() {
+      if (!canvas) return;
+      canvas.querySelectorAll('.chart-col').forEach((el) => el.remove());
+
+      chartData.forEach((item) => {
+        const col = document.createElement('div');
+        col.className = 'chart-col';
+
+        if (currentMode === 'dots') {
+          const stack = document.createElement('div');
+          stack.className = 'dot-stack';
+          for (let i = 0; i < item.deals; i++) {
+            const d = document.createElement('span');
+            d.className = 'dot-unit' + (i >= item.deals - item.dip ? ' accent' : '');
+            stack.appendChild(d);
+          }
+          col.appendChild(stack);
+        } else {
+          const bar = document.createElement('div');
+          bar.className = 'hatched-bar' + (item.peak ? ' peak' : '');
+          bar.style.height = `${item.deals * 11}px`;
+          col.appendChild(bar);
+        }
+
+        const label = document.createElement('span');
+        label.className = 'chart-xlabel font-mono';
+        label.textContent = item.day;
+        col.appendChild(label);
+
+        col.addEventListener('mouseenter', () => {
+          if (!tooltip) return;
+          tooltip.innerHTML = `<span>${item.day}</span> · <strong>${item.deals} fırsat</strong> · <span style="color:#FBD101;">Ort. ${item.avg}</span>`;
+          tooltip.classList.remove('opacity-0', 'translate-y-1');
+          tooltip.classList.add('opacity-100', 'translate-y-0');
+        });
+        col.addEventListener('mouseleave', () => {
+          if (!tooltip) return;
+          tooltip.classList.add('opacity-0', 'translate-y-1');
+          tooltip.classList.remove('opacity-100', 'translate-y-0');
+        });
+
+        canvas.appendChild(col);
+      });
+    }
+
+    document.querySelectorAll('#chartMode button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#chartMode button').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentMode = btn.getAttribute('data-mode') || 'dots';
+        renderChart();
+      });
+    });
+
+    // 2. Range Filter KPI Counter
+    const kpiCounts: Record<string, string> = { today: '14', '7d': '56', '30d': '218' };
+    document.querySelectorAll('#rangeFilter button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#rangeFilter button').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const kpi = document.getElementById('kpiCount');
+        const range = btn.getAttribute('data-range') || 'today';
+        if (kpi && kpiCounts[range]) kpi.textContent = kpiCounts[range];
+      });
+    });
+
+    // 3. Editor Queue Accordion + Tactile Yellow Glow Save Effect
+    document.querySelectorAll('.queue-item').forEach((item) => {
+      item.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('a') || target.closest('button')) return;
+        document.querySelectorAll('.queue-item').forEach((i) => i.classList.remove('expanded'));
+        item.classList.add('expanded');
+      });
+    });
+
+    document.querySelectorAll('.save-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const card = btn.closest('.queue-item');
+        const name = btn.getAttribute('data-name') || 'Fırsat';
+        card?.classList.add('approved');
+        btn.textContent = '✓ Kaydedildi';
+        btn.classList.remove('btn-pill-outline');
+        btn.classList.add('btn-pill-deal');
+        if ((window as any).showHegToast) {
+          (window as any).showHegToast(`${name} kaydedildi`);
+        }
+        setTimeout(() => card?.classList.remove('approved'), 1400);
+      });
+    });
+
+    // 4. Category Segmented Filter
+    document.querySelectorAll('#homeCatFilter button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#homeCatFilter button').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-cat') || 'all';
+        document.querySelectorAll('.home-deal-item').forEach((el) => {
+          const itemCat = el.getAttribute('data-cat');
+          const isWeb = el.getAttribute('data-web') === 'true';
+          const isAlert = el.getAttribute('data-alert') === 'true';
+          const show =
+            cat === 'all' ||
+            (cat === 'web' && isWeb) ||
+            (cat === 'alert' && isAlert) ||
+            itemCat === cat;
+          el.classList.toggle('hidden', !show);
+        });
+      });
+    });
+
+    renderChart();
+  </script>
 </BaseLayout>

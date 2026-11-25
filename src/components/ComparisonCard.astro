@@ -1,6 +1,7 @@
 ---
 import type { ComparisonArticle } from '../lib/types';
 import { formatTRY } from '../data/site';
+import SparkBars from './SparkBars.astro';
 
 interface Props {
   comparison: ComparisonArticle;
@@ -10,85 +11,100 @@ const { comparison } = Astro.props;
 const hasYoutube = Boolean(comparison.social?.youtubeUrl);
 ---
 
-<article class="heg-dark-card rounded-2xl overflow-hidden flex flex-col h-full group text-white hover:border-[#FAD002]/45 transition">
-  <!-- Top Visual Header -->
-  <a href={`/vs/${comparison.slug}`} class="relative block aspect-[16/9] overflow-hidden bg-[#070B14]">
+<article class="tactile-card tactile-card-hover overflow-hidden flex flex-col h-full group">
+  <!-- Clean Media Header -->
+  <a href={`/vs/${comparison.slug}`} class="relative block aspect-[16/9] overflow-hidden bg-[#F9FAFB] border-b border-[#E4E4E7]">
     <img
       src={comparison.thumbnail}
       alt={comparison.title}
       loading="lazy"
-      class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+      class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-500"
     />
-    <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-transparent"></div>
-
-    <!-- Top Badges -->
     <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
-      <span class="text-[11px] font-mono font-extrabold bg-[#FAD002] text-[#0B0B0D] px-2.5 py-1 rounded-lg shadow">
+      <span class="badge-pill badge-deal font-mono shadow-sm">
         {comparison.hookBadge}
       </span>
       {hasYoutube ? (
-        <span class="text-[10px] font-mono font-bold bg-red-600/95 text-white px-2.5 py-1 rounded-lg shadow">
-          ▶ YOUTUBE + WEB
+        <span class="badge-pill bg-white/95 text-[#111111] border border-[#E4E4E7] font-mono shadow-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#FF0000]"></span>
+          YOUTUBE + WEB
         </span>
       ) : (
-        <span class="text-[10px] font-mono font-bold bg-[#03519F] text-white px-2.5 py-1 rounded-lg shadow">
-          ✦ WEB-ÖZEL VS
+        <span class="badge-pill badge-blue font-mono shadow-sm">
+          WEB-ÖZEL VS
         </span>
       )}
     </div>
   </a>
 
-  <!-- Dedicated Live Scoreboard Strip (Zero Thumbnail Overlap!) -->
-  <div class="bg-[#070B14] border-y border-white/10 px-5 py-2.5 flex items-center justify-center">
-    <div class="inline-flex items-center gap-2 text-xs font-mono font-extrabold">
-      <span class="text-sky-300">{comparison.productA.shortName}</span>
-      <span class="bg-[#03519F] text-white px-2 py-0.5 rounded tabular-nums">{comparison.scoreA}</span>
-      <span class="text-slate-500">VS</span>
-      <span class="bg-[#FAD002] text-[#0B0B0D] px-2 py-0.5 rounded tabular-nums">{comparison.scoreB}</span>
-      <span class="text-[#FAD002]">{comparison.productB.shortName}</span>
+  <!-- Crisp Scoreboard Strip (Zero overlap!) -->
+  <div class="px-5 py-2.5 bg-[#F9FAFB] border-b border-[#E4E4E7] flex items-center justify-between gap-2 font-mono text-xs">
+    <span class="text-[#71717A] uppercase text-[10.5px]">RAUND SKORU</span>
+    <div class="flex items-center gap-2 font-bold">
+      <span class="text-[#02458A]">{comparison.productA.shortName}</span>
+      <span class="bg-[#111111] text-white px-2 py-0.5 rounded-full tabular-nums">{comparison.scoreA}</span>
+      <span class="text-[#71717A]">–</span>
+      <span class="bg-[#FBD101] text-[#1A1500] px-2 py-0.5 rounded-full tabular-nums">{comparison.scoreB}</span>
+      <span class="text-[#111111]">{comparison.productB.shortName}</span>
     </div>
   </div>
 
-  <!-- Content Body -->
-  <div class="p-6 flex flex-col flex-1">
-    <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-2">
-      <span>{comparison.category.toUpperCase()}</span>
-      <span>📅 {comparison.displayDate}</span>
+  <!-- Body -->
+  <div class="p-5 flex flex-col flex-1">
+    <div class="flex items-center justify-between text-[11px] font-mono text-[#71717A] mb-1.5">
+      <span class="uppercase">{comparison.category}</span>
+      <span>{comparison.displayDate}</span>
     </div>
 
     <a href={`/vs/${comparison.slug}`}>
-      <h3 class="text-xl font-extrabold text-white group-hover:text-[#FAD002] transition leading-snug">
+      <h3 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111] group-hover:text-[#0251A0] transition leading-snug">
         {comparison.title}
       </h3>
     </a>
-    <p class="text-xs sm:text-sm text-slate-400 mt-2 line-clamp-2 leading-relaxed flex-1">
+    <p class="text-[13px] text-[#52525B] mt-1.5 line-clamp-2 leading-relaxed flex-1">
       {comparison.subtitle}
     </p>
 
-    <!-- Side-by-Side Quick Price Strip -->
-    <div class="mt-5 grid grid-cols-2 gap-2.5 pt-4 border-t border-white/10 text-xs">
-      <div class="bg-white/5 rounded-xl p-2.5 border border-[#03519F]/40">
-        <div class="font-mono text-[10px] text-sky-300 truncate">{comparison.productA.shortName}</div>
-        <div class="font-mono font-extrabold text-sm text-white mt-0.5 tabular-nums">
-          {formatTRY(comparison.productA.lowestPrice)}
+    <!-- Tactile Contender Rows with SparkBars -->
+    <div class="mt-4 pt-3.5 border-t border-dashed border-[#E4E4E7] space-y-2.5 text-xs">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="font-semibold text-[#111111] truncate">{comparison.productA.shortName}</span>
+          {comparison.winnerSide === 'A' && <span class="badge-pill badge-deal font-mono !text-[9.5px] !py-0 !px-2">KAZANAN</span>}
         </div>
-        <div class="text-[10px] font-mono text-emerald-400 mt-0.5">HEG {comparison.productA.hegScore.toFixed(1)}/10</div>
+        <div class="flex items-center gap-2.5 font-mono shrink-0">
+          <SparkBars score={comparison.productA.hegScore} tone={comparison.winnerSide === 'A' ? 'yellow' : 'blue'} />
+          <strong class="text-[#111111] tabular-nums">{formatTRY(comparison.productA.lowestPrice)}</strong>
+        </div>
       </div>
-      <div class="bg-white/5 rounded-xl p-2.5 border border-[#FAD002]/35">
-        <div class="font-mono text-[10px] text-[#FAD002] truncate">{comparison.productB.shortName}</div>
-        <div class="font-mono font-extrabold text-sm text-white mt-0.5 tabular-nums">
-          {formatTRY(comparison.productB.lowestPrice)}
+
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="font-semibold text-[#111111] truncate">{comparison.productB.shortName}</span>
+          {comparison.winnerSide === 'B' && <span class="badge-pill badge-deal font-mono !text-[9.5px] !py-0 !px-2">KAZANAN</span>}
         </div>
-        <div class="text-[10px] font-mono text-slate-300 mt-0.5">HEG {comparison.productB.hegScore.toFixed(1)}/10</div>
+        <div class="flex items-center gap-2.5 font-mono shrink-0">
+          <SparkBars score={comparison.productB.hegScore} tone={comparison.winnerSide === 'B' ? 'yellow' : 'blue'} />
+          <strong class="text-[#111111] tabular-nums">{formatTRY(comparison.productB.lowestPrice)}</strong>
+        </div>
       </div>
     </div>
 
-    <a
-      href={`/vs/${comparison.slug}`}
-      class="mt-4 w-full inline-flex items-center justify-center gap-2 bg-[#03519F] hover:bg-[#0B6BCB] text-white text-xs font-bold py-3 rounded-xl transition"
-    >
-      <span>Raund Tablosu & Kazananı İncele</span>
-      <span aria-hidden="true">→</span>
-    </a>
+    <div class="mt-4 flex items-center gap-2">
+      <a href={`/vs/${comparison.slug}`} class="btn-pill btn-pill-primary flex-1 !py-2.5 !text-xs">
+        Raund Analizini Aç <span class="arrow">↗</span>
+      </a>
+      {hasYoutube && (
+        <a
+          href={comparison.social!.youtubeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-pill btn-pill-outline btn-pill-video !py-2.5 !px-3.5 !text-xs"
+          title="YouTube'da İzle"
+        >
+          ▶
+        </a>
+      )}
+    </div>
   </div>
 </article>
