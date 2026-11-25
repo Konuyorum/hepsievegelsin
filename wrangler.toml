@@ -3,4 +3,4 @@ pages_build_output_dir = "dist"
 compatibility_date = "2024-11-01"
 
 [vars]
-ANTHROPIC_MODEL = "claude-3-5-haiku-20241022"
+NVIDIA_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b"

@@ -129,6 +129,22 @@ const amazonTag = SITE.amazonTag;
 
     let isVS = false;
 
+    function safeText(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function safeListHtml(html) {
+      return String(html || '')
+        .replace(/<script[\s\S]*?<\/script>/gi, '')
+        .replace(/\son\w+="[^"]*"/gi, '')
+        .replace(/\son\w+='[^']*'/gi, '')
+        .replace(/javascript:/gi, '');
+    }
+
     function setVS(state) {
       isVS = state;
       vsWrap?.classList.toggle('hidden', !isVS);
@@ -198,12 +214,26 @@ const amazonTag = SITE.amazonTag;
       try {
         const res = await fetch('/api/search', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-HEG-Client': 'web-v2',
+          },
           body: JSON.stringify({ query: query1, query2, isVS: vsMode }),
         });
 
-        if (!res.ok) throw new Error('API_UNAVAILABLE');
-        const data = await res.json();
+        const data = await res.json().catch(() => null);
+        if (!res.ok) {
+          if (data && data.message) {
+            loading?.classList.add('hidden');
+            if (notice) {
+              notice.innerHTML = `<div class="text-sm font-medium text-[#B91C1C]">${data.message}</div>`;
+              notice.classList.remove('hidden');
+            }
+            return;
+          }
+          throw new Error('API_UNAVAILABLE');
+        }
         loading?.classList.add('hidden');
 
         if (data.type === 'error') {
@@ -290,15 +320,15 @@ const amazonTag = SITE.amazonTag;
                   </div>
                   ${data.heg_score ? `<div class="badge-pill badge-deal font-mono !text-base !px-4 !py-1.5">${data.heg_score}/10</div>` : ''}
                 </div>
-                <div class="bg-[#F9FAFB] border-l-[3px] border-[#0251A0] rounded-r-xl p-4 text-[13.5px] text-[#111111] leading-relaxed">${data.verdict}</div>
+                <div class="bg-[#F9FAFB] border-l-[3px] border-[#0251A0] rounded-r-xl p-4 text-[13.5px] text-[#111111] leading-relaxed">${safeText(data.verdict)}</div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[13.5px]">
                   <div class="bg-[#F9FAFB] border border-[#E4E4E7] rounded-[14px] p-4">
                     <h3 class="font-semibold text-[#111111] mb-2">✓ Avantajları</h3>
-                    <div class="text-[#52525B] space-y-1">${data.pros}</div>
+                    <div class="text-[#52525B] space-y-1">${safeListHtml(data.pros)}</div>
                   </div>
                   <div class="bg-[#FEF2F2]/60 border border-[#FECACA] rounded-[14px] p-4">
                     <h3 class="font-semibold text-[#991B1B] mb-2">✕ Dikkat Edilmesi Gerekenler</h3>
-                    <div class="text-[#52525B] space-y-1">${data.cons}</div>
+                    <div class="text-[#52525B] space-y-1">${safeListHtml(data.cons)}</div>
                   </div>
                 </div>
                 <div>
