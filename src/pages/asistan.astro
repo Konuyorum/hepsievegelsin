@@ -365,6 +365,11 @@ const amazonTag = SITE.amazonTag;
                         ${item.tag ? `<span class="badge-pill badge-blue font-mono">${safeText(item.tag)}</span>` : ''}
                       </div>
                       <h3 class="text-[17px] font-semibold text-[#111111] mt-2 leading-snug">${safeText(item.model || item.name)}</h3>
+                      ${
+                        item.price_range_try
+                          ? `<div class="mt-1.5 inline-flex items-center gap-1.5 font-mono text-xs font-bold text-[#111111] bg-[#F4F4F5] border border-[#E4E4E7] px-2.5 py-0.5 rounded-full">Fiyat Aralığı: ${safeText(item.price_range_try)}</div>`
+                          : ''
+                      }
                     </div>
                     ${item.heg_score ? `<span class="badge-pill badge-deal font-mono shrink-0">${safeText(item.heg_score)}/10</span>` : ''}
                   </div>
@@ -504,10 +509,48 @@ const amazonTag = SITE.amazonTag;
           } else {
             // Single Specific Brand + Model: Explicit Identity Banner + Pozitifler/Negatifler Table + Better Alternative
             const reviewRows = Array.isArray(data.review_table) ? data.review_table : [];
+            const keySpecs = Array.isArray(data.key_specs) ? data.key_specs : [];
             const alt = data.alternative && data.alternative.has_better && data.alternative.name ? data.alternative : null;
             const brandLabel = data.evaluated_brand ? safeText(data.evaluated_brand) : '';
             const modelLabel = data.evaluated_model ? safeText(data.evaluated_model) : safeText(data.title || query1);
             const catLabel = data.product_category ? safeText(data.product_category) : '';
+
+            const specsHtml =
+              keySpecs.length > 0
+                ? `<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    ${keySpecs
+                      .map(
+                        (sp) => `
+                      <div class="bg-[#F9FAFB] border border-[#E4E4E7] rounded-[12px] p-3">
+                        <div class="font-mono text-[10px] uppercase text-[#71717A]">${safeText(sp.label)}</div>
+                        <div class="text-xs font-semibold text-[#111111] mt-0.5 leading-snug">${safeText(sp.value)}</div>
+                      </div>`
+                      )
+                      .join('')}
+                  </div>`
+                : '';
+
+            const whoHtml =
+              data.who_should_buy || data.who_should_skip
+                ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    ${
+                      data.who_should_buy
+                        ? `<div class="bg-[#F9FAFB] border border-[#E4E4E7] rounded-[12px] p-3.5">
+                            <div class="font-mono text-[10px] font-semibold uppercase text-[#02458A] mb-1">✓ KİMLER ALMALI?</div>
+                            <p class="text-[#111111] leading-relaxed">${safeText(data.who_should_buy)}</p>
+                          </div>`
+                        : ''
+                    }
+                    ${
+                      data.who_should_skip
+                        ? `<div class="bg-[#FEF2F2]/45 border border-[#FECACA] rounded-[12px] p-3.5">
+                            <div class="font-mono text-[10px] font-semibold uppercase text-[#B91C1C] mb-1">✕ KİMLER UZAK DURMALI?</div>
+                            <p class="text-[#52525B] leading-relaxed">${safeText(data.who_should_skip)}</p>
+                          </div>`
+                        : ''
+                    }
+                  </div>`
+                : '';
 
             const reviewTableHtml = `
               <div class="overflow-x-auto border border-[#E4E4E7] rounded-[14px]">
@@ -546,6 +589,7 @@ const amazonTag = SITE.amazonTag;
                     <div class="flex items-center gap-2 flex-wrap">
                       <span class="badge-pill badge-deal font-mono">★ HEG DAHA İYİ ALTERNATİF</span>
                       ${alt.brand ? `<span class="badge-pill badge-neutral font-mono">${safeText(alt.brand.toUpperCase())}</span>` : ''}
+                      ${alt.price_range_try ? `<span class="badge-pill badge-neutral font-mono">FİYAT: ${safeText(alt.price_range_try)}</span>` : ''}
                     </div>
                     <h3 class="text-[20px] font-semibold tracking-[-0.02em] text-[#111111] mt-2">${safeText(alt.name)}</h3>
                   </div>
@@ -583,16 +627,31 @@ const amazonTag = SITE.amazonTag;
                       ${catLabel ? `<span class="badge-pill badge-neutral font-mono">${catLabel.toUpperCase()}</span>` : ''}
                       ${data.verdict_label ? `<span class="badge-pill badge-deal font-mono">${safeText(data.verdict_label)}</span>` : ''}
                     </div>
-                    <h2 class="text-[22px] font-semibold text-[#111111] mt-2">${modelLabel}</h2>
+                    <h2 class="text-[22px] sm:text-[26px] font-semibold text-[#111111] mt-2">${modelLabel}</h2>
                   </div>
                   ${data.heg_score ? `<div class="badge-pill badge-deal font-mono !text-base !px-4 !py-1.5">${safeText(data.heg_score)}/10</div>` : ''}
                 </div>
+
+                ${
+                  data.price_range_try
+                    ? `<div class="flex flex-wrap items-center justify-between gap-2 bg-[#FFFDF0] border border-[#E5B800]/60 rounded-[14px] px-4 py-3">
+                        <div>
+                          <div class="font-mono text-[10px] uppercase text-[#9A7400]">${safeText(data.price_source_note || 'TÜRKİYE FİYAT ARALIĞI')}</div>
+                          <div class="font-mono text-[20px] font-bold text-[#111111] tabular-nums">${safeText(data.price_range_try)}</div>
+                        </div>
+                        <span class="text-[11px] font-mono text-[#52525B]">Anlık dip fiyat için aşağıdaki mağazaları kontrol edin ↓</span>
+                      </div>`
+                    : ''
+                }
+
+                ${specsHtml}
 
                 <div class="bg-[#F9FAFB] border-l-[3px] border-[#0251A0] rounded-r-xl p-4 text-[13.5px] text-[#111111] leading-relaxed">
                   ${safeText(data.verdict)}
                 </div>
 
                 ${reviewTableHtml}
+                ${whoHtml}
 
                 <div>
                   <div class="font-mono text-[11px] text-[#71717A] uppercase mb-1">${modelLabel} — Çoklu Mağaza Canlı Fiyat Kontrolü</div>
