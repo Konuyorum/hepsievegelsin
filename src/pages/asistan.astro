@@ -30,24 +30,24 @@ const amazonTag = SITE.amazonTag;
 ---
 
 <BaseLayout
-  title="HEG AI Ürün Analizi (Pozitifler/Negatifler + Daha İyi Alternatif) & Google Araştırma"
-  description="Sadece marka ve ürün adı girerek gerçek kullanıcı yorumlarından derlenen Pozitifler & Negatifler tablosu, daha iyi alternatif önerisi ve ayrı Google Web Araştırması."
+  title="HEG AI Ürün & Kategori Analizi (Pozitifler/Negatifler + Akıllı Seçim) & Google Araştırma"
+  description="Marka/model adı girerek Pozitifler & Negatifler tablosu ve daha iyi alternatif görün; genel kategori girerek kullanım amacınıza göre en iyi 4 gerçek marka/modeli keşfedin."
   canonicalPath="/asistan"
   activeNav="asistan"
 >
-  <div class="max-w-[980px] mx-auto px-5 py-9 space-y-6">
+  <div class="max-w-[1020px] mx-auto px-5 py-9 space-y-6">
     <!-- Header -->
     <div class="text-center space-y-2.5">
-      <span class="badge-pill badge-blue font-mono">HEG AI ÜRÜN ANALİZİ · SADECE MARKA & MODEL</span>
+      <span class="badge-pill badge-blue font-mono">HEG AI ANALİZ · MARKA/MODEL & AKILLI KATEGORİ SEÇİCİ</span>
       <h1 class="text-[30px] sm:text-[40px] font-semibold tracking-[-0.03em] text-[#111111] leading-tight">
-        Marka veya Ürün Adını Girin
+        Marka, Ürün veya Kategori Girin
       </h1>
       <p class="text-[14px] text-[#52525B] max-w-2xl mx-auto">
-        Kullanıcı yorumlarından derlenen <strong class="text-[#111111]">Pozitifler & Negatifler tablosunu</strong> ve fiyat/özellik/yorum açısından <strong class="text-[#111111]">daha iyi bir alternatifi varsa</strong> anında görün.
+        Spesifik model girerseniz <strong class="text-[#111111]">Pozitifler/Negatifler tablosu + daha iyi alternatif</strong>; genel kategori girerseniz (örn. <em>monitör, ayakkabı</em>) <strong class="text-[#111111]">akıllı seçim soruları ve en iyi 4 gerçek model</strong> gelir.
       </p>
     </div>
 
-    <!-- Tactile Product/Brand-Only AI Search Box -->
+    <!-- Tactile Search Box -->
     <div class="tactile-card p-3 space-y-2">
       <form id="aiSearchForm" class="space-y-2.5">
         <div class="flex flex-col sm:flex-row gap-2">
@@ -55,7 +55,7 @@ const amazonTag = SITE.amazonTag;
             id="aiQ1"
             type="text"
             maxlength="60"
-            placeholder="Sadece marka ve model girin (Örn: Dyson V15 Detect, Roborock S8)..."
+            placeholder="Örn: Dyson V15 Detect, Roborock S8, monitör, spor ayakkabı..."
             class="flex-1 bg-[#F9FAFB] border border-[#E4E4E7] rounded-full text-[#111111] placeholder-[#71717A] px-5 py-3 text-sm focus:border-[#0251A0] focus:bg-white focus:outline-none transition"
           />
           <button
@@ -84,14 +84,14 @@ const amazonTag = SITE.amazonTag;
         </div>
       </form>
       <div class="px-3 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-[#71717A]">
-        <span>* Bu alan yalnızca marka/ürün analizi içindir; soru cümleleri kabul edilmez.</span>
+        <span>* Yalnızca marka, model veya ürün kategorisi girilebilir; soru cümleleri kabul edilmez.</span>
         <a href="#google-arastirma" class="text-[#02458A] font-semibold hover:underline">Soru sormak için Google Araştırması ↓</a>
       </div>
     </div>
 
-    <!-- Brand/Product Preset Pills -->
+    <!-- Quick Preset Pills -->
     <div class="flex flex-wrap justify-center gap-2">
-      {['Dyson V15 Detect', 'Roborock S8', 'Samsung Galaxy Z Fold 8', 'Anker Soundcore Liberty 4 NC', 'Philips Airfryer XXL'].map((preset) => (
+      {['Dyson V15 Detect', 'Roborock S8', 'monitör', 'ayakkabı', 'Anker Soundcore Liberty 4 NC'].map((preset) => (
         <button
           type="button"
           data-preset={preset}
@@ -114,33 +114,31 @@ const amazonTag = SITE.amazonTag;
     <!-- Loading -->
     <div id="aiLoading" class="hidden tactile-card p-10 text-center space-y-3">
       <div class="w-9 h-9 rounded-full border-[3px] border-[#E4E4E7] border-t-[#111111] animate-spin mx-auto"></div>
-      <div class="font-semibold text-[15px] text-[#111111]">Kullanıcı Yorumları & Alternatifler Derleniyor...</div>
-      <p class="text-xs font-mono text-[#71717A]">Pozitifler/Negatifler tablosu ve daha iyi rakip karşılaştırması hazırlanıyor.</p>
+      <div class="font-semibold text-[15px] text-[#111111]">Gerçek Marka & Modeller + Kullanıcı Yorumları Derleniyor...</div>
+      <p class="text-xs font-mono text-[#71717A]">Pozitifler/Negatifler ve en mantıklı alternatifler hazırlanıyor.</p>
     </div>
 
     <div id="aiNotice" class="hidden tactile-card !border-[#FECACA] bg-[#FEF2F2]/40 p-5 space-y-2.5"></div>
     <div id="aiOutput" class="hidden space-y-5"></div>
 
-    <!-- SEPARATE MODULE: FREE GOOGLE WEB RESEARCH (For General Questions) -->
+    <!-- SEPARATE MODULE: FREE GOOGLE WEB RESEARCH -->
     <section id="google-arastirma" class="pt-4">
       <div class="tactile-card p-6 space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <span class="badge-pill badge-neutral font-mono">GENEL SORULAR & WEB ARAŞTIRMASI</span>
-            <h2 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111] mt-1.5">
-              Google ile Web Araştırması Yap
-            </h2>
-            <p class="text-xs text-[#52525B] mt-0.5">
-              Ürün adı dışındaki tüm sorularınız, forum araştırmaları veya genel bilgi aramaları için AI analizinden ayrı ücretsiz Google araması.
-            </p>
-          </div>
+        <div>
+          <span class="badge-pill badge-neutral font-mono">GENEL SORULAR & WEB ARAŞTIRMASI</span>
+          <h2 class="text-[18px] font-semibold tracking-[-0.02em] text-[#111111] mt-1.5">
+            Google ile Web Araştırması Yap
+          </h2>
+          <p class="text-xs text-[#52525B] mt-0.5">
+            Ürün/kategori adı dışındaki tüm sorularınız, forum araştırmaları veya genel bilgi aramaları için ücretsiz Google araması.
+          </p>
         </div>
 
         <form id="googleSearchForm" class="flex flex-col sm:flex-row gap-2">
           <input
             id="googleQ"
             type="text"
-            placeholder="Herhangi bir soru veya konu yazın (Örn: Robot süpürge alırken nelere dikkat edilir?)..."
+            placeholder="Herhangi bir soru veya konu yazın (Örn: IPS ve VA panel monitör farkı nedir?)..."
             class="flex-1 bg-[#F9FAFB] border border-[#E4E4E7] rounded-full text-[#111111] placeholder-[#71717A] px-5 py-2.5 text-sm focus:border-[#0251A0] focus:bg-white focus:outline-none transition"
           />
           <button type="submit" class="btn-pill btn-pill-outline !py-2.5 !px-5 !text-xs font-semibold">
@@ -164,6 +162,8 @@ const amazonTag = SITE.amazonTag;
     const verifiedList = document.getElementById('verifiedMatchList');
 
     let isVS = false;
+    let activeBaseQuery = '';
+    let selectedFilters = new Map(); // questionIndex -> optionText
 
     const QUESTION_RE =
       /[?¿]|(^|\s)(nasıl|neden|niçin|niye|nedir|kimdir|ne\s+zaman|nerede|nereye|hangisi|hangi|kaç\s+tane|kaç\s+lira|ne\s+kadar|tavsiye\s+eder|önerir\s+misin|alınır\s+mı|değer\s+mi|yazar\s+mısın|anlat|açıkla|hesapla|çevir|özetle|kod\s+yaz|merhaba|selam|naber|how|what|why|when|where|who|which)(\s|$)/i;
@@ -182,14 +182,6 @@ const amazonTag = SITE.amazonTag;
         .replace(/"/g, '&quot;');
     }
 
-    function safeListHtml(html) {
-      return String(html || '')
-        .replace(/<script[\s\S]*?<\/script>/gi, '')
-        .replace(/\son\w+="[^"]*"/gi, '')
-        .replace(/\son\w+='[^']*'/gi, '')
-        .replace(/javascript:/gi, '');
-    }
-
     function setVS(state) {
       isVS = state;
       vsWrap?.classList.toggle('hidden', !isVS);
@@ -206,14 +198,15 @@ const amazonTag = SITE.amazonTag;
       if (isVS) q2?.focus();
     });
 
-    function buildStoreLinks(keyword) {
+    function buildStoreLinks(keyword, compact = false) {
       const enc = encodeURIComponent(keyword);
+      const pad = compact ? '!py-1.5 !px-2.5 !text-[11px]' : '!py-2 !text-xs';
       return `
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3">
-          <a href="https://www.amazon.com.tr/s?k=${enc}&tag=${amazonTag}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="btn-pill btn-pill-primary !py-2 !text-xs">Amazon TR (#reklam) ↗</a>
-          <a href="https://www.hepsiburada.com/ara?q=${enc}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-outline !py-2 !text-xs">Hepsiburada ↗</a>
-          <a href="https://www.trendyol.com/sr?q=${enc}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-outline !py-2 !text-xs">Trendyol ↗</a>
-          <a href="https://www.akakce.com/arama/?q=${enc}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-outline !py-2 !text-xs">Akakçe Fiyat ↗</a>
+          <a href="https://www.amazon.com.tr/s?k=${enc}&tag=${amazonTag}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="btn-pill btn-pill-primary ${pad}">Amazon TR ↗</a>
+          <a href="https://www.hepsiburada.com/ara?q=${enc}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-outline ${pad}">Hepsiburada ↗</a>
+          <a href="https://www.trendyol.com/sr?q=${enc}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-outline ${pad}">Trendyol ↗</a>
+          <a href="https://www.akakce.com/arama/?q=${enc}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-outline ${pad}">Akakçe ↗</a>
         </div>`;
     }
 
@@ -261,22 +254,24 @@ const amazonTag = SITE.amazonTag;
       notice.classList.remove('hidden');
     }
 
-    async function runSearch(query1, query2 = '', vsMode = false) {
+    async function runSearch(query1, query2 = '', vsMode = false, filters = []) {
       if (!query1) return;
       notice?.classList.add('hidden');
       output?.classList.add('hidden');
 
-      // Client-side brand/product-only guard
       if (isQuestionOrTooLong(query1) || (vsMode && query2 && isQuestionOrTooLong(query2))) {
         verifiedBox?.classList.add('hidden');
         showNotice(
-          'AI Analiz alanına soru sorulamaz; yalnızca marka veya ürün adı girilebilir (Örn: Dyson V15 Detect, Roborock S8).',
+          'AI Analiz alanına soru sorulamaz; yalnızca marka, ürün veya kategori adı girilebilir (Örn: Dyson V15 Detect, monitör, ayakkabı).',
           query1
         );
         const gInput = document.getElementById('googleQ');
         if (gInput) gInput.value = query1;
         return;
       }
+
+      activeBaseQuery = query1;
+      if (filters.length === 0) selectedFilters.clear();
 
       const combined = vsMode && query2 ? `${query1} ${query2}` : query1;
       checkVerifiedMatches(combined);
@@ -290,7 +285,7 @@ const amazonTag = SITE.amazonTag;
             'Content-Type': 'application/json',
             'X-HEG-Client': 'web-v2',
           },
-          body: JSON.stringify({ query: query1, query2, isVS: vsMode }),
+          body: JSON.stringify({ query: query1, query2, isVS: vsMode, filters }),
         });
 
         const data = await res.json().catch(() => null);
@@ -307,7 +302,164 @@ const amazonTag = SITE.amazonTag;
         }
 
         if (output) {
-          if (data.type === 'comparison') {
+          if (data.type === 'category_guided' || data.type === 'list') {
+            const questions = Array.isArray(data.clarify_questions) ? data.clarify_questions : [];
+            const items = Array.isArray(data.items) ? data.items : [];
+            const applied = Array.isArray(data.applied_filters) ? data.applied_filters : filters;
+
+            const clarifyHtml =
+              questions.length > 0
+                ? `
+              <div class="tactile-card !border-[#BDD6F2] bg-[#F9FAFB] p-5 sm:p-6 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <span class="badge-pill badge-blue font-mono">AKILLI SEÇİM REHBERİ</span>
+                    <h3 class="text-[16px] font-semibold text-[#111111] mt-1.5">Tercihinizi Seçin — Size Özel En İyi 4 Modeli Bulalım</h3>
+                  </div>
+                  ${
+                    applied.length > 0
+                      ? `<span class="badge-pill badge-deal font-mono">AKTİF: ${safeText(applied.join(' · '))}</span>`
+                      : ''
+                  }
+                </div>
+
+                <div class="space-y-3.5">
+                  ${questions
+                    .map(
+                      (q, qIdx) => `
+                    <div class="space-y-2">
+                      <div class="text-xs font-semibold text-[#52525B]">${safeText(q.question)}</div>
+                      <div class="flex flex-wrap gap-2">
+                        ${(q.options || [])
+                          .map((opt) => {
+                            const isSel = applied.includes(opt);
+                            return `<button type="button" class="clarify-chip btn-pill ${isSel ? 'btn-pill-deal' : 'btn-pill-outline'} !py-1.5 !px-3.5 !text-xs" data-qidx="${qIdx}" data-opt="${safeText(opt)}">${safeText(opt)}</button>`;
+                          })
+                          .join('')}
+                      </div>
+                    </div>`
+                    )
+                    .join('')}
+                </div>
+
+                <div class="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-[#E4E4E7]">
+                  <span class="text-[11px] font-mono text-[#71717A]" id="filterSummaryText">
+                    ${applied.length > 0 ? `Seçili: ${safeText(applied.join(' · '))}` : 'Yukarıdan 1 veya daha fazla kriter seçip sonuçları daraltabilirsiniz.'}
+                  </span>
+                  <button type="button" id="applyClarifyBtn" class="btn-pill btn-pill-primary !py-2 !px-5 !text-xs">
+                    Seçimime Göre En İyi 4 Modeli Getir <span class="arrow">↗</span>
+                  </button>
+                </div>
+              </div>`
+                : '';
+
+            const cardsHtml = items
+              .map(
+                (item, idx) => `
+              <article class="tactile-card p-5 flex flex-col justify-between gap-4">
+                <div class="space-y-3">
+                  <div class="flex items-start justify-between gap-2">
+                    <div>
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <span class="badge-pill badge-neutral font-mono">#0${idx + 1} · ${safeText((item.brand || '').toUpperCase())}</span>
+                        ${item.tag ? `<span class="badge-pill badge-blue font-mono">${safeText(item.tag)}</span>` : ''}
+                      </div>
+                      <h3 class="text-[17px] font-semibold text-[#111111] mt-2 leading-snug">${safeText(item.model || item.name)}</h3>
+                    </div>
+                    ${item.heg_score ? `<span class="badge-pill badge-deal font-mono shrink-0">${safeText(item.heg_score)}/10</span>` : ''}
+                  </div>
+
+                  <p class="text-[13px] text-[#52525B] leading-relaxed">${safeText(item.summary || item.desc)}</p>
+
+                  <!-- Mini Pros / Cons Table per Real Model -->
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                    <div class="bg-[#F9FAFB] border border-[#E4E4E7] rounded-[12px] p-3 space-y-1">
+                      <div class="font-mono text-[10px] font-semibold uppercase text-[#02458A]">✓ POZİTİFLER</div>
+                      ${(item.positives || [])
+                        .map((p) => `<div class="text-[#111111] leading-snug"><span class="font-mono font-bold text-[#02458A] mr-1">+</span>${safeText(p)}</div>`)
+                        .join('')}
+                    </div>
+                    <div class="bg-[#FEF2F2]/45 border border-[#FECACA] rounded-[12px] p-3 space-y-1">
+                      <div class="font-mono text-[10px] font-semibold uppercase text-[#B91C1C]">✕ NEGATİFLER</div>
+                      ${(item.negatives || [])
+                        .map((n) => `<div class="text-[#52525B] leading-snug"><span class="font-mono font-bold text-[#EF4444] mr-1">−</span>${safeText(n)}</div>`)
+                        .join('')}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-dashed border-[#E4E4E7]">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-mono text-[10.5px] text-[#71717A] uppercase">CANLI MAĞAZA LİNKLERİ</span>
+                    <button type="button" class="deep-analyze-btn text-xs font-semibold text-[#02458A] hover:underline cursor-pointer" data-model="${safeText(item.search_keyword || item.model || item.name)}">
+                      Detaylı Tablo & Alternatif →
+                    </button>
+                  </div>
+                  ${buildStoreLinks(item.search_keyword || item.model || item.name, true)}
+                </div>
+              </article>`
+              )
+              .join('');
+
+            output.innerHTML = `
+              <div class="space-y-5">
+                <div class="flex flex-wrap items-end justify-between gap-2">
+                  <div>
+                    <h2 class="text-[22px] font-semibold tracking-[-0.02em] text-[#111111]">${safeText(data.category_title || data.title)}</h2>
+                    ${data.intro ? `<p class="text-[13px] text-[#52525B] mt-1">${safeText(data.intro)}</p>` : ''}
+                  </div>
+                </div>
+                ${clarifyHtml}
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-[18px]">
+                  ${cardsHtml}
+                </div>
+              </div>`;
+
+            // Bind interactive clarify chips
+            output.querySelectorAll('.clarify-chip').forEach((chip) => {
+              chip.addEventListener('click', () => {
+                const qIdx = chip.getAttribute('data-qidx');
+                const opt = chip.getAttribute('data-opt');
+                if (!qIdx || !opt) return;
+
+                if (selectedFilters.get(qIdx) === opt) {
+                  selectedFilters.delete(qIdx);
+                  chip.classList.remove('btn-pill-deal');
+                  chip.classList.add('btn-pill-outline');
+                } else {
+                  output.querySelectorAll(`.clarify-chip[data-qidx="${qIdx}"]`).forEach((sib) => {
+                    sib.classList.remove('btn-pill-deal');
+                    sib.classList.add('btn-pill-outline');
+                  });
+                  selectedFilters.set(qIdx, opt);
+                  chip.classList.remove('btn-pill-outline');
+                  chip.classList.add('btn-pill-deal');
+                }
+
+                const summary = document.getElementById('filterSummaryText');
+                const arr = [...selectedFilters.values()];
+                if (summary) {
+                  summary.textContent = arr.length > 0 ? `Seçili: ${arr.join(' · ')}` : 'Yukarıdan 1 veya daha fazla kriter seçip sonuçları daraltabilirsiniz.';
+                }
+              });
+            });
+
+            document.getElementById('applyClarifyBtn')?.addEventListener('click', () => {
+              const arr = [...selectedFilters.values()];
+              runSearch(activeBaseQuery, '', false, arr);
+            });
+
+            output.querySelectorAll('.deep-analyze-btn').forEach((btn) => {
+              btn.addEventListener('click', () => {
+                const modelName = btn.getAttribute('data-model') || '';
+                if (!modelName) return;
+                if (q1) q1.value = modelName;
+                setVS(false);
+                runSearch(modelName, '', false, []);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              });
+            });
+          } else if (data.type === 'comparison') {
             output.innerHTML = `
               <div class="tactile-card p-6 space-y-5">
                 <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#E4E4E7]">
@@ -350,58 +502,51 @@ const amazonTag = SITE.amazonTag;
                 </div>
               </div>`;
           } else {
-            // Single Product: Structured Pozitifler & Negatifler Table + Better Alternative Card!
+            // Single Specific Brand + Model: Explicit Identity Banner + Pozitifler/Negatifler Table + Better Alternative
             const reviewRows = Array.isArray(data.review_table) ? data.review_table : [];
             const alt = data.alternative && data.alternative.has_better && data.alternative.name ? data.alternative : null;
+            const brandLabel = data.evaluated_brand ? safeText(data.evaluated_brand) : '';
+            const modelLabel = data.evaluated_model ? safeText(data.evaluated_model) : safeText(data.title || query1);
+            const catLabel = data.product_category ? safeText(data.product_category) : '';
 
-            const reviewTableHtml =
-              reviewRows.length > 0
-                ? `
-                <div class="overflow-x-auto border border-[#E4E4E7] rounded-[14px]">
-                  <table class="w-full text-left border-collapse text-[13.5px]">
-                    <thead>
-                      <tr class="bg-[#F9FAFB] border-b border-[#E4E4E7] text-[11px] font-mono uppercase tracking-[0.04em]">
-                        <th class="py-3 px-4 text-[#71717A] w-1/5">Kriter / Konu</th>
-                        <th class="py-3 px-4 text-[#111111] w-2/5">✓ Pozitifler (Olumlu Yorumlar)</th>
-                        <th class="py-3 px-4 text-[#B91C1C] w-2/5">✕ Negatifler (Olumsuz Yorumlar)</th>
-                      </tr>
-                    </thead>
-                    <tbody class="divide-y divide-[#E4E4E7] align-top">
-                      ${reviewRows
-                        .map(
-                          (row) => `
-                        <tr class="hover:bg-[#F9FAFB] transition">
-                          <td class="py-3.5 px-4 font-semibold text-[#111111] bg-[#F9FAFB]/60">${safeText(row.topic)}</td>
-                          <td class="py-3.5 px-4 text-[#111111] leading-relaxed">
-                            <span class="font-mono font-bold text-[#02458A] mr-1">+</span>${safeText(row.positive)}
-                          </td>
-                          <td class="py-3.5 px-4 text-[#52525B] bg-[#FEF2F2]/35 leading-relaxed">
-                            <span class="font-mono font-bold text-[#EF4444] mr-1">−</span>${safeText(row.negative)}
-                          </td>
-                        </tr>`
-                        )
-                        .join('')}
-                    </tbody>
-                  </table>
-                </div>`
-                : `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[13.5px]">
-                  <div class="bg-[#F9FAFB] border border-[#E4E4E7] rounded-[14px] p-4">
-                    <h3 class="font-semibold text-[#111111] mb-2">✓ Pozitifler</h3>
-                    <div class="text-[#52525B] space-y-1">${safeListHtml(data.pros)}</div>
-                  </div>
-                  <div class="bg-[#FEF2F2]/60 border border-[#FECACA] rounded-[14px] p-4">
-                    <h3 class="font-semibold text-[#991B1B] mb-2">✕ Negatifler</h3>
-                    <div class="text-[#52525B] space-y-1">${safeListHtml(data.cons)}</div>
-                  </div>
-                </div>`;
+            const reviewTableHtml = `
+              <div class="overflow-x-auto border border-[#E4E4E7] rounded-[14px]">
+                <table class="w-full text-left border-collapse text-[13.5px]">
+                  <thead>
+                    <tr class="bg-[#F9FAFB] border-b border-[#E4E4E7] text-[11px] font-mono uppercase tracking-[0.04em]">
+                      <th class="py-3 px-4 text-[#71717A] w-1/5">Kriter / Konu</th>
+                      <th class="py-3 px-4 text-[#111111] w-2/5">✓ Pozitifler (Olumlu Yorumlar)</th>
+                      <th class="py-3 px-4 text-[#B91C1C] w-2/5">✕ Negatifler (Olumsuz Yorumlar)</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-[#E4E4E7] align-top">
+                    ${reviewRows
+                      .map(
+                        (row) => `
+                      <tr class="hover:bg-[#F9FAFB] transition">
+                        <td class="py-3.5 px-4 font-semibold text-[#111111] bg-[#F9FAFB]/60">${safeText(row.topic)}</td>
+                        <td class="py-3.5 px-4 text-[#111111] leading-relaxed">
+                          <span class="font-mono font-bold text-[#02458A] mr-1">+</span>${safeText(row.positive)}
+                        </td>
+                        <td class="py-3.5 px-4 text-[#52525B] bg-[#FEF2F2]/35 leading-relaxed">
+                          <span class="font-mono font-bold text-[#EF4444] mr-1">−</span>${safeText(row.negative)}
+                        </td>
+                      </tr>`
+                      )
+                      .join('')}
+                  </tbody>
+                </table>
+              </div>`;
 
             const altHtml = alt
               ? `
               <div class="tactile-card !border-[#E5B800] bg-[#FFFDF0] p-6 space-y-4">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <span class="badge-pill badge-deal font-mono">★ HEG DAHA İYİ ALTERNATİF ÖNERİSİ</span>
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="badge-pill badge-deal font-mono">★ HEG DAHA İYİ ALTERNATİF</span>
+                      ${alt.brand ? `<span class="badge-pill badge-neutral font-mono">${safeText(alt.brand.toUpperCase())}</span>` : ''}
+                    </div>
                     <h3 class="text-[20px] font-semibold tracking-[-0.02em] text-[#111111] mt-2">${safeText(alt.name)}</h3>
                   </div>
                   <span class="badge-pill badge-blue font-mono">FİYAT · ÖZELLİK · YORUM</span>
@@ -433,10 +578,12 @@ const amazonTag = SITE.amazonTag;
                 <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#E4E4E7]">
                   <div>
                     <div class="flex items-center gap-2 flex-wrap">
-                      <span class="badge-pill badge-blue font-mono">KULLANICI YORUM ANALİZİ</span>
-                      ${data.verdict_label ? `<span class="badge-pill badge-neutral font-mono">${safeText(data.verdict_label)}</span>` : ''}
+                      <span class="badge-pill badge-blue font-mono">DEĞERLENDİRİLEN ÜRÜN</span>
+                      ${brandLabel ? `<span class="badge-pill badge-neutral font-mono">MARKA: ${brandLabel.toUpperCase()}</span>` : ''}
+                      ${catLabel ? `<span class="badge-pill badge-neutral font-mono">${catLabel.toUpperCase()}</span>` : ''}
+                      ${data.verdict_label ? `<span class="badge-pill badge-deal font-mono">${safeText(data.verdict_label)}</span>` : ''}
                     </div>
-                    <h2 class="text-[22px] font-semibold text-[#111111] mt-2">${safeText(data.title || query1)}</h2>
+                    <h2 class="text-[22px] font-semibold text-[#111111] mt-2">${modelLabel}</h2>
                   </div>
                   ${data.heg_score ? `<div class="badge-pill badge-deal font-mono !text-base !px-4 !py-1.5">${safeText(data.heg_score)}/10</div>` : ''}
                 </div>
@@ -448,8 +595,8 @@ const amazonTag = SITE.amazonTag;
                 ${reviewTableHtml}
 
                 <div>
-                  <div class="font-mono text-[11px] text-[#71717A] uppercase mb-1">${safeText(query1)} — Çoklu Mağaza Canlı Fiyat Kontrolü</div>
-                  ${buildStoreLinks(data.amazon_keyword || query1)}
+                  <div class="font-mono text-[11px] text-[#71717A] uppercase mb-1">${modelLabel} — Çoklu Mağaza Canlı Fiyat Kontrolü</div>
+                  ${buildStoreLinks(data.amazon_keyword || modelLabel)}
                 </div>
               </div>
               ${altHtml}`;
@@ -464,7 +611,7 @@ const amazonTag = SITE.amazonTag;
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
-      runSearch(q1?.value.trim() || '', q2?.value.trim() || '', isVS);
+      runSearch(q1?.value.trim() || '', q2?.value.trim() || '', isVS, []);
     });
 
     document.querySelectorAll('.preset-btn').forEach((btn) => {
@@ -472,11 +619,10 @@ const amazonTag = SITE.amazonTag;
         const text = btn.getAttribute('data-preset') || '';
         if (q1) q1.value = text;
         setVS(false);
-        runSearch(text, '', false);
+        runSearch(text, '', false, []);
       });
     });
 
-    // Separate Free Google Web Search Form
     document.getElementById('googleSearchForm')?.addEventListener('submit', (e) => {
       e.preventDefault();
       const gq = document.getElementById('googleQ')?.value.trim();
@@ -491,11 +637,11 @@ const amazonTag = SITE.amazonTag;
       const p2 = params.get('q2') || '';
       if (q1) q1.value = p1;
       if (q2) q2.value = p2;
-      if (p1 && p2) runSearch(p1, p2, true);
+      if (p1 && p2) runSearch(p1, p2, true, []);
     } else if (params.get('ara')) {
       const q = params.get('ara') || '';
       if (q1) q1.value = q;
-      runSearch(q, '', false);
+      runSearch(q, '', false, []);
     }
   </script>
 </BaseLayout>

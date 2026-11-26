@@ -1,14 +1,17 @@
 /**
- * HEG (Hepsi Eve Gelsin) v2 — Hardened AI Product Analysis & VS Edge Function
+ * HEG (Hepsi Eve Gelsin) v2 — Hardened AI Product & Category Analysis Edge Function
  * Route: POST /api/search
  * Primary AI Engine: NVIDIA Developer NIM API (Nemotron 3.5 Lightning + Bolt fallback)
  *
- * Security & Scope Layers:
- *  1. Strict Origin + Referer allowlist (no wildcard CORS, blocks external sites & raw scripts)
- *  2. Sec-Fetch-Site same-origin enforcement + required custom X-HEG-Client header
- *  3. Per-IP sliding-window rate limiting (burst & hourly quotas)
- *  4. Brand/Product-name-only input enforcement (blocks general questions & non-shopping prompts)
- *  5. Structured Pros/Cons user-review table + Better Alternative (price, features, reviews)
+ * Modes:
+ *  1. General Category / Ambiguous Term (e.g. "monitör", "ayakkabı", "Bosch 9"):
+ *     -> Returns `type: "category_guided"` with interactive clarification questions/chips
+ *        AND top 4 real brand+model recommendations (each with Pros, Cons, HEG Score & store links).
+ *  2. Specific Brand + Model (e.g. "Dyson V15 Detect", "Roborock S8"):
+ *     -> Returns `type: "single"` with explicit evaluated_brand, evaluated_model, product_category,
+ *        4-row Pozitifler/Negatifler user-review table, and a same-category Better Alternative.
+ *  3. VS Mode (two specific products):
+ *     -> Returns `type: "comparison"` with criterion-by-criterion winner table.
  */
 
 const ALLOWED_ORIGINS = new Set([
@@ -30,7 +33,6 @@ function isQuestionOrInvalidProduct(str) {
   if (!str) return true;
   if (QUESTION_PATTERN.test(str)) return true;
   const words = str.split(/\s+/).filter(Boolean);
-  // Product / brand names should be concise (max 6 words)
   if (words.length > 6) return true;
   return false;
 }
@@ -168,7 +170,7 @@ export async function onRequestPost(context) {
   }
 
   const contentLength = Number(request.headers.get('Content-Length') || 0);
-  if (contentLength > 1024) {
+  if (contentLength > 1536) {
     return new Response(
       JSON.stringify({ type: 'error', message: 'İstek boyutu sınırı aşıldı.' }),
       { status: 413, headers }
@@ -177,7 +179,7 @@ export async function onRequestPost(context) {
 
   try {
     const rawBody = await request.text();
-    if (rawBody.length > 1024) {
+    if (rawBody.length > 1536) {
       return new Response(
         JSON.stringify({ type: 'error', message: 'İstek boyutu sınırı aşıldı.' }),
         { status: 413, headers }
@@ -188,24 +190,28 @@ export async function onRequestPost(context) {
     const query = sanitizeQuery(body.query);
     const query2 = sanitizeQuery(body.query2);
     const isVS = Boolean(body.isVS);
+    const rawFilters = Array.isArray(body.filters) ? body.filters : [];
+    const filters = rawFilters
+      .slice(0, 4)
+      .map((f) => sanitizeQuery(f))
+      .filter((f) => f.length >= 2 && f.length <= 45);
 
     if (!query || query.length < 2 || query.length > 60) {
       return new Response(
         JSON.stringify({
           type: 'error',
-          message: 'Lütfen yalnızca marka ve ürün adı girin (Örn: Dyson V15 Detect, Roborock S8).',
+          message: 'Lütfen yalnızca marka, ürün veya kategori adı girin (Örn: Dyson V15 Detect, monitör, ayakkabı).',
         }),
         { status: 400, headers }
       );
     }
 
-    // Strict brand/product-only rule: block questions & general sentences
     if (isQuestionOrInvalidProduct(query) || (isVS && isQuestionOrInvalidProduct(query2))) {
       return new Response(
         JSON.stringify({
           type: 'error',
           message:
-            'AI Analiz alanına soru sorulamaz; yalnızca marka veya ürün adı girilebilir (Örn: Dyson V15 Detect, Roborock S8). Genel sorularınız için aşağıdaki Google Web Araştırması bölümünü kullanın.',
+            'AI Analiz alanına soru sorulamaz; yalnızca marka, ürün veya kategori adı girilebilir (Örn: Dyson V15 Detect, monitör, ayakkabı). Genel sorularınız için aşağıdaki Google Web Araştırması bölümünü kullanın.',
         }),
         { status: 400, headers }
       );
@@ -220,41 +226,93 @@ export async function onRequestPost(context) {
 
     const systemPrompt =
       'Sen Hepsi Eve Gelsin (hepsievegelsin.com) platformunun tarafsız, marka sponsorluğu almayan Türkiye e-ticaret ürün analiz uzmanısın. ' +
+      'Kusursuz, doğal ve akıcı Türkiye Türkçesi kullan; uydurma kelime veya bozuk çeviri asla kullanma. ' +
       'SADECE geçerli ham JSON döndür (markdown blokları veya ekstra açıklama yazma). ' +
-      'Girdi yalnızca bir ürün veya marka adı olmalıdır. Eğer girdi bir soru, sohbet veya ürün/marka dışı bir ifadeyse ' +
-      'SADECE şu JSON\'u döndür: {"type":"error","message":"AI Analiz yalnızca marka veya ürün adı içindir. Genel sorular için Google Web Araştırması bölümünü kullanın."}';
+      'ASLA isimsiz/genel bir ürün yorumu yapma: her zaman Türkiye\'de (Amazon TR, Hepsiburada, Trendyol) satılan gerçek, somut MARKA + TAM MODEL adı ver. ' +
+      'Eğer girdi alışveriş/ürün/kategori dışı bir ifadeyse SADECE şu JSON\'u döndür: ' +
+      '{"type":"error","message":"AI Analiz yalnızca marka, ürün veya kategori adı içindir. Genel sorular için Google Web Araştırması bölümünü kullanın."}';
 
     let userPrompt = '';
     if (isVS) {
       userPrompt = `Türkiye piyasası gözüyle "${query}" ile "${query2}" ürünlerini gerçek kullanıcı yorumları, özellikler ve fiyat/performans açısından tarafsız karşılaştır.
 
 KONTROL:
-Kıyaslanabilir iki ürün değilse SADECE şu JSON'u döndür:
-{"type":"error","message":"Karşılaştırma için benzer iki marka/model girin (Örn: Roborock S8 vs Dreame L10s Ultra)."}
+Kıyaslanabilir iki spesifik ürün değilse SADECE şu JSON'u döndür:
+{"type":"error","message":"Karşılaştırma için benzer iki spesifik marka ve model girin (Örn: Roborock S8 vs Dreame L10s Ultra)."}
 
 Kıyaslanabilirse SADECE şu JSON'u döndür:
 {
   "type": "comparison",
-  "p1_name": "${query}",
-  "p2_name": "${query2}",
+  "p1_name": "Tam Marka ve Model 1",
+  "p2_name": "Tam Marka ve Model 2",
   "summary": "İki ürün arasındaki kritik farkı ve hangisinin kime göre olduğunu anlatan 2-3 cümlelik tarafsız HEG kararı.",
   "table": [
     {"feature": "Kriter Adı", "val1": "Ürün 1 Değeri", "val2": "Ürün 2 Değeri", "winner": 1}
   ]
 }`;
     } else {
-      userPrompt = `Marka/Ürün: "${query}"
+      const filterClause =
+        filters.length > 0
+          ? `\nKULLANICININ SEÇTİĞİ FİLTRELER: ${filters.join(', ')} — Önerdiğin 4 gerçek marka/model KESİNLİKLE bu kriterlere birebir uysun!`
+          : '';
 
-GÖREV:
-Türkiye'deki (Hepsiburada, Amazon TR, Trendyol, global kullanıcı forumları) gerçek kullanıcı yorumlarını derleyerek bu ürün/marka için tarafsız bir **Pozitifler ve Negatifler tablosu** oluştur ve **fiyat, özellik ve kullanıcı yorumları açısından daha iyi bir alternatifi varsa** onu net şekilde öner.
+      userPrompt = `Kullanıcı Girdisi: "${query}"${filterClause}
 
-SADECE şu ham JSON formatını döndür:
+AKILLI YOL AYRIMI (ÇOK KRİTİK — MUTLAKA UY):
+
+DURUM 1 — GENEL KATEGORİ veya BELİRSİZ/EKSİK MARKA-SERİ İSE:
+(Örn: "monitör", "ayakkabı", "kulaklık", "telefon", "laptop", "airfryer", "robot süpürge", "kahve makinesi", "Adidas", "Bosch 9", "Samsung" gibi tek bir kesin tam modele işaret etmeyen her sorgu — veya filtre seçilmiş kategori sorgusu)
+-> KESİNLİKLE "category_guided" tipinde JSON döndür!
+-> ASLA "monitörler genel olarak iyidir" gibi isimsiz analiz yapma!
+-> Hem kullanıcıya seçimini daraltması için 2-3 kısa netleştirme sorusu (tıklanabilir seçeneklerle; ör. Monitör için: "Kullanım Amacı", "Ekran Boyutu", "Bütçe"; Ayakkabı için: "Ayakkabı Türü", "Kullanım Amacı", "Öncelik"; Bosch 9 için: "Hangi Bosch 9 Ürünü?" -> "Unlimited 9 Dikey Süpürge", "Serie 8/9 Çamaşır Makinesi", "Serie 8/9 Bulaşık Makinesi") oluştur,
+-> HEM DE Türkiye'de en çok tercih edilen, en iyi **4 adet GERÇEK MARKA + TAM MODEL** (ör. "LG UltraGear 27GS75Q-B", "Adidas Ultraboost Light", "Nike Pegasus 41" vb.) listele; her birinin kendi HEG puanı, 2 somut pozitif kullanıcı yorumu ve 2 somut negatif kullanıcı yorumu olsun!
+
+"category_guided" JSON ŞEMASI:
+{
+  "type": "category_guided",
+  "category_title": "${query} — En İyi 4 Gerçek Model & Seçim Rehberi",
+  "intro": "Seçiminizi netleştirmek için aşağıdan kullanım amacınızı seçebilir veya Türkiye'de kullanıcı yorumları en güçlü 4 modeli hemen inceleyebilirsiniz.",
+  "applied_filters": ${JSON.stringify(filters)},
+  "clarify_questions": [
+    {
+      "question": "Kullanım amacınız nedir?",
+      "options": ["Seçenek 1", "Seçenek 2", "Seçenek 3", "Seçenek 4"]
+    },
+    {
+      "question": "Boyut / Tür tercihiniz?",
+      "options": ["Seçenek A", "Seçenek B", "Seçenek C"]
+    }
+  ],
+  "items": [
+    {
+      "brand": "Gerçek Marka (Örn: LG)",
+      "model": "Tam Model Adı (Örn: LG UltraGear 27GS75Q-B 27 inç 180Hz IPS)",
+      "tag": "En İyi F/P",
+      "heg_score": 8.9,
+      "summary": "Neden bu listede olduğunu anlatan 1 net cümle",
+      "positives": ["Somut olumlu kullanıcı yorumu 1", "Somut olumlu kullanıcı yorumu 2"],
+      "negatives": ["Somut olumsuz kullanıcı yorumu / şikayet 1", "Somut olumsuz kullanıcı yorumu 2"],
+      "search_keyword": "LG UltraGear 27GS75Q-B"
+    }
+  ]
+}
+
+DURUM 2 — KESİN, TEK BİR SPESİFİK MARKA + TAM MODEL İSE:
+(Örn: "Dyson V15 Detect", "Roborock S8", "Samsung Galaxy Z Fold 8", "Anker Soundcore Liberty 4 NC", "Philips HD9270 Airfryer", "Nike Pegasus 41")
+-> "single" tipinde JSON döndür!
+-> Hangi marka, hangi tam model ve hangi kategoriyi değerlendirdiğini açıkça belirt!
+-> Daha iyi alternatif (alternative) KESİNLİKLE **birebir aynı kategoriden** gerçek bir rakip marka + tam model olsun (ör. dikey süpürgeye robot süpürge önerme, yine dikey süpürge öner!).
+
+"single" JSON ŞEMASI:
 {
   "type": "single",
-  "title": "${query} — Kullanıcı Yorumları & HEG Analizi",
+  "evaluated_brand": "Marka Adı (Örn: Dyson)",
+  "evaluated_model": "Tam Ürün Modeli (Örn: Dyson V15 Detect Absolute)",
+  "product_category": "Ürün Kategorisi (Örn: Şarjlı Dikey Süpürge)",
+  "title": "Dyson V15 Detect Absolute — Kullanıcı Yorumları & HEG Analizi",
   "heg_score": 8.2,
   "verdict_label": "ŞARTLI ALINIR",
-  "verdict": "Gerçek kullanıcı yorumları ve fiyat/performans dengesine dayanan 2-3 cümlelik net, tarafsız HEG özeti.",
+  "verdict": "Bu tam modelin gerçek kullanıcı yorumları ve fiyat/performans dengesine dayanan 2-3 cümlelik tarafsız HEG özeti.",
   "review_table": [
     {
       "topic": "Performans & Kalite",
@@ -264,7 +322,7 @@ SADECE şu ham JSON formatını döndür:
     {
       "topic": "Fiyat & Değer Dengesi",
       "positive": "Fiyatını hak eden güçlü yönü",
-      "negative": "Fiyat/maliyet veya aksesuar açısından eleştirilen yönü"
+      "negative": "Fiyat veya aksesuar açısından eleştirilen yönü"
     },
     {
       "topic": "Kullanım & Ergonomi",
@@ -279,13 +337,14 @@ SADECE şu ham JSON formatını döndür:
   ],
   "alternative": {
     "has_better": true,
-    "name": "Türkiye'de Satılan Daha Mantıklı Rakip Marka ve Tam Model",
-    "reason": "Bu alternatifin neden daha mantıklı bir tercih olduğunun 1-2 cümlelik net özeti.",
-    "price_advantage": "Fiyat açısından avantajı (ör. benzer performansı daha ulaşılabilir fiyata sunar)",
-    "feature_advantage": "Özellik açısından üstünlüğü (ör. daha uzun pil / ek başlık / daha sessiz)",
-    "review_advantage": "Kullanıcı yorumları açısından üstünlüğü (ör. daha az kronik arıza şikayeti)"
+    "brand": "Rakip Marka",
+    "name": "Aynı Kategoriden Gerçek Rakip Marka ve Tam Model",
+    "reason": "Bu alternatifin neden daha mantıklı olduğunun 1-2 cümlelik net özeti.",
+    "price_advantage": "Fiyat açısından net avantajı",
+    "feature_advantage": "Özellik açısından net üstünlüğü",
+    "review_advantage": "Kullanıcı yorumları açısından net üstünlüğü"
   },
-  "amazon_keyword": "${query}"
+  "amazon_keyword": "Tam Ürün Modeli"
 }
 
 Not: verdict_label yalnızca şunlardan biri olsun: "KESİN ALINIR", "EN İYİ F/P", "ŞARTLI ALINIR", "ALINMAZ".`;
@@ -293,7 +352,6 @@ Not: verdict_label yalnızca şunlardan biri olsun: "KESİN ALINIR", "EN İYİ F
 
     let parsedData = null;
 
-    // 1. Primary Engine: NVIDIA Developer NIM API (Nemotron 3.5 Lightning + Bolt fallback)
     if (env.NVIDIA_API_KEY) {
       const nvidiaModels = [
         env.NVIDIA_MODEL || 'nvidia/nemotron-3.5-lightning-30b-a3b',
@@ -310,12 +368,12 @@ Not: verdict_label yalnızca şunlardan biri olsun: "KESİN ALINIR", "EN İYİ F
               'Content-Type': 'application/json',
               Accept: 'application/json',
             },
-            signal: AbortSignal.timeout(20_000),
+            signal: AbortSignal.timeout(22_000),
             body: JSON.stringify({
               model,
-              temperature: 0.2,
+              temperature: 0.15,
               top_p: 0.9,
-              max_tokens: 1350,
+              max_tokens: 1850,
               stream: false,
               chat_template_kwargs: { enable_thinking: false },
               messages: [
@@ -337,7 +395,6 @@ Not: verdict_label yalnızca şunlardan biri olsun: "KESİN ALINIR", "EN İYİ F
       }
     }
 
-    // 2. Optional Fallback: Anthropic Claude
     if (!parsedData && env.ANTHROPIC_API_KEY) {
       try {
         const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -350,7 +407,7 @@ Not: verdict_label yalnızca şunlardan biri olsun: "KESİN ALINIR", "EN İYİ F
           signal: AbortSignal.timeout(15_000),
           body: JSON.stringify({
             model: env.ANTHROPIC_MODEL || 'claude-3-5-haiku-20241022',
-            max_tokens: 1350,
+            max_tokens: 1850,
             system: systemPrompt,
             messages: [{ role: 'user', content: userPrompt }],
           }),
