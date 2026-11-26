@@ -5,12 +5,12 @@
  * Grounding: Verified HEG 2026 Turkish Catalog + Optional Live Web Price Search (Tavily / Serper)
  */
 
-import prodFold8 from '../../src/content/products/samsung-galaxy-z-fold-8.json' with { type: 'json' };
-import prodRoborock from '../../src/content/products/roborock-s8.json' with { type: 'json' };
-import prodLiberty from '../../src/content/products/anker-soundcore-liberty-4-nc.json' with { type: 'json' };
-import prodAirpods from '../../src/content/products/apple-airpods-4-standart.json' with { type: 'json' };
-import compFoldDuo from '../../src/content/comparisons/galaxy-z-fold-8-vs-iphone-duo.json' with { type: 'json' };
-import compRoboDreame from '../../src/content/comparisons/roborock-s8-vs-dreame-l10s-ultra.json' with { type: 'json' };
+import prodFold8 from '../../src/content/products/samsung-galaxy-z-fold-8.json';
+import prodRoborock from '../../src/content/products/roborock-s8.json';
+import prodLiberty from '../../src/content/products/anker-soundcore-liberty-4-nc.json';
+import prodAirpods from '../../src/content/products/apple-airpods-4-standart.json';
+import compFoldDuo from '../../src/content/comparisons/galaxy-z-fold-8-vs-iphone-duo.json';
+import compRoboDreame from '../../src/content/comparisons/roborock-s8-vs-dreame-l10s-ultra.json';
 
 const VERIFIED_PRODUCTS = [prodFold8, prodRoborock, prodLiberty, prodAirpods];
 const VERIFIED_COMPARISONS = [compFoldDuo, compRoboDreame];
