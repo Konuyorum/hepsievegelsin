@@ -456,16 +456,17 @@ Not: verdict_label yalnızca şunlardan biri olsun: "KESİN ALINIR", "EN İYİ F
 
     let parsedData = null;
 
-    // 1. Primary Engine: NVIDIA Nemotron 3 Ultra (550B) with Lightning 30B automatic fallback
+    // 1. Primary Engine: NVIDIA Nemotron 3.5 Super (120B, ~1.4s) -> Bolt -> Ultra fallback
     if (env.NVIDIA_API_KEY) {
       const nvidiaModels = [
-        env.NVIDIA_MODEL || 'nvidia/nemotron-3-ultra-550b-a55b',
-        'nvidia/nemotron-3.5-lightning-30b-a3b',
+        env.NVIDIA_MODEL || 'nvidia/nemotron-3.5-super-vl-120b-a12b',
+        'nvidia/nemotron-3.5-bolt-e4b',
+        'nvidia/nemotron-3-ultra-550b-a55b',
       ];
 
       for (const model of nvidiaModels) {
         if (parsedData) break;
-        const isUltra = model.includes('ultra');
+        const timeoutMs = model.includes('ultra') ? 22_000 : 16_000;
         try {
           const res = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
             method: 'POST',
@@ -474,7 +475,7 @@ Not: verdict_label yalnızca şunlardan biri olsun: "KESİN ALINIR", "EN İYİ F
               'Content-Type': 'application/json',
               Accept: 'application/json',
             },
-            signal: AbortSignal.timeout(isUltra ? 55_000 : 25_000),
+            signal: AbortSignal.timeout(timeoutMs),
             body: JSON.stringify({
               model,
               temperature: 0.15,
