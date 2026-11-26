@@ -17,8 +17,8 @@ export const SITE = {
     instagramHandle: '@hepsievegelsin',
     instagramUrl: 'https://www.instagram.com/hepsievegelsin',
   },
-  lastUpdated: '23 Kasım 2026',
-  lastUpdatedIso: '2026-11-23',
+  lastUpdated: '26 Kasım 2026',
+  lastUpdatedIso: '2026-11-26',
 } as const;
 
 export const VERDICT_META: Record<

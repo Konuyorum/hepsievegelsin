@@ -1,0 +1,121 @@
+{
+  "slug": "sony-wh-1000xm5",
+  "name": "Sony WH-1000XM5",
+  "brand": "Sony",
+  "subtitle": "8 Mikrofonlu Çift İşlemcili ANC • LDAC Hi-Res • 30 Saat Pil Ömrü",
+  "category": "Kablosuz Kulaklık",
+  "categorySlug": "kablosuz-kulaklik",
+  "datePublished": "2026-11-26",
+  "dateModified": "2026-11-26",
+  "displayDate": "26 Kasım 2026",
+  "image": "/images/products/sony-wh-1000xm5.jpg",
+  "hegScore": 8.8,
+  "verdict": "FP_SAMPIYONU",
+  "verdictHeadline": "Kulak Üstü Gürültü Engelleme ve Mikrofon Kalitesinde Sınıfının Zirvesi",
+  "tldr": "26 Kasım 2026 itibarıyla Sony WH-1000XM5, 15.999 TL liste fiyatından 12.499 TL'ye inerek 3.500 TL net indirim sunuyor. 8 mikrofonlu çift işlemcili aktif gürültü engellemesi, net telefon görüşmesi ve 30 saat pil ömrüyle lider; yalnızca XM4 gibi katlanamayan tasarımı nedeniyle 8.8/10 puanla En İyi F/P (Premium) kategorisinde.",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "listPrice": 15999,
+  "currentLowestPrice": 12499,
+  "netSavings": 3500,
+  "discountPercent": 22,
+  "priceNote": "Siyah ve Platin Gümüş renklerinde Türkiye distribütör garantili canlı fiyatlardır.",
+  "reviewStats": {
+    "source": "Amazon TR & Global Alıcı Değerlendirmeleri",
+    "count": 9410,
+    "rating": 4.7,
+    "satisfactionPercent": 91
+  },
+  "criteria": [
+    {
+      "label": "Aktif Gürültü Engelleme (ANC)",
+      "score": 9.6,
+      "summary": "V1 + QN1 çift işlemci ve 8 mikrofon sayesinde uçak, metro ve ofis konuşmalarını kesmede sektör referansı."
+    },
+    {
+      "label": "Mikrofon & Çağrı Kalitesi",
+      "score": 9.3,
+      "summary": "4 huzmeleme mikrofonu ve AI gürültü azaltma ile kalabalık sokakta bile karşı tarafa çok temiz ses iletiyor."
+    },
+    {
+      "label": "Ses Kalitesi & LDAC",
+      "score": 8.9,
+      "summary": "30 mm karbon fiber sürücüler sıcak ve detaylı; Sony Sound Connect uygulamasındaki EQ ile stüdyo dengesine geliyor."
+    },
+    {
+      "label": "Konfor & Pil Ömrü",
+      "score": 8.8,
+      "summary": "250 gr hafif gövde, yumuşak sentetik deri pedler, 30 saat ANC açık pil ve 3 dk şarjla 3 saat çalma."
+    },
+    {
+      "label": "Taşınabilirlik & Katlanma",
+      "score": 7.4,
+      "summary": "Önceki XM4 gibi içe katlanamadığı için taşıma çantası çantada biraz daha fazla yer kaplıyor."
+    }
+  ],
+  "specs": [
+    { "label": "Gürültü Engelleme", "value": "Çift İşlemci (QN1 + V1) • 8 Mikrofonlu Auto NC Optimizer" },
+    { "label": "Ses Kodekleri", "value": "LDAC (Hi-Res), AAC, SBC + DSEE Extreme" },
+    { "label": "Pil Ömrü", "value": "30 saat (ANC açık) / 40 saat (ANC kapalı) • USB-C PD Hızlı Şarj" },
+    { "label": "Bağlantı", "value": "Bluetooth 5.2 + Çoklu Cihaz (Multipoint) + 3.5 mm Kablo" },
+    { "label": "Ağırlık", "value": "250 gr (Taşıma çantası dahil)" }
+  ],
+  "pros": [
+    "Uçak motoru ve ofis uğultusu kadar insan seslerini de bastıran sınıf lideri ANC performansı.",
+    "Kulak üstü kulaklıklar arasında en net dış mekan telefon görüşmesi ve Zoom/Teams mikrofon kalitesi.",
+    "250 gram ağırlık ve 30 saatlik pil ömrüyle uzun uçuşlarda ve tüm gün ofiste baş ağrısı yapmıyor.",
+    "12.499 TL kampanya tutarı AirPods Max'in yarı fiyatına yakın (3.500 TL net kazanç)."
+  ],
+  "cons": [
+    "Menteşeleri XM4 gibi içe katlanmıyor; taşıma kutusu küçük sırt çantalarında yer kaplıyor.",
+    "Su/ter dayanıklılık (IPX) sertifikası olmadığı için yoğun spor ve yağmur altında önerilmez.",
+    "Otomatik ANC optimizasyonu bazen sessiz ortamda gürültü engelleme seviyesini hafifçe düşürebiliyor."
+  ],
+  "whoShouldBuy": "Sık seyahat edenler, açık ofiste tamamen izole çalışmak isteyenler ve hem müzik hem telefon görüşmesi için tek bir premium kulaklık arayanlar.",
+  "whoShouldSkip": "Spor salonunda terleyerek kullanacaklar veya cebe/küçük çantaya sığan katlanır model arayanlar.",
+  "offers": [
+    {
+      "store": "Amazon TR",
+      "price": 12499,
+      "oldPrice": 15999,
+      "seller": "Amazon.com.tr",
+      "inStock": true,
+      "isLowest": true,
+      "isAffiliate": true,
+      "redirectSlug": "sony-xm5-amz",
+      "note": "En Dip Fiyat • Prime Teslimat"
+    },
+    {
+      "store": "Hepsiburada",
+      "price": 12899,
+      "oldPrice": 15999,
+      "seller": "Hepsiburada",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "sony-xm5-hb",
+      "note": "Sony Eurasia Garantili"
+    },
+    {
+      "store": "Trendyol",
+      "price": 13199,
+      "oldPrice": 15999,
+      "seller": "Yetkili Distribütör",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "sony-xm5-ty",
+      "note": "Taksit Seçenekli"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Sony WH-1000XM5 iPhone ile tam uyumlu çalışır mı?",
+      "answer": "Evet, iPhone ile AAC kodeği üzerinden sorunsuz çalışır, Multipoint ile aynı anda iPhone + Mac/PC'ye bağlanabilir ve tüm ayarlar Sony iOS uygulamasından yapılır."
+    },
+    {
+      "question": "XM4 yerine XM5 almaya değer mi?",
+      "answer": "Özellikle telefon görüşmesi/toplantı mikrofon kalitesi ve insan seslerini kesen ANC performansında XM5 belirgin şekilde daha iyidir. Tek avantajı XM4'ün katlanabilmesidir."
+    }
+  ]
+}

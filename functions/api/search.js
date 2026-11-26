@@ -9,10 +9,25 @@ import prodFold8 from '../../src/content/products/samsung-galaxy-z-fold-8.json';
 import prodRoborock from '../../src/content/products/roborock-s8.json';
 import prodLiberty from '../../src/content/products/anker-soundcore-liberty-4-nc.json';
 import prodAirpods from '../../src/content/products/apple-airpods-4-standart.json';
+import prodDysonV15 from '../../src/content/products/dyson-v15-detect.json';
+import prodAirfryer from '../../src/content/products/philips-airfryer-5000-xxl.json';
+import prodMxMaster from '../../src/content/products/logitech-mx-master-3s.json';
+import prodSonyXm5 from '../../src/content/products/sony-wh-1000xm5.json';
+import prodEspresso from '../../src/content/products/philips-ep2220-espresso.json';
 import compFoldDuo from '../../src/content/comparisons/galaxy-z-fold-8-vs-iphone-duo.json';
 import compRoboDreame from '../../src/content/comparisons/roborock-s8-vs-dreame-l10s-ultra.json';
 
-const VERIFIED_PRODUCTS = [prodFold8, prodRoborock, prodLiberty, prodAirpods];
+const VERIFIED_PRODUCTS = [
+  prodFold8,
+  prodRoborock,
+  prodLiberty,
+  prodAirpods,
+  prodDysonV15,
+  prodAirfryer,
+  prodMxMaster,
+  prodSonyXm5,
+  prodEspresso,
+];
 const VERIFIED_COMPARISONS = [compFoldDuo, compRoboDreame];
 
 const ALLOWED_ORIGINS = new Set([

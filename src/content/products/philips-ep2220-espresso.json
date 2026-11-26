@@ -1,0 +1,121 @@
+{
+  "slug": "philips-ep2220-espresso",
+  "name": "Philips Series 2200 Tam Otomatik Espresso Makinesi (EP2220/10)",
+  "brand": "Philips",
+  "subtitle": "%100 Seramik 12 Kademeli Öğütücü • AquaClean Filtre • Klasik Süt Köpürtücü",
+  "category": "Kahve Makinesi",
+  "categorySlug": "kahve-makinesi",
+  "datePublished": "2026-11-26",
+  "dateModified": "2026-11-26",
+  "displayDate": "26 Kasım 2026",
+  "image": "/images/products/philips-ep2220-espresso.jpg",
+  "hegScore": 8.9,
+  "verdict": "FP_SAMPIYONU",
+  "verdictHeadline": "Çekirdekten Fincana Giriş Segmentinin En Sorunsuz ve En Yüksek F/P Makinesi",
+  "tldr": "26 Kasım 2026 itibarıyla Philips Series 2200 (EP2220/10), 18.499 TL liste fiyatından 13.999 TL'ye inerek 4.500 TL net kazanç sunuyor. 20.000 fincana dayanıklı %100 seramik öğütücüsü, tamamen çıkarılıp yıkanabilen demleme grubu ve 6.200'ü aşkın yorumda 4.7/5 ortalamasıyla 8.9/10 HEG Puanı alarak En İyi F/P damgasını kazanıyor.",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "listPrice": 18499,
+  "currentLowestPrice": 13999,
+  "netSavings": 4500,
+  "discountPercent": 24,
+  "priceNote": "EP2220/10 Mat Siyah klasik süt köpürtücülü versiyon canlı fiyatlarıdır.",
+  "reviewStats": {
+    "source": "Hepsiburada & Amazon TR Doğrulanmış Alıcılar",
+    "count": 6280,
+    "rating": 4.7,
+    "satisfactionPercent": 90
+  },
+  "criteria": [
+    {
+      "label": "Fiyat / Performans",
+      "score": 9.4,
+      "summary": "13.999 TL bandında gerçek seramik öğütücülü, tek tuşla taze çekirdek espresso veren en güvenilir tam otomatik makine."
+    },
+    {
+      "label": "Kahve Kalitesi & Öğütücü",
+      "score": 8.8,
+      "summary": "12 kademeli %100 seramik öğütücü çekirdeği yakmadan öğütüyor; 3 kademeli aroma ve sıcaklık ayarı mevcut."
+    },
+    {
+      "label": "Bakım & Temizlik Kolaylığı",
+      "score": 9.2,
+      "summary": "Demleme grubu yan kapaktan tek hareketle çıkıp musluk altında yıkanabiliyor; AquaClean filtre kireç temizliğini 5.000 fincana kadar geciktiriyor."
+    },
+    {
+      "label": "Gerçek Kullanıcı Memnuniyeti",
+      "score": 8.9,
+      "summary": "6.280 değerlendirmede 4.7/5; kullanıcılar kahve maliyetini kapsüllü makinelere göre 1 yılda amorti ettiğini vurguluyor."
+    },
+    {
+      "label": "Sütlü İçecek Konforu",
+      "score": 7.6,
+      "summary": "LatteGo süt haznesi yok; süt köpürtme buhar çubuğuyla elle yapılıyor (temizliği kolay ama tek tuş konforu yok)."
+    }
+  ],
+  "specs": [
+    { "label": "Öğütücü", "value": "%100 Seramik • 12 Kademeli İncelik Ayarı (20.000 fincan ömür)" },
+    { "label": "Pompa Basıncı", "value": "15 Bar • Aroma Extract (90–98°C sabit demleme)" },
+    { "label": "İçecek Seçenekleri", "value": "Espresso, Uzun Kahve (Americano) + Buhar/Sıcak Su Çubuğu" },
+    { "label": "Hazne Kapasitesi", "value": "1.8 Litre Su Tankı • 275 gr Çekirdek Haznesi" },
+    { "label": "Filtre & Temizlik", "value": "AquaClean su filtresi uyumlu • Çıkarılabilir demleme grubu" }
+  ],
+  "pros": [
+    "Kapsül kahve bağımlılığını bitiriyor; taze çekirdek kahveyle 1 yılda kendi maliyetini çıkarıyor.",
+    "Tamamen çıkarılıp su altında yıkanabilen demleme grubu hijyen ve uzun ömür açısından büyük avantaj.",
+    "Seramik öğütücü metal öğütücüler gibi aşırı ısınmadığı için kahve aromasını koruyor.",
+    "13.999 TL kampanya fiyatı resmi listeden 4.500 TL daha düşük."
+  ],
+  "cons": [
+    "Otomatik LatteGo süt haznesi bulunmuyor; latte/cappuccino için sütü buhar çubuğuyla elle köpürtmeniz gerekiyor.",
+    "Öğütme ve açılış/kapanış durulama esnasında ses seviyesi sabah erken saatlerde hissedilebiliyor.",
+    "Piyasadaki parlak damlama tepsisi zamanla ince çizikler gösterebiliyor."
+  ],
+  "whoShouldBuy": "Ağırlıklı olarak espresso ve Americano içen, kapsül masrafından kurtulup 14.000 TL bandında uzun ömürlü bir çekirdekli makine almak isteyenler.",
+  "whoShouldSkip": "Her gün tek tuşla otomatik latte/cappuccino içmek isteyenler (Philips LatteGo serisine yönelmeli).",
+  "offers": [
+    {
+      "store": "Hepsiburada",
+      "price": 13999,
+      "oldPrice": 18499,
+      "seller": "Hepsiburada Resmi Satıcı",
+      "inStock": true,
+      "isLowest": true,
+      "isAffiliate": false,
+      "redirectSlug": "philips-ep2220-hb",
+      "note": "En Dip Fiyat • Mat Siyah"
+    },
+    {
+      "store": "Amazon TR",
+      "price": 14499,
+      "oldPrice": 18499,
+      "seller": "Amazon.com.tr",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": true,
+      "redirectSlug": "philips-ep2220-amz",
+      "note": "Prime Hızlı Teslimat"
+    },
+    {
+      "store": "Trendyol",
+      "price": 14790,
+      "oldPrice": 18499,
+      "seller": "Philips Yetkili Satıcı",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "philips-ep2220-ty",
+      "note": "2 Yıl Philips Türkiye Garantili"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Philips EP2220 ile toz kahve de kullanılabilir mi?",
+      "answer": "Evet. Çekirdek haznesinin yanında tek fincanlık öğütülmüş kahve bölmesi de bulunur; kafeinsiz veya hazır filtre/espresso kahve de demleyebilirsiniz."
+    },
+    {
+      "question": "Philips EP2220 ile LatteGo (EP2230/EP3246) arasındaki fark nedir?",
+      "answer": "Demleme motoru ve seramik öğütücü aynıdır; tek fark EP2220'de sütü klasik buhar çubuğuyla elle köpürtmeniz, LatteGo modellerinde ise tek tuşla otomatik sütlü kahve almanızdır."
+    }
+  ]
+}

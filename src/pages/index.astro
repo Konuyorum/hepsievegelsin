@@ -33,7 +33,15 @@ const websiteSchema = {
 
 function catGroup(category: string): 'tech' | 'home' {
   const lower = category.toLowerCase();
-  if (lower.includes('süpürge') || lower.includes('mutfak') || lower.includes('ev')) return 'home';
+  if (
+    lower.includes('süpürge') ||
+    lower.includes('mutfak') ||
+    lower.includes('airfryer') ||
+    lower.includes('kahve') ||
+    lower.includes('espresso') ||
+    lower.includes('ev')
+  )
+    return 'home';
   return 'tech';
 }
 ---
@@ -247,7 +255,7 @@ function catGroup(category: string): 'tech' | 'home' {
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[18px]" id="homeDealsGrid">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[18px]" id="homeDealsGrid">
         {products.map((product) => (
           <div
             class="home-deal-item"

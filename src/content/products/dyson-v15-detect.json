@@ -1,0 +1,121 @@
+{
+  "slug": "dyson-v15-detect",
+  "name": "Dyson V15 Detect Absolute",
+  "brand": "Dyson",
+  "subtitle": "240 AW Emiş Gücü • Fluffy Optic Lazer Başlık • Piezo Toz Sensörü",
+  "category": "Şarjlı Dikey Süpürge",
+  "categorySlug": "sarjli-dikey-supurge",
+  "datePublished": "2026-11-26",
+  "dateModified": "2026-11-26",
+  "displayDate": "26 Kasım 2026",
+  "image": "/images/products/dyson-v15-detect.jpg",
+  "hegScore": 8.6,
+  "verdict": "SARTLI_ALINIR",
+  "verdictHeadline": "Sert Zeminde Lazer Toz Tespiti Rakipsiz — Ama Ağırlık ve Fiyatını Bilerek Alın",
+  "tldr": "26 Kasım 2026 itibarıyla Dyson V15 Detect Absolute, 29.999 TL liste fiyatından 25.499 TL seviyesine gerileyerek 4.500 TL net avantaj sunuyor. 240 AW emiş gücü, görünmez tozları ortaya çıkaran yeşil lazerli Fluffy Optic başlığı ve piezo sensörüyle sınıfının referansı; ancak 3.1 kg ağırlığı ve tetik basılı tutma gereksinimi nedeniyle 8.6/10 puanla Şartlı Alınır.",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "listPrice": 29999,
+  "currentLowestPrice": 25499,
+  "netSavings": 4500,
+  "discountPercent": 15,
+  "priceNote": "Absolute paket (Fluffy Optic + Digital Motorbar) için canlı çoklu mağaza taramasıdır.",
+  "reviewStats": {
+    "source": "Hepsiburada & Amazon TR Doğrulanmış Alıcılar",
+    "count": 5140,
+    "rating": 4.8,
+    "satisfactionPercent": 92
+  },
+  "criteria": [
+    {
+      "label": "Emiş Gücü & Temizlik",
+      "score": 9.5,
+      "summary": "240 AW Hyperdymium motor ve yeşil lazerli Fluffy Optic başlık, sert zemindeki mikroskobik tozları bile tek geçişte topluyor."
+    },
+    {
+      "label": "Filtrasyon & Alerji Koruması",
+      "score": 9.3,
+      "summary": "Tam sızdırmaz HEPA filtre sistemi 0.1 mikrona kadar partikülleri hapseder; alerjik ve evcil hayvanlı evler için altın standart."
+    },
+    {
+      "label": "Gerçek Kullanıcı Memnuniyeti",
+      "score": 9.1,
+      "summary": "5.140'ın üzerinde yorumda 4.8/5 ortalama; kullanıcıların en sevdiği özellik lazer başlık ve toz miktarını gösteren LCD ekran."
+    },
+    {
+      "label": "Ergonomi & Ağırlık",
+      "score": 7.4,
+      "summary": "3.1 kg gövde uzun süreli tek el kullanımda bileği yorabiliyor; açma/kapama tuşu yerine tetiği basılı tutmak gerekiyor."
+    },
+    {
+      "label": "Fiyat / Performans",
+      "score": 7.7,
+      "summary": "25.499 TL kampanya fiyatı resmi listeden 4.500 TL daha iyi olsa da yedek batarya ve filtre maliyetleri yüksek."
+    }
+  ],
+  "specs": [
+    { "label": "Emiş Gücü", "value": "240 AW (Hyperdymium 125.000 rpm motor)" },
+    { "label": "Çalışma Süresi", "value": "Eco modda 60 dk'ya kadar • Otomatik modda ~35-40 dk" },
+    { "label": "Özel Başlık", "value": "Fluffy Optic (Yeşil Lazer) + Digital Motorbar (Tüy dolanma karşıtı)" },
+    { "label": "Sensör & Ekran", "value": "Piezo akustik toz ölçer + gerçek zamanlı LCD ekran" },
+    { "label": "Toz Haznesi & Ağırlık", "value": "0.76 Litre • 3.1 kg" }
+  ],
+  "pros": [
+    "Yeşil lazerli Fluffy Optic başlık, çıplak gözle görünmeyen tüm toz ve tüyleri sert zeminde anında ortaya çıkarıyor.",
+    "Piezo sensör toz yoğunluğuna göre emiş gücünü otomatik artırıp pil ömrünü dengeliyor.",
+    "Tam sızdırmaz HEPA filtrasyon ve 240 AW çekiş gücü halılarda bile kablosuz üstünlük sağlıyor.",
+    "25.499 TL seviyesindeki kampanya, resmi liste fiyatına kıyasla 4.500 TL somut kazanç sunuyor."
+  ],
+  "cons": [
+    "3.1 kg ağırlığı ve sürekli tetiğe basılı tutma tasarımı büyük evlerde bilek yorgunluğu yaratabiliyor.",
+    "Gen5detect'in aksine tek tuşla açma/kapama düğmesi bulunmuyor.",
+    "Orijinal yedek batarya ve aksesuar fiyatları rakiplerine göre oldukça pahalı."
+  ],
+  "whoShouldBuy": "Evcil hayvanı veya toz alerjisi olan, sert zemin + halı karışık evinde en yüksek çekiş gücünü ve gerçek lazer temizlik performansını isteyenler.",
+  "whoShouldSkip": "Bilek hassasiyeti olanlar, 2 kg altı ultra hafif süpürge arayanlar veya 15.000 TL altı bütçe hedefleyenler.",
+  "offers": [
+    {
+      "store": "Hepsiburada",
+      "price": 25499,
+      "oldPrice": 29999,
+      "seller": "Hepsiburada Resmi Satıcı",
+      "inStock": true,
+      "isLowest": true,
+      "isAffiliate": false,
+      "redirectSlug": "dyson-v15-hb",
+      "note": "En Dip Fiyat • Absolute Paket"
+    },
+    {
+      "store": "Amazon TR",
+      "price": 26299,
+      "oldPrice": 29999,
+      "seller": "Amazon.com.tr",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": true,
+      "redirectSlug": "dyson-v15-amz",
+      "note": "Prime Hızlı Teslimat"
+    },
+    {
+      "store": "Trendyol",
+      "price": 26750,
+      "oldPrice": 29999,
+      "seller": "Yetkili Satıcı",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "dyson-v15-ty",
+      "note": "Resmi Garantili"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Dyson V15 Detect ile Gen5detect arasındaki temel fark nedir?",
+      "answer": "Gen5detect 280 AW daha yüksek emiş gücü ve tetik yerine tek tuşla açma/kapama düğmesi sunar; ancak V15 Detect 25.499 TL civarında çok daha ulaşılabilir fiyatıyla fiyat/performans açısından hâlâ daha mantıklıdır."
+    },
+    {
+      "question": "Dyson V15 Detect bataryası ne kadar gidiyor?",
+      "answer": "Eco modda 60 dakikaya kadar, günlük kullanımda en çok tercih edilen Auto (Otomatik) modda ise zemin kirliliğine bağlı olarak ortalama 35–42 dakika kesintisiz çalışır."
+    }
+  ]
+}

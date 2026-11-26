@@ -1,0 +1,121 @@
+{
+  "slug": "logitech-mx-master-3s",
+  "name": "Logitech MX Master 3S",
+  "brand": "Logitech",
+  "subtitle": "Sessiz Tıklama • 8.000 DPI Camda Çalışan Sensör • MagSpeed Elektromanyetik Tekerlek",
+  "category": "Bilgisayar & Ofis",
+  "categorySlug": "bilgisayar-ofis",
+  "datePublished": "2026-11-26",
+  "dateModified": "2026-11-26",
+  "displayDate": "26 Kasım 2026",
+  "image": "/images/products/logitech-mx-master-3s.jpg",
+  "hegScore": 9.2,
+  "verdict": "KESIN_ALINIR",
+  "verdictHeadline": "Yazılımcılar, Tasarımcılar ve Ofis Çalışanları İçin Hâlâ Rakipsiz Üretkenlik Faresi",
+  "tldr": "26 Kasım 2026 itibarıyla Logitech MX Master 3S, 4.999 TL liste fiyatından 3.649 TL'ye inerek 1.350 TL net avantaj sunuyor. %90 daha sessiz tıklama tuşları, cam dahil her yüzeyde çalışan 8.000 DPI sensörü, yatay başparmak tekerleği ve 3 cihaz arası anlık geçişiyle 9.2/10 HEG Puanı alarak Kesin Alınır damgasını kazanıyor.",
+  "hasAffiliateLinks": true,
+  "featured": true,
+  "listPrice": 4999,
+  "currentLowestPrice": 3649,
+  "netSavings": 1350,
+  "discountPercent": 27,
+  "priceNote": "Grafit ve Açık Gri renk seçeneklerinde Logi Bolt alıcı dahil resmi kutu fiyatıdır.",
+  "reviewStats": {
+    "source": "Amazon TR & Global Kullanıcı Değerlendirmeleri",
+    "count": 7620,
+    "rating": 4.8,
+    "satisfactionPercent": 94
+  },
+  "criteria": [
+    {
+      "label": "Ergonomi & Sessiz Tıklama",
+      "score": 9.6,
+      "summary": "El anatomisine oturan kıvrımlı gövde ve %90 sessizleştirilmiş ana tuşlar gece/ofis çalışmasında eşsiz konfor sunar."
+    },
+    {
+      "label": "MagSpeed & Yatay Tekerlek",
+      "score": 9.7,
+      "summary": "Saniyede 1.000 satır kaydıran elektromanyetik çelik tekerlek + Excel/Premiere için yatay başparmak tekerleği rakipsiz."
+    },
+    {
+      "label": "Sensör & Çoklu Cihaz",
+      "score": 9.2,
+      "summary": "8.000 DPI Darkfield sensör şeffaf cam masada bile kaymadan çalışır; 3 bilgisayara tek tuşla geçiş yapar."
+    },
+    {
+      "label": "Pil Ömrü & Şarj",
+      "score": 9.1,
+      "summary": "USB-C ile tek şarjda 70 güne kadar kullanım; 1 dakikalık hızlı şarjla 3 saat çalışma."
+    },
+    {
+      "label": "Oyun Performansı (125 Hz)",
+      "score": 6.8,
+      "summary": "125 Hz yoklama hızı ve 141 gr ağırlığı nedeniyle rekabetçi FPS oyunları için değil, saf üretkenlik için tasarlanmıştır."
+    }
+  ],
+  "specs": [
+    { "label": "Sensör", "value": "8.000 DPI Darkfield (Cam yüzeyde bile çalışır)" },
+    { "label": "Tekerlek", "value": "MagSpeed Elektromanyetik + Başparmak Yatay Tekerlek" },
+    { "label": "Bağlantı", "value": "Bluetooth + Logi Bolt USB Alıcı (3 Cihaz Easy-Switch)" },
+    { "label": "Pil & Şarj", "value": "70 güne kadar kullanım • USB-C Hızlı Şarj" },
+    { "label": "Ağırlık & Tasarım", "value": "141 gr • Sağ el ergonomik tasarım • Sessiz tıklama" }
+  ],
+  "pros": [
+    "MagSpeed tekerlek ve yatay başparmak tekerleği Excel, kod editörleri ve video kurguda hızı ikiye katlıyor.",
+    "Cam masalar dahil mouse pad olmadan her yüzeyde hatasız çalışan 8.000 DPI sensör.",
+    "Sessiz tıklama tuşları paylaşımlı ofislerde ve gece çalışırken sıfır gürültü yaratıyor.",
+    "3.649 TL kampanya fiyatı son 6 ayın en güçlü alım noktalarından (1.350 TL net kazanç)."
+  ],
+  "cons": [
+    "125 Hz polling rate ve 141 gr ağırlık nedeniyle rekabetçi e-spor / FPS oyunları için uygun değil.",
+    "Yalnızca sağ el kullanımına göre şekillendirilmiş; solak kullanıcılar için uygun değil.",
+    "Açık gri (Pale Gray) versiyon uzun kullanımda koyu grafit renge göre daha çabuk lekelenebiliyor."
+  ],
+  "whoShouldBuy": "Günde 4 saatten fazla bilgisayar başında çalışan yazılımcılar, tasarımcılar, finans/Excel uzmanları ve Mac + Windows arası geçiş yapanlar.",
+  "whoShouldSkip": "Solak kullanıcılar veya önceliği 1000Hz+ hafif rekabetçi oyuncu faresi olanlar.",
+  "offers": [
+    {
+      "store": "Amazon TR",
+      "price": 3649,
+      "oldPrice": 4999,
+      "seller": "Amazon.com.tr",
+      "inStock": true,
+      "isLowest": true,
+      "isAffiliate": true,
+      "redirectSlug": "mx-master-3s-amz",
+      "note": "En Dip Fiyat • Grafit • Prime"
+    },
+    {
+      "store": "Hepsiburada",
+      "price": 3849,
+      "oldPrice": 4999,
+      "seller": "Hepsiburada",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "mx-master-3s-hb",
+      "note": "Logi Bolt Dahil"
+    },
+    {
+      "store": "Trendyol",
+      "price": 3920,
+      "oldPrice": 4999,
+      "seller": "Logitech Yetkili",
+      "inStock": true,
+      "isLowest": false,
+      "isAffiliate": false,
+      "redirectSlug": "mx-master-3s-ty",
+      "note": "Resmi Garantili"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Logitech MX Master 3S Mac ve Windows ile aynı anda çalışır mı?",
+      "answer": "Evet. Altındaki Easy-Switch tuşu veya Logi Options+ Flow özelliği ile Mac, Windows ve iPad dahil 3 cihaz arasında anlık geçiş yapabilir, dosya kopyalayabilirsiniz."
+    },
+    {
+      "question": "MX Master 3S oyun için uygun mu?",
+      "answer": "Hikaye tabanlı/strateji oyunlarda rahatça kullanılır ancak 125 Hz raporlama hızı ve 141 gram ağırlığı nedeniyle rekabetçi FPS oyunları için önerilmez."
+    }
+  ]
+}

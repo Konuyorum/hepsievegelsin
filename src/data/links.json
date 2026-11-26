@@ -130,5 +130,95 @@
     "store": "Amazon TR",
     "product": "Xiaomi Smart Air Fryer 6.5L",
     "isAffiliate": true
+  },
+  "dyson-v15-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Dyson+V15+Detect+Absolute",
+    "store": "Hepsiburada",
+    "product": "Dyson V15 Detect Absolute",
+    "isAffiliate": false
+  },
+  "dyson-v15-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Dyson+V15+Detect+Absolute&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Dyson V15 Detect Absolute",
+    "isAffiliate": true
+  },
+  "dyson-v15-ty": {
+    "url": "https://www.trendyol.com/sr?q=Dyson+V15+Detect+Absolute",
+    "store": "Trendyol",
+    "product": "Dyson V15 Detect Absolute",
+    "isAffiliate": false
+  },
+  "philips-airfryer-xxl-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Philips+Airfryer+5000+XXL+HD9285&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Philips Airfryer 5000 Serisi XXL HD9285/96",
+    "isAffiliate": true
+  },
+  "philips-airfryer-xxl-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Philips+Airfryer+5000+XXL+HD9285",
+    "store": "Hepsiburada",
+    "product": "Philips Airfryer 5000 Serisi XXL HD9285/96",
+    "isAffiliate": false
+  },
+  "philips-airfryer-xxl-ty": {
+    "url": "https://www.trendyol.com/sr?q=Philips+Airfryer+5000+XXL+HD9285",
+    "store": "Trendyol",
+    "product": "Philips Airfryer 5000 Serisi XXL HD9285/96",
+    "isAffiliate": false
+  },
+  "mx-master-3s-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Logitech+MX+Master+3S&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Logitech MX Master 3S",
+    "isAffiliate": true
+  },
+  "mx-master-3s-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Logitech+MX+Master+3S",
+    "store": "Hepsiburada",
+    "product": "Logitech MX Master 3S",
+    "isAffiliate": false
+  },
+  "mx-master-3s-ty": {
+    "url": "https://www.trendyol.com/sr?q=Logitech+MX+Master+3S",
+    "store": "Trendyol",
+    "product": "Logitech MX Master 3S",
+    "isAffiliate": false
+  },
+  "sony-xm5-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Sony+WH-1000XM5&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Sony WH-1000XM5",
+    "isAffiliate": true
+  },
+  "sony-xm5-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Sony+WH-1000XM5",
+    "store": "Hepsiburada",
+    "product": "Sony WH-1000XM5",
+    "isAffiliate": false
+  },
+  "sony-xm5-ty": {
+    "url": "https://www.trendyol.com/sr?q=Sony+WH-1000XM5",
+    "store": "Trendyol",
+    "product": "Sony WH-1000XM5",
+    "isAffiliate": false
+  },
+  "philips-ep2220-hb": {
+    "url": "https://www.hepsiburada.com/ara?q=Philips+EP2220+10+Espresso",
+    "store": "Hepsiburada",
+    "product": "Philips Series 2200 Tam Otomatik Espresso Makinesi EP2220/10",
+    "isAffiliate": false
+  },
+  "philips-ep2220-amz": {
+    "url": "https://www.amazon.com.tr/s?k=Philips+EP2220+10+Espresso&tag=hepsievegelsi-21",
+    "store": "Amazon TR",
+    "product": "Philips Series 2200 Tam Otomatik Espresso Makinesi EP2220/10",
+    "isAffiliate": true
+  },
+  "philips-ep2220-ty": {
+    "url": "https://www.trendyol.com/sr?q=Philips+EP2220+10+Espresso",
+    "store": "Trendyol",
+    "product": "Philips Series 2200 Tam Otomatik Espresso Makinesi EP2220/10",
+    "isAffiliate": false
   }
 }
